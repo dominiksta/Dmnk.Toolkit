@@ -3,6 +3,10 @@
     <File Path="cake.cs" />
     <File Path="src/Directory.Packages.props" />
   </Folder>
+  <Folder Name="/Docs/">
+    <File Path="index.md" />
+    <File Path="README.md" />
+  </Folder>
   <Folder Name="/Lib/">
     <Project Path="src/Dmnk.Blazor.Cookies/Dmnk.Blazor.Cookies.csproj" />
     <Project Path="src/Dmnk.Blazor.Dialogs.Fluent/Dmnk.Blazor.Dialogs.Fluent.csproj" />

@@ -10,7 +10,7 @@ var configuration = Argument("configuration", "Release");
 Task("build")
     .Does(() =>
     {
-        DotNetBuild("./src/Dmnk.Toolkit.slnx", new DotNetBuildSettings
+        DotNetBuild("./Dmnk.Toolkit.slnx", new DotNetBuildSettings
         {
             Configuration = configuration,
         });
@@ -20,7 +20,7 @@ Task("test")
     .IsDependentOn("Build")
     .Does(() =>
     {
-        DotNetTest("./src/Dmnk.Toolkit.slnx", new DotNetTestSettings
+        DotNetTest("./Dmnk.Toolkit.slnx", new DotNetTestSettings
         {
             Configuration = configuration,
             NoBuild = true,
@@ -40,7 +40,7 @@ Task("docs:build")
     .Does(() =>
     {
         StartProcess("dotnet", new ProcessSettings {
-            Arguments = "docfx docs/docfx.json"
+            Arguments = "docfx docfx.json"
         });
     });
 

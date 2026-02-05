@@ -1,4 +1,4 @@
-﻿namespace Dmnk.Blazor.Core.Suspense;
+﻿namespace Dmnk.Blazor.Suspense;
 
 /// <summary>
 /// Provides a mechanism to show a loading state for a wasm component without

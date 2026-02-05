@@ -32,21 +32,26 @@
       {
         "files": [
           "api/**.yml",
-          "*.{md,yml}"
         ],
         "src": "docs"
       },
       {
         "files": [
-          "index.md",
-          "toc.yml"
+          "**/*.md",
+          "**/toc.yml"
+        ],
+        "exclude": [
+          "**/obj/**",
+          "**/bin/**",
+          "**/_namespace.md",
+          "README.md"
         ]
       }
     ],
     "overwrite": [
       {
         "files": [
-          "**/README.md"
+          "**/_namespace.md"
         ],
         "src": "./src"
       }
@@ -65,10 +70,9 @@
       "modern"
     ],
     "globalMetadata": {
-      "_appName": "Dmnt.Toolkit.Docs",
-      "_appTitle": "Dmnt.Toolkit.Docs",
+      "_appName": "Dmnk.Toolkit.Docs",
+      "_appTitle": "Dmnk.Toolkit.Docs",
       "_enableSearch": true,
-      "_appHomePage": "README.md",
       "pdf": false
     }
   }
