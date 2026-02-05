@@ -19,7 +19,7 @@ public static class BlazorIconExtensions
                 $"Icon definition of type {icon.GetType().FullName} is not supported in Blazor."
             )
             #else
-            _ => new MarkupString("<div color="red">ICON_TYPE_ERROR</div>")
+            _ => new MarkupString("""<div color="red">ICON_TYPE_ERROR</div>""")
             #endif
         };
     }
