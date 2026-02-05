@@ -1,0 +1,119 @@
+﻿@using Microsoft.FluentUI.AspNetCore.Components
+@using Microsoft.JSInterop
+@implements IAsyncDisposable
+@inject BlazorVmDialogController VmVmDialogController
+@inject IJSRuntime Js
+
+<div class="r-dialog-provider">
+    @for (var i = 0; i < _activeDialogs.Count; i++)
+    {
+        var dlg = _activeDialogs[i];
+        Dictionary<string, object?> parameters = new()
+        {
+            { nameof(IVmDialogView.Dialog), dlg.Reference },
+            { nameof(IVmDialogView.Params), dlg.Parameters },
+            { "Vm", dlg.ViewModel },
+        };
+        <div class="r-dialog-backdrop" @key="i" 
+             style="z-index: @(BaseZIndex + i);"
+             @onmousedown="() => OnBackDropClick(dlg.Parameters, dlg.Reference)"
+             @onkeydown="(e) => OnKeyDown(e, dlg.Parameters, dlg.Reference)">
+            <div class="r-dialog-content" role="dialog" aria-modal="true"
+                 @onmousedown:stopPropagation="true">
+                @* ReSharper disable once Blazor.EditorRequired *@
+                <VmDialog
+                    Params="@dlg.Parameters"
+                    Dialog="@dlg.Reference">
+                    <DynamicComponent Type="@dlg.Component" Parameters="parameters"/>
+                </VmDialog>
+            </div>
+        </div>
+    }
+</div>
+
+
+@code {
+    /// <summary>
+    /// You may overwrite this if a third-party component library is using a
+    /// higher z-index.
+    /// </summary>
+    // ReSharper disable once FieldCanBeMadeReadOnly.Global
+    // ReSharper disable once MemberCanBePrivate.Global
+    public static int BaseZIndex = 1000;
+
+    private List<(
+        VmDialogParameters Parameters, Type Component, 
+        IVmDialogViewModel ViewModel, VmDialogReference Reference
+    )> _activeDialogs = [];
+
+    protected override async Task OnInitializedAsync()
+    {
+        VmVmDialogController.OnShow += OnShow;
+        VmVmDialogController.OnClose += OnClose;
+    }
+
+    private void OnClose(IVmDialogViewModel vm)
+    {
+        int idx = _activeDialogs.FindLastIndex(dlg => dlg.ViewModel == vm);
+        _activeDialogs.RemoveAt(idx);
+        StateHasChanged();
+    }
+
+    private void OnShow((
+        VmDialogParameters Parameters, Type Component, 
+        IVmDialogViewModel ViewModel, VmDialogReference Reference
+    ) args)
+    {
+        _activeDialogs.Add(args);
+        StateHasChanged();
+    }
+
+    private async Task OnBackDropClick(
+        VmDialogParameters parameters, VmDialogReference reference
+    )
+    {
+        if (parameters.AllowCancel) await reference.Dismiss();
+    }
+
+    private async Task OnKeyDown(
+        KeyboardEventArgs e,
+        VmDialogParameters parameters, VmDialogReference reference
+    )
+    {
+        if (e.Key == "Escape") await OnBackDropClick(parameters, reference);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        _activeDialogs.Clear();
+        VmVmDialogController.OnShow -= OnShow;
+        VmVmDialogController.OnClose -= OnClose;
+        await InvokeAsync(StateHasChanged);
+        if (_module != null) await _module.InvokeVoidAsync("removeBodyKeyListener");
+    }
+
+    private IJSObjectReference? _module;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _module = await Js.InvokeAsync<IJSObjectReference>(
+                "import", 
+                "./_content/Dmnk.Blazor.Dialogs/Blazor/DialogControllerProvider.razor.js"
+            );
+            await _module.InvokeVoidAsync(
+                "addBodyKeyListener", DotNetObjectReference.Create(this)
+            );
+        }
+    }
+
+    [JSInvokable]
+    public async Task OnDocumentKeyDownEscape()
+    {
+        if (_activeDialogs.Count == 0) return;
+        var topDialog = _activeDialogs[^1];
+        await OnBackDropClick(topDialog.Parameters, topDialog.Reference);
+        _activeDialogs.Remove(topDialog);
+    }
+}

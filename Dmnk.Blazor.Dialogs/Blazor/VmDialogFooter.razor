@@ -1,0 +1,11 @@
+﻿@using Microsoft.FluentUI.AspNetCore.Components
+
+<FluentStack HorizontalAlignment="HorizontalAlignment.End"
+    Style="width: 100%" Class="@VmDialog.FooterClass">
+    @ChildContent
+</FluentStack>
+
+@code {
+    [Parameter, EditorRequired] 
+    public required RenderFragment ChildContent { get; set; }
+}

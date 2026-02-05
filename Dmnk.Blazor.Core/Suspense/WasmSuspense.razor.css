@@ -1,0 +1,7 @@
+﻿.suspense, .suspense-waiting {
+    display: contents;
+}
+
+.suspense > .suspense-waiting:not(:first-child) {
+    display: none;
+}

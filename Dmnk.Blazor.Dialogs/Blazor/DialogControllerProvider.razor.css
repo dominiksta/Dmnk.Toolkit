@@ -1,0 +1,40 @@
+﻿.r-dialog-provider {
+    display: contents;
+}
+
+.r-dialog-backdrop {
+    position: fixed;
+    top: 0; left: 0;
+    height: 100%; width: 100%;
+    background-color: rgba(0, 0, 0, .3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.r-dialog-content {
+    display: flex;
+    max-height: 98vh;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    /* adapted from box-shadow of fluent-ui (--elevation-shadow-dialog) */
+    box-shadow: 0 0 2px var(--neutral-foreground-rest), 0 calc(128* 0.5px) calc((128* 1px)) rgb(0 0 0 / 12%);
+    background: var(--fill-color);
+
+    animation: show-dialog 200ms 50ms cubic-bezier(0.38, 0.97, 0.56, 0.76) forwards;
+
+    /* TODO: animate. the difficult part seems to be animating removal */
+    /*!* Prestate *!*/
+    /*opacity: 0;*/
+    /*!* remove transform for just a fade-in *!*/
+    /*transform: rotateX(-90deg);*/
+    /*transform-origin: top center;*/
+}
+
+/*@keyframes show-dialog {*/
+/*    100% {*/
+/*        opacity: 1;*/
+/*        transform: none;*/
+/*    }*/
+/*}*/
+

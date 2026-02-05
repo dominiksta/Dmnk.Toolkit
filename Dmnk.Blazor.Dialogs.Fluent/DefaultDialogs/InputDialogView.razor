@@ -1,0 +1,65 @@
+﻿@using Microsoft.FluentUI.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+@using Dmnk.Blazor.Dialogs.Blazor
+@using Dmnk.Blazor.Dialogs.DefaultDialogs
+@typeparam T
+@inherits Dmnk.Blazor.Dialogs.Blazor.BlazorVmDialogViewFor<InputDialogViewModel<T>>
+
+<VmDialogBody>
+    @if (typeof(T) == typeof(int))
+    {
+        <FluentNumberField
+            Style="width: 100%;"
+            TValue="int"
+            Class="@(Vm.ValidationError != null ? "invalid" : "")"
+            Value="@((int) ((object?) Vm.Value ?? 0))"
+            Immediate="true" Autofocus="true"
+            @onkeydown="OnKeyDown"
+            ValueChanged="@(i => { Vm.Value = (T) (object) i; })"/>
+    }
+    else if (typeof(T) == typeof(string))
+    {
+        <FluentTextField
+            Style="width: 100%;"
+            Value="@(Vm.Value?.ToString())"
+            Class="@(Vm.ValidationError != null ? "invalid" : "")"
+            AutoComplete="off"
+            Immediate="true" Autofocus="true"
+            @onkeydown="OnKeyDown"
+            ValueChanged="@(str => { Vm.Value = (T?) (object?) str; })"/>
+    }
+    else
+    {
+        throw new ArgumentException($"Unsupported input type: {typeof(T)}");
+    }
+    @if (!string.IsNullOrWhiteSpace(Vm.ValidationError))
+    {
+        <p style="color: var(--warning);">@Vm.ValidationError</p>
+    }
+</VmDialogBody>
+
+<VmDialogFooter>
+    <FluentButton Appearance="Appearance.Accent" 
+                  OnClick="@(() => Vm.CloseCommand.Execute(null))"
+                  Disabled="Vm.ValidationError != null">
+        @Vm.ActionConfirmText
+    </FluentButton>
+    @if (Params.AllowCancel)
+    {
+        <FluentButton Appearance="Appearance.Neutral"
+                      OnClick="@Vm.Dialog.Dismiss">
+            @Vm.ActionCancelText
+        </FluentButton>
+    }
+</VmDialogFooter>
+
+@code {
+    [Parameter] public override required VmDialogReference Dialog { get; set; }
+    [Parameter] public override required VmDialogParameters Params { get; set; }
+    
+    private void OnKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key != "Enter") return;
+        Vm.CloseCommand.Execute(null);
+    }
+}

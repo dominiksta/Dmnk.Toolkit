@@ -1,0 +1,16 @@
+﻿<WasmSuspense>
+    <WaitingContent>
+        <div style="height: 100%; width: 100%; display: flex; align-items: center; justify-content: center">
+            @Text
+        </div>
+    </WaitingContent>
+    <Content>@ChildContent</Content>
+</WasmSuspense>
+
+@code {
+    [Parameter, EditorRequired]
+    public required RenderFragment ChildContent { get; set; }
+    
+    [Parameter, EditorRequired]
+    public required string Text { get; set; }
+}

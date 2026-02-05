@@ -1,0 +1,177 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.JSInterop
+@implements IDisposable
+@inject IJSRuntime Js
+
+<div @ref="_root"
+    @attributes="AdditionalAttributes"
+    style="display: contents; outline: none; @(Style)"
+    class="r-focus-trap @Class"
+    @onkeydown="HandleKeyEvent"
+    @onkeyup="HandleKeyEvent"
+    @onfocus="FocusFallbackAsync"
+    tabindex="-1">
+
+     <div style="position: fixed; pointer-events: none;"
+        tabindex="@TrapTabIndex"
+        @onfocus="FocusFirstAsync">
+    </div>
+
+    <div style="position: fixed; pointer-events: none;"
+        tabindex="@TrapTabIndex"
+        @onfocus="OnBumperFocusAsync">
+    </div>
+
+    <div @ref="_fallback"
+        style="position: fixed; pointer-events: none;"
+        tabindex="-1">
+    </div>
+
+    <div @ref="_content"
+        style="display: contents; outline: none;"
+        tabindex="-1">
+        @ChildContent
+    </div>
+
+    <div style="position: fixed; pointer-events: none;"
+        tabindex="@TrapTabIndex"
+        @onfocus="OnBumperFocusAsync">
+    </div>
+
+    <div style="position: fixed; pointer-events: none;"
+        tabindex="@TrapTabIndex"
+        @onfocus="FocusLastAsync">
+    </div>
+</div>
+
+@code {
+    private bool _shiftDown = false;
+    private bool _disabled = false;
+    private bool _disposed = false;
+    private bool _initialized = false;
+    private bool _shouldRender = true;
+
+    [Parameter] 
+    public Dictionary<string, object?> AdditionalAttributes { get; set; } = new();
+
+    [Parameter] public string? Style { get; set; }
+    [Parameter] public string? Class { get; set; }
+
+    private ElementReference _fallback = default!;
+    private ElementReference _root = default!;
+    private ElementReference _content = default!;
+
+    /// <summary>
+    /// The content within this focus trap.
+    /// </summary>
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    /// <summary>
+    /// Prevents the user from interacting with this focus trap.
+    /// </summary>
+    /// <remarks>
+    /// Defaults to <c>false</c>.
+    /// </remarks>
+    [Parameter]
+    public bool Disabled
+    {
+         get => _disabled;
+         set
+         {
+              if (_disabled != value)
+              {
+                   _disabled = value;
+                   _initialized = false;
+              }
+         }
+    }
+
+    public enum DefaultFocusT
+    {
+         /// <summary> Focus the first focusable child of ChildContent </summary>
+         FirstChild,
+         /// <summary> Focus the last focusable child of ChildContent </summary>
+         LastChild,
+         /// <summary> Not recommended - focus an empty container element </summary>
+         [Obsolete("Not recommended for accessibility")]
+         None,
+    }
+
+    /// <summary>
+    /// The element which receives focus when this focus trap is created or enabled.
+    /// </summary>
+    /// <remarks>
+    /// Defaults to <see cref="DefaultFocusT.FirstChild"/>.
+    /// </remarks>
+    [Parameter]
+    public DefaultFocusT DefaultFocus { get; set; } = DefaultFocusT.FirstChild;
+
+    private string TrapTabIndex => Disabled ? "-1" : "0";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+         await base.OnAfterRenderAsync(firstRender);
+
+         if (_disposed) return;
+         if (firstRender) await SaveFocusAsync();
+         if (!_initialized) await InitializeFocusAsync();
+    }
+
+    private Task OnBumperFocusAsync(FocusEventArgs args) 
+         => _shiftDown ? FocusLastAsync() : FocusFirstAsync();
+
+    private Task InitializeFocusAsync()
+    {
+         _initialized = true;
+
+         if (!_disabled)
+         {
+              switch (DefaultFocus)
+              {
+#pragma warning disable CS0618 // Type or member is obsolete
+                   case DefaultFocusT.None: return FocusFallbackAsync();
+#pragma warning restore CS0618 // Type or member is obsolete
+                   case DefaultFocusT.FirstChild: return FocusFirstAsync();
+                   case DefaultFocusT.LastChild: return FocusLastAsync();
+              }
+         }
+
+         return Task.CompletedTask;
+    }
+
+    private Task FocusFallbackAsync() => _fallback.FocusAsync().AsTask();
+    private Task FocusFirstAsync() => _content.FocusFirstFocusableChild(Js).AsTask();
+    private Task FocusLastAsync() => _content.FocusLastFocusableChild(Js).AsTask();
+    private Task SaveFocusAsync() => _root.SaveFocus(Js).AsTask();
+    private async Task RestoreFocusAsync()
+    {
+        // This delay prevents keyboard handlers from child elements triggering
+        // event handlers in the previously focused element. For example, with
+        // a focus trap around a dialog and a keyboard event handler in the
+        // dialog to close the dialog when the return key is pressed, without
+        // this delay the previously focused element would be clicked by that
+        // enter press.
+        await Task.Delay(100);
+        await _root.RestoreFocus(Js);
+    }
+
+    private void HandleKeyEvent(KeyboardEventArgs args)
+    {
+         _shouldRender = false;
+         if (args.Key == "Tab") _shiftDown = args.ShiftKey;
+    }
+
+    protected override bool ShouldRender()
+    {
+         if (_shouldRender) return true;
+         _shouldRender = true; // auto-reset _shouldRender to true
+         return false;
+    }
+
+    public void Dispose()
+    {
+         _disposed = true;
+         if (!_disabled) _ = RestoreFocusAsync();
+    }
+}

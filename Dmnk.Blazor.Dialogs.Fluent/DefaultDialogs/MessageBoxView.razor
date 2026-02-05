@@ -1,0 +1,30 @@
+﻿@using Microsoft.FluentUI.AspNetCore.Components
+@using Microsoft.JSInterop
+@using Dmnk.Blazor.Focus
+@using Dmnk.Blazor.Dialogs.Blazor
+@using Dmnk.Blazor.Dialogs.DefaultDialogs
+@inherits BlazorVmDialogViewFor<MessageBoxViewModel>
+@inject IJSRuntime Js
+
+<VmDialogBody>
+    <p>@Vm.DisplayMessage()</p>
+</VmDialogBody>
+
+<VmDialogFooter>
+    <FluentButton @ref="_btnConfirm" Appearance="Appearance.Accent"
+                  OnClick="@Vm.Dialog.Close">
+        @Vm.ActionConfirmText
+    </FluentButton>
+</VmDialogFooter>
+
+@code {
+    [Parameter] public override required VmDialogReference Dialog { get; set; }
+    [Parameter] public override required VmDialogParameters Params { get; set; }
+
+    private FluentButton _btnConfirm = null!;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender) await _btnConfirm.Element.ForceFocus(Js);
+    }
+}

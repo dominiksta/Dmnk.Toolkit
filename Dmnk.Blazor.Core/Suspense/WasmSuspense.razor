@@ -1,0 +1,14 @@
+﻿<div class="suspense">
+    @Content
+    <div class="suspense-waiting">
+        @WaitingContent
+    </div>
+</div>
+
+@code {
+    [Parameter, EditorRequired]
+    public required RenderFragment WaitingContent { get; set; }
+
+    [Parameter, EditorRequired]
+    public required RenderFragment Content { get; set; }
+}

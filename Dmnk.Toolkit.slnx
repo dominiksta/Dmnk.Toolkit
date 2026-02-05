@@ -1,0 +1,18 @@
+<Solution>
+  <Folder Name="/Build/">
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Folder Name="/Lib/">
+    <Project Path="Dmnk.Blazor.Core/Dmnk.Blazor.Core.csproj" />
+    <Project Path="Dmnk.Blazor.Dialogs.Fluent/Dmnk.Blazor.Dialogs.Fluent.csproj" />
+    <Project Path="Dmnk.Blazor.Dialogs.Tests/Dmnk.Blazor.Dialogs.Tests.csproj" />
+    <Project Path="Dmnk.Blazor.Dialogs/Dmnk.Blazor.Dialogs.csproj" />
+    <Project Path="Dmnk.Blazor.Focus/Dmnk.Blazor.Focus.csproj" />
+    <Project Path="Dmnk.Blazor.Mvvm/Dmnk.Blazor.Mvvm.csproj" />
+    <Project Path="Dmnk.Blazor.OverlayScrollbar/Dmnk.Blazor.OverlayScrollbar.csproj" />
+    <Project Path="Dmnk.Blazor.Storage/Dmnk.Blazor.Storage.csproj" />
+    <Project Path="Dmnk.Icons.Blazor.Fluent/Dmnk.Icons.Blazor.Fluent.csproj" />
+    <Project Path="Dmnk.Icons.Blazor/Dmnk.Icons.Blazor.csproj" />
+    <Project Path="Dmnk.Icons.Core/Dmnk.Icons.Core.csproj" />
+  </Folder>
+</Solution>

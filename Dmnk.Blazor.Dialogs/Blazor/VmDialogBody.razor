@@ -1,0 +1,10 @@
+﻿<div class="@VmDialog.BodyClass" style="@Style">
+    @ChildContent
+</div>
+
+@code {
+    [Parameter, EditorRequired]
+    public required RenderFragment? ChildContent { get; set; }
+
+    [Parameter] public string Style { get; set; } = "";
+}

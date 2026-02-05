@@ -1,0 +1,46 @@
+﻿@using Microsoft.FluentUI.AspNetCore.Components
+@using Icons = Microsoft.FluentUI.AspNetCore.Components.Icons
+
+@using Dmnk.Icons.Blazor
+<div style="height: @(Params.Height); width: @(Params.Width); padding: 1em;">
+    <FluentStack Orientation="Orientation.Vertical"
+                 Class="r-dialog-component" Id='@("r-dialog-component-" + _id)'
+                 Style="height: 100%">
+        <FocusTrap DefaultFocus="FocusTrap.DefaultFocusT.None">
+            <div role="toolbar"
+                 style="display: flex; width: 100%; align-items: center; column-gap: 1em;">
+                @if (Params.Icon != null)
+                {
+                    <div style="height: 100%;">@(Params.Icon.ToMarkup())</div>
+                }
+                <span style="font-size: 120%;">
+                    @if (Params.Title != null) { @Params.Title }
+                    else { @Params.TitleMarkup }
+                </span>
+                @if (Params.AllowCancel)
+                {
+                    <FluentSpacer/>
+                    <FluentButton
+                        Appearance="Appearance.Stealth"
+                        OnClick="@Dialog.Dismiss"
+                        IconStart="@(new Icons.Regular.Size20.Dismiss()
+                                       .WithColor(Color.Neutral))"/>
+                }
+            </div>
+            @ChildContent
+        </FocusTrap>
+    </FluentStack>
+</div>
+
+@code {
+    public const string BodyClass = "r-dialog-body";
+    public const string FooterClass = "r-dialog-footer";
+    
+    [Parameter, EditorRequired] public required VmDialogParameters Params { get; set; }
+    [Parameter, EditorRequired] public required VmDialogReference Dialog { get; set; }
+    
+    [Parameter, EditorRequired] public required RenderFragment ChildContent { get; set; }
+
+    private static int _idCounter = 0;
+    private readonly int _id = _idCounter++;
+}

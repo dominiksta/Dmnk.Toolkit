@@ -1,0 +1,40 @@
+﻿@using Microsoft.FluentUI.AspNetCore.Components
+@using Microsoft.JSInterop
+@using Dmnk.Blazor.Dialogs.Blazor
+@using Dmnk.Blazor.Dialogs.DefaultDialogs
+@using Dmnk.Blazor.Focus
+@inherits Dmnk.Blazor.Dialogs.Blazor.BlazorVmDialogViewFor<ConfirmationDialogViewModel>
+@inject IJSRuntime Js
+
+<VmDialogBody>
+    <p>@Vm.DisplayMessage()</p>
+</VmDialogBody>
+
+<VmDialogFooter>
+    <FluentButton
+        @ref="_btnConfirm"
+        Appearance="Appearance.Accent"
+        OnClick="@(() => Vm.CloseCommand.ExecuteAsync(true))">
+        @Vm.ActionConfirmText
+    </FluentButton>
+    <FluentButton
+        @ref="_btnDeny"
+        OnClick="@(() => Vm.CloseCommand.ExecuteAsync(false))">
+        @Vm.ActionDenyText
+    </FluentButton>
+</VmDialogFooter>
+
+@code {
+    [Parameter] public override required VmDialogReference Dialog { get; set; }
+    [Parameter] public override required VmDialogParameters Params { get; set; }
+
+    private FluentButton _btnConfirm = null!;
+    private FluentButton _btnDeny = null!;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender) return;
+        if (Vm.Type == MessageBoxType.Warning) await _btnDeny.Element.ForceFocus(Js);
+        else await _btnConfirm.Element.ForceFocus(Js);
+    }
+}
