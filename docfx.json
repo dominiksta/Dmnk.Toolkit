@@ -4,7 +4,7 @@
     {
       "src": [
         {
-          "src": "../src",
+          "src": "./src",
           "files": [
             "Dmnk.Blazor.Cookies/bin/Release/net10.0/Dmnk.Blazor.Cookies.dll",
             "Dmnk.Blazor.Dialogs/bin/Release/net10.0/Dmnk.Blazor.Dialogs.dll",
@@ -24,28 +24,42 @@
           ]
         }
       ],
-      "dest": "api"
+      "dest": "docs/api"
     }
   ],
   "build": {
     "content": [
       {
         "files": [
-          "**/*.{md,yml}"
+          "api/**.yml",
+          "*.{md,yml}"
         ],
-        "exclude": [
-          "_site/**"
+        "src": "docs"
+      },
+      {
+        "files": [
+          "index.md",
+          "toc.yml"
         ]
+      }
+    ],
+    "overwrite": [
+      {
+        "files": [
+          "**/README.md"
+        ],
+        "src": "./src"
       }
     ],
     "resource": [
       {
         "files": [
           "images/**"
-        ]
+        ],
+        "src": "docs"
       }
     ],
-    "output": "_site",
+    "output": "docs/_site",
     "template": [
       "default",
       "modern"
@@ -54,6 +68,7 @@
       "_appName": "Dmnt.Toolkit.Docs",
       "_appTitle": "Dmnt.Toolkit.Docs",
       "_enableSearch": true,
+      "_appHomePage": "README.md",
       "pdf": false
     }
   }
