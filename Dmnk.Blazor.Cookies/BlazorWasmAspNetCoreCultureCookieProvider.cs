@@ -3,8 +3,11 @@ using System.Web;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.JSInterop;
 
-namespace Dmnk.Blazor.Core;
+namespace Dmnk.Blazor.Cookies;
 
+/// <summary>
+/// See <see cref="Configure"/>.
+/// </summary>
 public static class BlazorWasmAspNetCoreCultureCookieProvider
 {
     /// <summary>
