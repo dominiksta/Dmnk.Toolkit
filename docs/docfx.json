@@ -16,7 +16,7 @@
             "Dmnk.Blazor.Suspense/bin/Release/net10.0/Dmnk.Blazor.Suspense.dll",
             "Dmnk.Icons.Blazor/bin/Release/net10.0/Dmnk.Icons.Blazor.dll",
             "Dmnk.Icons.Blazor.Fluent/bin/Release/net10.0/Dmnk.Icons.Blazor.Fluent.dll",
-            "Dmnk.Icons.Core/bin/Release/net10.0/Dmnk.Icons.Core.dll",
+            "Dmnk.Icons.Core/bin/Release/netstandard2.0/Dmnk.Icons.Core.dll",
           ],
           "exclude": [
             "**/obj/**",
