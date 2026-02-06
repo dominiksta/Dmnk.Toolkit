@@ -1,7 +1,7 @@
 ﻿using Dmnk.Blazor.Dialogs.DefaultDialogs;
 using Dmnk.Icons.Core;
 
-namespace Dmnk.Blazor.Dialogs.Blazor;
+namespace Dmnk.Blazor.Dialogs;
 
 public abstract class BlazorVmDialogController : IVmDialogController
 {
@@ -53,12 +53,12 @@ public abstract class BlazorVmDialogController : IVmDialogController
 
     private readonly Dictionary<Type, Type> _vm2Component = new();
     
-    internal event Action<(
+    public event Action<(
         VmDialogParameters Parameters, Type Component, 
         IVmDialogViewModel ViewModel, VmDialogReference Reference
     )>? OnShow;
 
-    internal event Action<IVmDialogViewModel>? OnClose;
+    public event Action<IVmDialogViewModel>? OnClose;
     
     public async Task<VmDialogReference> Show<T>(VmDialogParameters parameters, T viewModel) 
         where T : IVmDialogViewModel
@@ -82,7 +82,9 @@ public abstract class BlazorVmDialogController : IVmDialogController
             await viewModel.OnDismissAsync();
             OnClose?.Invoke(viewModel);
         });
+#pragma warning disable CS0618 // Type or member is obsolete
         viewModel.Dialog = reference;
+#pragma warning restore CS0618 // Type or member is obsolete
         OnShow?.Invoke((parameters, component, viewModel, reference));
         // ReSharper disable once MethodHasAsyncOverload
         return reference;

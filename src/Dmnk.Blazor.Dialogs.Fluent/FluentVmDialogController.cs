@@ -1,5 +1,4 @@
-﻿using Dmnk.Blazor.Dialogs.Blazor;
-using Dmnk.Blazor.Dialogs.DefaultDialogs;
+﻿using Dmnk.Blazor.Dialogs.DefaultDialogs;
 using Dmnk.Blazor.Dialogs.Fluent.DefaultDialogs;
 using Dmnk.Icons.Blazor.Fluent;
 using Microsoft.FluentUI.AspNetCore.Components;
@@ -8,9 +7,9 @@ using MsIcons = Microsoft.FluentUI.AspNetCore.Components.Icons.Filled.Size24;
 
 namespace Dmnk.Blazor.Dialogs.Fluent;
 
-public class FluentBlazorDialogController : BlazorVmDialogController
+public class FluentVmDialogController : BlazorVmDialogController
 {
-    public FluentBlazorDialogController()
+    public FluentVmDialogController()
     {
         Register(typeof(InputDialogView<>), typeof(InputDialogViewModel<>));
         Register<MessageBoxView, MessageBoxViewModel>();

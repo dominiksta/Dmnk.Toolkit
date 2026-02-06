@@ -2,7 +2,7 @@
 using Dmnk.Blazor.Mvvm;
 using Microsoft.AspNetCore.Components;
 
-namespace Dmnk.Blazor.Dialogs.Blazor;
+namespace Dmnk.Blazor.Dialogs.Fluent;
 
 public abstract class BlazorVmDialogView : ComponentBase, IVmDialogView
 {

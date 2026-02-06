@@ -1,7 +1,8 @@
-﻿@using Microsoft.FluentUI.AspNetCore.Components
+﻿@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.FluentUI.AspNetCore.Components
 @using Microsoft.JSInterop
 @implements IAsyncDisposable
-@inject BlazorVmDialogController VmVmDialogController
+@inject Dialogs.BlazorVmDialogController DialogController
 @inject IJSRuntime Js
 
 <div class="r-dialog-provider">
@@ -48,8 +49,8 @@
 
     protected override async Task OnInitializedAsync()
     {
-        VmVmDialogController.OnShow += OnShow;
-        VmVmDialogController.OnClose += OnClose;
+        DialogController.OnShow += OnShow;
+        DialogController.OnClose += OnClose;
     }
 
     private void OnClose(IVmDialogViewModel vm)
@@ -86,8 +87,8 @@
     public async ValueTask DisposeAsync()
     {
         _activeDialogs.Clear();
-        VmVmDialogController.OnShow -= OnShow;
-        VmVmDialogController.OnClose -= OnClose;
+        DialogController.OnShow -= OnShow;
+        DialogController.OnClose -= OnClose;
         await InvokeAsync(StateHasChanged);
         if (_module != null) await _module.InvokeVoidAsync("removeBodyKeyListener");
     }

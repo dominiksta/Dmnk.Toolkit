@@ -4,7 +4,12 @@ namespace Dmnk.Blazor.Dialogs;
 
 public interface IVmDialogViewModel : INotifyPropertyChanged
 {
-    protected internal VmDialogReference Dialog { get; internal set; }
+    public VmDialogReference Dialog
+    {
+        get; 
+        [Obsolete("Do NOT modify outside of custom DialogController implementations.")]
+        set;
+    }
     
     public void OnDismiss();
     public Task OnDismissAsync();

@@ -1,9 +1,8 @@
 ﻿@using Microsoft.FluentUI.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Web
-@using Dmnk.Blazor.Dialogs.Blazor
 @using Dmnk.Blazor.Dialogs.DefaultDialogs
 @typeparam T
-@inherits Dmnk.Blazor.Dialogs.Blazor.BlazorVmDialogViewFor<InputDialogViewModel<T>>
+@inherits BlazorVmDialogViewFor<InputDialogViewModel<T>>
 
 <VmDialogBody>
     @if (typeof(T) == typeof(int))
