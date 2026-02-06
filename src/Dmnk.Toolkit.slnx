@@ -1,6 +1,7 @@
 <Solution>
   <Folder Name="/Build/">
     <File Path="../cake.cs" />
+    <File Path=".editorconfig" />
     <File Path="Directory.Packages.props" />
   </Folder>
   <Folder Name="/Docs/">

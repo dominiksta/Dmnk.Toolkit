@@ -4,11 +4,21 @@ using Dmnk.Icons.Core;
 
 namespace Dmnk.Blazor.Dialogs;
 
+/// <summary>
+/// A base class for an implementation of <see cref="IVmDialogController"/>.
+/// Allows registering ViewModels with the corresponding views using <see cref="Register"/>.
+/// </summary>
 public abstract class BlazorVmDialogController : IVmDialogController
 {
     /// <summary>
     /// Register a viewmodel with its corresponding component.
+    /// If your viewmodel is a generic class, use <see cref="Register(Type, Type)"/>.
     /// </summary>
+    /// <example>
+    /// <code>
+    /// controller.Register&gt;MyDialogView, MyDialogViewModel&lt;();
+    /// </code>
+    /// </example>
     public BlazorVmDialogController Register<TComponent, TViewModel>()
         where TComponent : IVmDialogView
         where TViewModel : IVmDialogViewModel
@@ -16,6 +26,15 @@ public abstract class BlazorVmDialogController : IVmDialogController
         return Register(typeof(TComponent), typeof(TViewModel));
     }
 
+    /// <summary>
+    /// Like <see cref="Register{TComponent, TViewModel}"/>, but allows registering
+    /// open generic types.
+    /// </summary>
+    /// <example>
+    /// <code>
+    /// controller.Register(typeof(MyDialogView&lt;&gt;), typeof(MyDialogViewModel&lt;&gt;));
+    /// </code>
+    /// </example>
     public BlazorVmDialogController Register(Type componentType, Type viewModelType)
     {
         if (!componentType.IsAssignableTo(typeof(IVmDialogView)))
@@ -54,14 +73,24 @@ public abstract class BlazorVmDialogController : IVmDialogController
 
     private readonly Dictionary<Type, Type> _vm2Component = new();
     
+    /// <summary>
+    /// Fired whenever a dialog is shown using <see cref="Show{T}"/>. You typically won't need to
+    /// use this, unless you are implementing a new dialog controller or provider.
+    /// </summary>
     public event Action<(
         VmDialogParameters Parameters, Type Component, 
         IVmDialogViewModel ViewModel, VmDialogReference Reference
     )>? OnShow;
 
+    /// <summary>
+    /// Fired whenever a dialog is closed, either by calling <see cref="VmDialogReference.Close"/>
+    /// or <see cref="VmDialogReference.Dismiss"/>. You typically won't need to use this, unless you
+    /// are implementing a new dialog controller or provider.
+    /// </summary>
     public event Action<IVmDialogViewModel>? OnClose;
     
-    public async Task<VmDialogReference> Show<T>(VmDialogParameters parameters, T viewModel) 
+    /// <summary> <inheritdoc/> </summary>
+    public Task<VmDialogReference> Show<T>(VmDialogParameters parameters, T viewModel) 
         where T : IVmDialogViewModel
     {
         Type vmType = typeof(T);
@@ -88,8 +117,9 @@ public abstract class BlazorVmDialogController : IVmDialogController
 #pragma warning restore CS0618 // Type or member is obsolete
         OnShow?.Invoke((parameters, component, viewModel, reference));
         // ReSharper disable once MethodHasAsyncOverload
-        return reference;
+        return Task.FromResult(reference);
     }
 
+    /// <summary> <inheritdoc/> </summary>
     public abstract Icon DefaultIconForIntent(MessageBoxType type);
 }

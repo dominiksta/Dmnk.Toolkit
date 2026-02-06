@@ -45,10 +45,13 @@ public class DefaultDialogTests
         );
 
         var vm = controller.GetLastOpenedOfType<InputDialogViewModel<string>>();
-        
-        Assert.That(vm.Value, Is.EqualTo("default-value"));
-        Assert.That(vm.ValidationError, Is.EqualTo("error"));
-        
+
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(vm.Value, Is.EqualTo("default-value"));
+            Assert.That(vm.ValidationError, Is.EqualTo("error"));
+        }
+
         await vm.CloseCommand.ExecuteAsync(null);
         Assert.That(vm.Dialog.Closed, Is.False);
 
@@ -56,7 +59,7 @@ public class DefaultDialogTests
         
         Assert.That(vm.ValidationError, Is.Null);
         
-        vm.CloseCommand.Execute(null);
+        await vm.CloseCommand.ExecuteAsync(null);
         Assert.That(vm.Dialog.Closed, Is.True);
     }
 }

@@ -20,5 +20,9 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Dmnk.Blazor.Dialogs\Dmnk.Blazor.Dialogs.csproj" />
+      <ProjectReference Include="..\Dmnk.Blazor.Focus\Dmnk.Blazor.Focus.csproj" />
+      <ProjectReference Include="..\Dmnk.Blazor.OverlayScrollbar\Dmnk.Blazor.OverlayScrollbar.csproj" />
+      <ProjectReference Include="..\Dmnk.Icons.Blazor.Fluent\Dmnk.Icons.Blazor.Fluent.csproj" />
+      <ProjectReference Include="..\Dmnk.Icons.Blazor\Dmnk.Icons.Blazor.csproj" />
     </ItemGroup>
 </Project>

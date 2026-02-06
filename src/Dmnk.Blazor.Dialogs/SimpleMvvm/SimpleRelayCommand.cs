@@ -2,26 +2,30 @@
 
 namespace Dmnk.Blazor.Dialogs.SimpleMvvm;
 
-public class SimpleRelayCommand : ICommand
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
+/// <summary>
+/// Internal basic MVVM implementation, just to not depend on e.g. the CommunityToolkit in the core
+/// library. Not intended for public use, use a proper MVVM library.
+/// </summary>
+public class SimpleRelayCommand(
+    Action<object?> executeFunction,
+    Predicate<object?> canExecutePredicate
+) : ICommand
 {
-    public Action<object?> ExecuteFunction { get; }
-    public Predicate<object?> CanExecutePredicate { get; }
-    public event EventHandler CanExecuteChanged;
+    public SimpleRelayCommand(Action<object?> executeFunction) 
+        : this(executeFunction, _ => true) { }
+
+    public event EventHandler? CanExecuteChanged;
     private void UpdateCanExecute() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+
+    public virtual bool CanExecute(object? parameter) => 
+        canExecutePredicate?.Invoke(parameter) ?? true;
     
-    public SimpleRelayCommand(Action<object?> executeFunction) : this(executeFunction, _ => true) { }  
-    public SimpleRelayCommand(Action<object?> executeFunction, Predicate<object?> canExecutePredicate)
-    {
-        ExecuteFunction = executeFunction;
-        CanExecutePredicate = canExecutePredicate;
-    }
-    
-    public virtual bool CanExecute(object? parameter) => (CanExecutePredicate?.Invoke(parameter) ?? true);
-    
-    public virtual async void Execute(object? parameter)
+    public virtual void Execute(object? parameter)
     {
         UpdateCanExecute();
-        ExecuteFunction(parameter);
+        executeFunction(parameter);
         UpdateCanExecute();
     }
 }

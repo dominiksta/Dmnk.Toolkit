@@ -14,6 +14,7 @@ public class HeadlessVmDialogController : IVmDialogController
     private readonly HashSet<Type> _viewModels = new();
     private readonly List<(IVmDialogViewModel ViewModel, DateTime Opened)> _instances = [];
 
+    /// <summary> See <see cref="HeadlessVmDialogController"/> </summary>
     public HeadlessVmDialogController()
     {
         Register(typeof(InputDialogViewModel<>));
@@ -21,14 +22,20 @@ public class HeadlessVmDialogController : IVmDialogController
         Register<ConfirmationDialogViewModel>();
     }
     
-    public T GetLastOpenedOfType<T>()
-    {
-        return (T) _instances
+    /// <summary>
+    /// Get the last opened instance of a viewmodel type. This is useful for unit tests to verify
+    /// that a dialog was opened with the correct viewmodel and parameters.
+    /// </summary>
+    public T GetLastOpenedOfType<T>() =>
+        (T) _instances
             .Where(i => i.ViewModel.GetType() == typeof(T))
             .OrderBy(i => i.Opened)
             .First().ViewModel;
-    }
 
+    /// <summary>
+    /// Register a viewmodel type.
+    /// Equivalent of <see cref="BlazorVmDialogController.Register(Type, Type)"/>.
+    /// </summary>
     public void Register(Type viewModelType)
     {
         if (!viewModelType.IsAssignableTo(typeof(IVmDialogViewModel)))
@@ -40,10 +47,15 @@ public class HeadlessVmDialogController : IVmDialogController
         _viewModels.Add(viewModelType);
     }
     
+    /// <summary>
+    /// Register a viewmodel type.
+    /// Equivalent of <see cref="BlazorVmDialogController.Register{TComponent, TViewModel}"/>.
+    /// </summary>
     public void Register<TViewModel>() where TViewModel : IVmDialogViewModel 
         => Register(typeof(TViewModel));
 
-    public async Task<VmDialogReference> Show<T>(
+    /// <summary> <inheritdoc/> </summary>
+    public Task<VmDialogReference> Show<T>(
         VmDialogParameters parameters, T viewModel
     ) where T : IVmDialogViewModel
     {
@@ -63,11 +75,14 @@ public class HeadlessVmDialogController : IVmDialogController
             viewModel.OnDismiss();
             await viewModel.OnDismissAsync();
         });
+#pragma warning disable CS0618 // Type or member is obsolete
         viewModel.Dialog = reference;
+#pragma warning restore CS0618 // Type or member is obsolete
         // ReSharper disable once MethodHasAsyncOverload
-        return reference;
+        return Task.FromResult(reference);
     }
 
+    /// <summary> <inheritdoc/> </summary>
     public Icon DefaultIconForIntent(MessageBoxType type)
     {
         return type switch
@@ -80,6 +95,6 @@ public class HeadlessVmDialogController : IVmDialogController
             _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
         };
         
-        Icon MkIcon(string name) => new Icon(new PngIconDefinition(name), new Size(0, 0));
+        Icon MkIcon(string name) => new(new PngIconDefinition(name), new Size(0, 0));
     }
 }

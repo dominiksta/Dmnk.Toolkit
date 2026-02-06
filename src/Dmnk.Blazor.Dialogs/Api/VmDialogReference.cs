@@ -1,5 +1,10 @@
 ﻿namespace Dmnk.Blazor.Dialogs.Api;
 
+/// <summary>
+/// Holds a reference to an open dialog, allowing, among other things, to close or dismiss it from
+/// the ViewModel.
+/// </summary>
+/// <param name="onClose"></param>
 public class VmDialogReference(Func<Task> onClose)
 {
     private readonly TaskCompletionSource _close = new(1);
@@ -25,8 +30,19 @@ public class VmDialogReference(Func<Task> onClose)
         _close.SetResult();
     }
 
+    /// <summary>
+    /// A task that completes when the dialog is closed, either by calling <see cref="Close"/> or
+    /// <see cref="Dismiss"/>.
+    /// </summary>
     public Task WaitClosed => _close.Task;
 
+    /// <summary>
+    /// Whether the dialog was dismissed by calling <see cref="Dismiss"/>.
+    /// </summary>
     public bool Cancelled { get; private set; } = false;
+    
+    /// <summary>
+    /// Whether the dialog was closed by calling <see cref="Close"/> or <see cref="Dismiss"/>.
+    /// </summary>
     public bool Closed { get; private set; } = false;
 }
