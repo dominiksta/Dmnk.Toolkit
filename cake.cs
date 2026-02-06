@@ -54,6 +54,14 @@ Task("docs:serve")
         });
     });
 
+Task("pack")
+    .Does(() =>
+    {
+        StartProcess("dotnet", new ProcessSettings {
+            Arguments = "pack src/Dmnk.Toolkit.slnx -c " + configuration + " -o ./artifacts"
+        });
+    });
+
 // ----------------------------------------------------------------------
 // Helpers
 // ----------------------------------------------------------------------

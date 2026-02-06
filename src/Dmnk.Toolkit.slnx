@@ -7,6 +7,7 @@
   <Folder Name="/Docs/">
     <File Path="../index.md" />
     <File Path="../README.md" />
+    <File Path="../_readme_nuget.md" />
   </Folder>
   <Folder Name="/Lib/">
     <Project Path="Dmnk.Blazor.Dialogs.CommunityToolkit/Dmnk.Blazor.Dialogs.CommunityToolkit.csproj" />
