@@ -1,4 +1,5 @@
-﻿using Dmnk.Blazor.Dialogs.Properties;
+﻿using Dmnk.Blazor.Dialogs.Api;
+using Dmnk.Blazor.Dialogs.Properties;
 using Microsoft.AspNetCore.Components;
 
 namespace Dmnk.Blazor.Dialogs.DefaultDialogs;

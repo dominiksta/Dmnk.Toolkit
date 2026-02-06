@@ -1,4 +1,4 @@
-﻿namespace Dmnk.Blazor.Dialogs;
+﻿namespace Dmnk.Blazor.Dialogs.Api;
 
 public class VmDialogReference(Func<Task> onClose)
 {

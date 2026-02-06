@@ -1,7 +1,7 @@
 ﻿using Dmnk.Blazor.Dialogs.DefaultDialogs;
 using Dmnk.Icons.Core;
 
-namespace Dmnk.Blazor.Dialogs;
+namespace Dmnk.Blazor.Dialogs.Api;
 
 public interface IVmDialogController
 {

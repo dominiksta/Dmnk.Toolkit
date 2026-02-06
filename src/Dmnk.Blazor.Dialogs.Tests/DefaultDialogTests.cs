@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Dmnk.Blazor.Dialogs.Api;
+using Microsoft.AspNetCore.Components;
 using Dmnk.Blazor.Dialogs.DefaultDialogs;
 
 namespace Dmnk.Blazor.Dialogs.Tests;

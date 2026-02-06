@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using Dmnk.Blazor.Dialogs.Api;
 using Dmnk.Blazor.Mvvm;
 using Microsoft.AspNetCore.Components;
 

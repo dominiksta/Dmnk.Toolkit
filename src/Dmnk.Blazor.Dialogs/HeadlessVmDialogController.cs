@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using Dmnk.Blazor.Dialogs.Api;
 using Dmnk.Blazor.Dialogs.DefaultDialogs;
 using Dmnk.Icons.Core;
 

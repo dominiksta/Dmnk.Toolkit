@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace Dmnk.Blazor.Dialogs;
+namespace Dmnk.Blazor.Dialogs.Api;
 
 public abstract class DialogViewModelBase : ObservableObject, IVmDialogViewModel
 {

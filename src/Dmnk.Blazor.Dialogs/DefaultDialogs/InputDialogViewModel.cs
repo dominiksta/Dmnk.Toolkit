@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Dmnk.Blazor.Dialogs.Api;
 using Dmnk.Blazor.Dialogs.Properties;
 
 namespace Dmnk.Blazor.Dialogs.DefaultDialogs;

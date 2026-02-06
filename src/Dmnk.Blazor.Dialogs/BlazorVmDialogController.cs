@@ -1,4 +1,5 @@
-﻿using Dmnk.Blazor.Dialogs.DefaultDialogs;
+﻿using Dmnk.Blazor.Dialogs.Api;
+using Dmnk.Blazor.Dialogs.DefaultDialogs;
 using Dmnk.Icons.Core;
 
 namespace Dmnk.Blazor.Dialogs;

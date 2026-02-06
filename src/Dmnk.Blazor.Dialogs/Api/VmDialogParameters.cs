@@ -1,7 +1,7 @@
 ﻿using Dmnk.Icons.Core;
 using Microsoft.AspNetCore.Components;
 
-namespace Dmnk.Blazor.Dialogs;
+namespace Dmnk.Blazor.Dialogs.Api;
 
 public class VmDialogParameters
 {
