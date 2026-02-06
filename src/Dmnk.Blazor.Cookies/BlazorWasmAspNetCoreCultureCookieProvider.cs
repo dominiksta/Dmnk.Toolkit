@@ -40,7 +40,7 @@ public static class BlazorWasmAspNetCoreCultureCookieProvider
         try
         {
             var js = container.GetRequiredService<IJSRuntime>();
-            var cookie = await BrowserCookieAccess.GetCookie(js, cookieName);
+            var cookie = await BrowserCookieAccess.GetCookieValue(js, cookieName);
             (c, uic) = ParseAspNetCultureCookie(cookie);
         }
         catch (Exception ex)
