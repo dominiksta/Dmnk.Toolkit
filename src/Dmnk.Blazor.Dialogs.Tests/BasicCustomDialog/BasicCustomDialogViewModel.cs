@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Dmnk.Blazor.Dialogs.Api;
+using Dmnk.Blazor.Dialogs.CommunityToolkit;
 
 namespace Dmnk.Blazor.Dialogs.Tests.BasicCustomDialog;
 

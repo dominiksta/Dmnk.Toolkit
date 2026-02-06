@@ -1,29 +1,41 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using System.Windows.Input;
 using Dmnk.Blazor.Dialogs.Api;
 using Dmnk.Blazor.Dialogs.Properties;
+using Dmnk.Blazor.Dialogs.SimpleMvvm;
 
 namespace Dmnk.Blazor.Dialogs.DefaultDialogs;
 
-public partial class InputDialogViewModel<T> : DialogViewModelBase
+public partial class InputDialogViewModel<T> : SimpleDialogViewModelBase
 {
     public string ActionConfirmText { get; init; } = Resources.Actions_OK;
     public string ActionCancelText { get; init; } = Resources.Actions_Cancel;
     
     public Func<T?, string?>? Validate { get; init; }
-    
-    [ObservableProperty] 
-    [NotifyPropertyChangedFor(nameof(ValidationError))]
-    private T? _value;
+
+    public T? Value
+    {
+        get;
+        set
+        {
+            SetProperty(ref field, value);
+            OnPropertyChanged(nameof(ValidationError));
+        }
+    }
 
     public string? ValidationError => Validate?.Invoke(Value);
 
-    [RelayCommand(CanExecute = nameof(CanClose))]
-    public async Task Close()
+    private async Task Close()
     {
         if (ValidationError != null) return;
         await Dialog.Close();
     }
-
-    public bool CanClose() => ValidationError == null;
+    
+    public SimpleAsyncRelayCommand CloseCommand => new SimpleAsyncRelayCommand(
+        async _ =>
+        {
+            if (ValidationError != null) return;
+            await Dialog.Close();
+        }, 
+        _ => ValidationError == null
+    );
 }

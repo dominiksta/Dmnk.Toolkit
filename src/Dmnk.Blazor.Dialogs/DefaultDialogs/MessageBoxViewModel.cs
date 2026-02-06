@@ -1,10 +1,11 @@
 ﻿using Dmnk.Blazor.Dialogs.Api;
 using Dmnk.Blazor.Dialogs.Properties;
+using Dmnk.Blazor.Dialogs.SimpleMvvm;
 using Microsoft.AspNetCore.Components;
 
 namespace Dmnk.Blazor.Dialogs.DefaultDialogs;
 
-public partial class MessageBoxViewModel : DialogViewModelBase
+public partial class MessageBoxViewModel : SimpleDialogViewModelBase
 {
     public virtual string ActionConfirmText { get; init; } = Resources.Actions_OK;
     public MessageBoxType Type { get; init; } = MessageBoxType.Info;

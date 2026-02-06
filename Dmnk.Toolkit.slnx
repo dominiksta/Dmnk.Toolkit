@@ -8,6 +8,7 @@
     <File Path="README.md" />
   </Folder>
   <Folder Name="/Lib/">
+    <Project Path="src/Dmnk.Blazor.Dialogs.CommunityToolkit/Dmnk.Blazor.Dialogs.CommunityToolkit.csproj" />
     <Project Path="src/Dmnk.Blazor.Cookies/Dmnk.Blazor.Cookies.csproj" />
     <Project Path="src/Dmnk.Blazor.Dialogs.Fluent/Dmnk.Blazor.Dialogs.Fluent.csproj" />
     <Project Path="src/Dmnk.Blazor.Dialogs.Tests/Dmnk.Blazor.Dialogs.Tests.csproj" />
