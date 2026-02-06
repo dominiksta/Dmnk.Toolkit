@@ -4,7 +4,7 @@ namespace Dmnk.Blazor.Dialogs.Tests;
 
 public class ControlFlowTests
 {
-    [Test, Timeout(500)]
+    [Test, CancelAfter(500)]
     public async Task Custom_Dialog()
     {
         var controller = new HeadlessVmDialogController();
