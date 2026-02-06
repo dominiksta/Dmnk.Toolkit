@@ -12,11 +12,11 @@ namespace Dmnk.Blazor.Mvvm;
 public abstract class MvvmComponentBase<T> : AbstractMvvmComponentBase<T> 
     where T : INotifyPropertyChanged
 {
-    [Obsolete("Internal - do NOT modify.")] 
-    protected override T? __ViewModel { get => _vm; set => _vm = value!; }
+    internal override T? __ViewModel { get => _vm; set => _vm = value!; }
     
     private T _vm = default!;
 
+    /// <summary> The ViewModel </summary>
     [Parameter, EditorRequired]
     [SuppressMessage(
         "Usage", "BL0007:Component parameters should be auto properties",

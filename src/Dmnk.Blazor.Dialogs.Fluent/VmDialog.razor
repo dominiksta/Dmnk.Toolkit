@@ -1,4 +1,5 @@
 ﻿@using Dmnk.Blazor.Dialogs.Api
+@using Dmnk.Blazor.Focus
 @using Microsoft.FluentUI.AspNetCore.Components
 @using Icons = Microsoft.FluentUI.AspNetCore.Components.Icons
 
@@ -7,7 +8,7 @@
     <FluentStack Orientation="Orientation.Vertical"
                  Class="r-dialog-component" Id='@("r-dialog-component-" + _id)'
                  Style="height: 100%">
-        <FocusTrap DefaultFocus="FocusTrap.DefaultFocusT.None">
+        <FocusTrap DefaultFocus="FocusTrap.DefaultFocusT.FirstChild">
             <div role="toolbar"
                  style="display: flex; width: 100%; align-items: center; column-gap: 1em;">
                 @if (Params.Icon != null)

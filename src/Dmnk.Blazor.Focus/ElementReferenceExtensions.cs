@@ -3,6 +3,10 @@ using Microsoft.JSInterop;
 
 namespace Dmnk.Blazor.Focus;
 
+/// <summary>
+/// Extends <see cref="ElementReference"/> with some helper methods to focus elements in a more
+/// robust way, or to focus the first/last focusable child of an element.
+/// </summary>
 public static class ElementReferenceExtensions
 {
     private const string JsClass = "window.__Dmnk_Blazor_Focus";

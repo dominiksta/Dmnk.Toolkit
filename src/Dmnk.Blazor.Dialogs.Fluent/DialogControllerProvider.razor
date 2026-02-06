@@ -48,7 +48,7 @@
         IVmDialogViewModel ViewModel, VmDialogReference Reference
     )> _activeDialogs = [];
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         DialogController.OnShow += OnShow;
         DialogController.OnClose += OnClose;

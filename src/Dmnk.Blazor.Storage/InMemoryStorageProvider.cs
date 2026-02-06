@@ -3,6 +3,9 @@ using System.Text.Json;
 
 namespace Dmnk.Blazor.Storage;
 
+/// <summary>
+/// An in-memory storage provider, useful mainly for unit testing.
+/// </summary>
 public class InMemoryStorageProvider : IInProcessStorageProvider
 {
     private readonly ConcurrentDictionary<string, string> _storage = new();
@@ -12,12 +15,23 @@ public class InMemoryStorageProvider : IInProcessStorageProvider
         WriteIndented = true
     };
 
+    /// <summary> <inheritdoc/> </summary>
     public void Clear() => _storage.Clear();
-    public string[] Keys() => _storage.Keys.ToArray();
+    
+    /// <summary> <inheritdoc/> </summary>
+    public void Clear(string key) => _storage.Remove(key, out _);
+    
+    /// <summary> <inheritdoc/> </summary>
+    public List<string> Keys() => _storage.Keys.ToList();
+    
+    /// <summary> <inheritdoc/> </summary>
     public bool ContainsKey(string key) => _storage.ContainsKey(key);
+    
+    /// <summary> <inheritdoc/> </summary>
     public bool TryGetItem(string key, out string result) => 
         _storage.TryGetValue(key, out result!);
 
+    /// <summary> <inheritdoc/> </summary>
     public bool TryGetItem<T>(string key, out T result)
     {
         if (TryGetItem(key, out var json))
@@ -34,13 +48,17 @@ public class InMemoryStorageProvider : IInProcessStorageProvider
         return false;
     }
 
+    /// <summary> <inheritdoc/> </summary>
     public void SetItem(string key, string content) => _storage[key] = content;
+    
+    /// <summary> <inheritdoc/> </summary>
     public void SetItem<T>(string key, T content) => SetItem(
         key, content is string str 
             ? str 
             : JsonSerializer.Serialize(content, _jsonOptions)
     );
 
+    /// <summary> <inheritdoc/> </summary>
     public ValueTask ClearAsync(CancellationToken ct = default)
     {
         ct.ThrowIfCancellationRequested();
@@ -48,6 +66,7 @@ public class InMemoryStorageProvider : IInProcessStorageProvider
         return ValueTask.CompletedTask;
     }
 
+    /// <summary> <inheritdoc/> </summary>
     public ValueTask ClearAsync(string key, CancellationToken ct = default)
     {
         ct.ThrowIfCancellationRequested();
@@ -55,18 +74,21 @@ public class InMemoryStorageProvider : IInProcessStorageProvider
         return ValueTask.CompletedTask;
     }
 
+    /// <summary> <inheritdoc/> </summary>
     public ValueTask<List<string>> KeysAsync(CancellationToken ct = default)
     {
         ct.ThrowIfCancellationRequested();
         return ValueTask.FromResult(_storage.Keys.ToList());
     }
 
+    /// <summary> <inheritdoc/> </summary>
     public ValueTask<bool> ContainsKeyAsync(string key, CancellationToken ct = default)
     {
         ct.ThrowIfCancellationRequested();
         return ValueTask.FromResult(ContainsKey(key));
     }
 
+    /// <summary> <inheritdoc/> </summary>
     public ValueTask<string?> GetItemAsync(string key, CancellationToken ct = default)
     {
         ct.ThrowIfCancellationRequested();
@@ -74,6 +96,7 @@ public class InMemoryStorageProvider : IInProcessStorageProvider
         return ValueTask.FromResult(success ? result : null);
     }
 
+    /// <summary> <inheritdoc/> </summary>
     public ValueTask<T?> GetItemAsync<T>(string key, CancellationToken ct = default)
     {
         ct.ThrowIfCancellationRequested();
@@ -81,6 +104,7 @@ public class InMemoryStorageProvider : IInProcessStorageProvider
         return ValueTask.FromResult(success ? result : default(T));
     }
 
+    /// <summary> <inheritdoc/> </summary>
     public ValueTask SetItemAsync(string key, string content, CancellationToken ct = default)
     {
         ct.ThrowIfCancellationRequested();
@@ -88,6 +112,7 @@ public class InMemoryStorageProvider : IInProcessStorageProvider
         return ValueTask.CompletedTask;
     }
 
+    /// <summary> <inheritdoc/> </summary>
     public ValueTask SetItemAsync<T>(string key, T content, CancellationToken ct = default)
     {
         ct.ThrowIfCancellationRequested();

@@ -1,4 +1,5 @@
-﻿using Dmnk.Blazor.Dialogs.DefaultDialogs;
+﻿using Dmnk.Blazor.Dialogs.Api;
+using Dmnk.Blazor.Dialogs.DefaultDialogs;
 using Dmnk.Blazor.Dialogs.Fluent.DefaultDialogs;
 using Dmnk.Icons.Blazor.Fluent;
 using Microsoft.FluentUI.AspNetCore.Components;
@@ -7,8 +8,14 @@ using MsIcons = Microsoft.FluentUI.AspNetCore.Components.Icons.Filled.Size24;
 
 namespace Dmnk.Blazor.Dialogs.Fluent;
 
+/// <summary>
+/// Implements <see cref="BlazorVmDialogController"/> by registering FluentUI versions of the
+/// default dialogs.
+/// <p>IVmDialogController: <inheritdoc cref="IVmDialogController"/>.</p>
+/// </summary>
 public class FluentVmDialogController : BlazorVmDialogController
 {
+    /// <summary> See <see cref="FluentVmDialogController"/> </summary>
     public FluentVmDialogController()
     {
         Register(typeof(InputDialogView<>), typeof(InputDialogViewModel<>));
@@ -16,6 +23,7 @@ public class FluentVmDialogController : BlazorVmDialogController
         Register<ConfirmationDialogView, ConfirmationDialogViewModel>();
     }
 
+    /// <summary> <inheritdoc/> </summary>
     public override Icon DefaultIconForIntent(MessageBoxType type) =>
         type switch
         {

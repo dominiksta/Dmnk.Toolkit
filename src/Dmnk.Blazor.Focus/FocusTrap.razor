@@ -1,4 +1,5 @@
-﻿@using Microsoft.AspNetCore.Components.Web
+﻿@using System.Diagnostics.CodeAnalysis
+@using Microsoft.AspNetCore.Components.Web
 @using Microsoft.JSInterop
 @implements IDisposable
 @inject IJSRuntime Js
@@ -74,6 +75,11 @@
     /// Defaults to <c>false</c>.
     /// </remarks>
     [Parameter]
+    [SuppressMessage("Usage", "BL0007: Component parameter '{0}' should be auto property", 
+        Justification = """
+                        Taken directly from MudFocusTrap.razor.cs in MudBlazor, so we should
+                        be fine(?)
+                        """)]
     public bool Disabled
     {
          get => _disabled;

@@ -10,11 +10,11 @@ namespace Dmnk.Blazor.Mvvm;
 public abstract class OwningMvvmComponentBase<T> : AbstractMvvmComponentBase<T>
     where T : INotifyPropertyChanged
 {
-    [Obsolete("Internal - do NOT modify.")] 
-    protected override T? __ViewModel { get => _vm; set => _vm = value!; }
+    internal override T? __ViewModel { get => _vm; set => _vm = value!; }
     
     private T _vm = default!;
 
+    /// <summary> The ViewModel </summary>
     public T Vm
     {
         get => _vm;
@@ -26,6 +26,7 @@ public abstract class OwningMvvmComponentBase<T> : AbstractMvvmComponentBase<T>
         }
     }
 
+    /// <summary> <inheritdoc/> </summary>
     protected override void OnInitialized()
     {
         if (Vm == null) throw new ArgumentNullException(nameof(Vm));

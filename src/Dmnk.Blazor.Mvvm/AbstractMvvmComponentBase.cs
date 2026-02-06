@@ -15,8 +15,8 @@ public abstract class AbstractMvvmComponentBase<T> : ComponentBase, IDisposable
     where T : INotifyPropertyChanged
 {
     // ReSharper disable once InconsistentNaming
-    [Obsolete("Internal - do NOT modify.")]
-    protected abstract T? __ViewModel { get; set; }
+    // ReSharper disable once MemberCanBeProtected.Global
+    internal abstract T? __ViewModel { get; set; }
 
     private List<ICommand> GetCommandCanExecuteChanged(T viewModel)
     {
@@ -32,7 +32,7 @@ public abstract class AbstractMvvmComponentBase<T> : ComponentBase, IDisposable
 
     private List<ICommand> _commands = [];
 
-    protected void SetViewModel(T? viewModel)
+    internal void SetViewModel(T? viewModel)
     {
         if (EqualityComparer<T?>.Default.Equals(__ViewModel, viewModel)) return;
         
@@ -51,6 +51,7 @@ public abstract class AbstractMvvmComponentBase<T> : ComponentBase, IDisposable
         InvokeAsync(StateHasChanged);
     }
 
+    /// <summary> <inheritdoc/> </summary>
     protected override void OnInitialized()
     {
         if (__ViewModel == null) return;
@@ -63,9 +64,11 @@ public abstract class AbstractMvvmComponentBase<T> : ComponentBase, IDisposable
     private void OnPropertyChanged(object? sender, PropertyChangedEventArgs args) 
         => InvokeAsync(StateHasChanged);
 
+    /// <summary> <inheritdoc/> </summary>
     public virtual void Dispose()
     {
         if (__ViewModel == null) return;
         SetViewModel(default);
+        GC.SuppressFinalize(this);
     }
 }

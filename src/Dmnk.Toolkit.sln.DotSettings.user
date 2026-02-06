@@ -3,4 +3,8 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=de4abd44_002Db742_002D40fe_002D9ef0_002Db4be10449b17/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from &amp;lt;Lib&amp;gt;\&amp;lt;Dmnk.Blazor.Dialogs.Tests&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;Project Location="C:\dev\Dmnk.Toolkit\src\Dmnk.Blazor.Dialogs.Tests" Presentation="&amp;lt;Lib&amp;gt;\&amp;lt;Dmnk.Blazor.Dialogs.Tests&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	
+	
+	
+	
 	</wpf:ResourceDictionary>
