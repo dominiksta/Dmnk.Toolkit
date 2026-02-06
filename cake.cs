@@ -7,6 +7,14 @@ var configuration = Argument("configuration", "Release");
 // Tasks
 // ----------------------------------------------------------------------
 
+Task("clean")
+    .Does(() =>
+    {
+        StartProcess("dotnet", new ProcessSettings {
+            Arguments = "clean src/Dmnk.Toolkit.slnx"
+        });
+    });
+
 Task("build")
     .Does(() =>
     {
@@ -55,10 +63,13 @@ Task("docs:serve")
     });
 
 Task("pack")
+    .IsDependentOn("clean")
+    .IsDependentOn("build")
     .Does(() =>
     {
         StartProcess("dotnet", new ProcessSettings {
-            Arguments = "pack src/Dmnk.Toolkit.slnx -c " + configuration + " -o ./artifacts"
+            Arguments = "pack src/Dmnk.Toolkit.slnx -c " +
+                configuration + " -o ./artifacts --no-build"
         });
     });
 
