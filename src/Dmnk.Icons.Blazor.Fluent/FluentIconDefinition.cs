@@ -3,7 +3,7 @@ using Fluent = Microsoft.FluentUI.AspNetCore.Components;
 
 namespace Dmnk.Icons.Blazor.Fluent;
 
-public class FluentIconDefinition(
+internal class FluentIconDefinition(
     Fluent::Icon fluentIcon
 ) : CustomIconDefinition(fluentIcon.Name)
 {

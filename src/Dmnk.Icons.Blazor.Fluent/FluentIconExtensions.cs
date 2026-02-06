@@ -4,9 +4,17 @@ using Fluent = Microsoft.FluentUI.AspNetCore.Components;
 
 namespace Dmnk.Icons.Blazor.Fluent;
 
+/// <summary>
+/// Provides extension methods for converting Fluent UI icons to the generic <see cref="Icon"/>
+/// type in <see cref="Dmnk.Icons.Core"/>.
+/// </summary>
 public static class FluentIconExtensions
 {
-    public static Icon ToIcon(this Fluent::Icon fluentIcon)
+    /// <summary>
+    /// Converts a Fluent UI <see cref="Fluent::Icon"/> to a generic
+    /// <see cref="Dmnk.Icons.Core.Icon"/>.
+    /// </summary>
+    public static Icon ToGenericIcon(this Fluent::Icon fluentIcon)
     {
         return new Icon(
             new FluentIconDefinition(fluentIcon), 

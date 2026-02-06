@@ -27,10 +27,10 @@ public class FluentVmDialogController : BlazorVmDialogController
     public override Icon DefaultIconForIntent(MessageBoxType type) =>
         type switch
         {
-            MessageBoxType.Success => new MsIcons.CheckmarkCircle().WithColor(Color.Success).ToIcon(),
-            MessageBoxType.Error => new MsIcons.ErrorCircle().WithColor(Color.Error).ToIcon(),
-            MessageBoxType.Warning => new MsIcons.Warning().WithColor(Color.Warning).ToIcon(),
-            MessageBoxType.Confirmation => new MsIcons.Question().WithColor(Color.Neutral).ToIcon(),
-            _ => new MsIcons.Info().WithColor(Color.Info).ToIcon(),
+            MessageBoxType.Success => new MsIcons.CheckmarkCircle().WithColor(Color.Success).ToGenericIcon(),
+            MessageBoxType.Error => new MsIcons.ErrorCircle().WithColor(Color.Error).ToGenericIcon(),
+            MessageBoxType.Warning => new MsIcons.Warning().WithColor(Color.Warning).ToGenericIcon(),
+            MessageBoxType.Confirmation => new MsIcons.Question().WithColor(Color.Neutral).ToGenericIcon(),
+            _ => new MsIcons.Info().WithColor(Color.Info).ToGenericIcon(),
         };
 }

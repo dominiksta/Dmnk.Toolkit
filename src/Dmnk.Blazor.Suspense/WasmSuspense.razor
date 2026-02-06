@@ -6,9 +6,19 @@
 </div>
 
 @code {
+    /// <summary>
+    /// The content to display while waiting for the main content to load. This is typically a
+    /// loading spinner or placeholder.
+    /// </summary>
     [Parameter, EditorRequired]
     public required RenderFragment WaitingContent { get; set; }
 
+    /// <summary>
+    /// The main content to display once it has loaded. This is the content that will be rendered
+    /// once the loading is complete. It can be any Blazor component or markup that you want to
+    /// display, but for this to actually do anything, it needs to be set to render in
+    /// InteractiveWebAssembly mode, while the host is rendered server side.
+    /// </summary>
     [Parameter, EditorRequired]
     public required RenderFragment Content { get; set; }
 }
