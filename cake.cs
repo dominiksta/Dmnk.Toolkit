@@ -10,7 +10,7 @@ var configuration = Argument("configuration", "Release");
 Task("build")
     .Does(() =>
     {
-        DotNetBuild("./Dmnk.Toolkit.slnx", new DotNetBuildSettings
+        DotNetBuild("./src/Dmnk.Toolkit.slnx", new DotNetBuildSettings
         {
             Configuration = configuration,
         });
@@ -20,7 +20,7 @@ Task("test")
     .IsDependentOn("Build")
     .Does(() =>
     {
-        DotNetTest("./Dmnk.Toolkit.slnx", new DotNetTestSettings
+        DotNetTest("./src/Dmnk.Toolkit.slnx", new DotNetTestSettings
         {
             Configuration = configuration,
             NoBuild = true,
