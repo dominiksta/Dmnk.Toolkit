@@ -13,6 +13,7 @@
         <Version>0.0.1</Version>
         <Authors>Dominik Stahmer</Authors>
         <Description>Base types for using MVVM in Blazor.</Description>
+        <PackageTags>Blazor;MVVM;Model-View-ViewModel</PackageTags>
         
         <PackageReleaseNotes>
             Initial Release
@@ -29,7 +30,6 @@
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <EnablePackageValidation>true</EnablePackageValidation>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageTags>Blazor;MVVM;Model-View-ViewModel</PackageTags>
     </PropertyGroup>
     
     <ItemGroup>

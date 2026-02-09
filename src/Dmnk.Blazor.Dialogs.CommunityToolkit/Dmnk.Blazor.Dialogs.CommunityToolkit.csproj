@@ -8,6 +8,32 @@
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <PackageId>Dmnk.Blazor.Dialogs.CommunityToolkit</PackageId>
+        <Version>0.0.1</Version>
+        <Authors>Dominik Stahmer</Authors>
+        <Description>
+            Dead-simple integration package for the CommunityToolkit.Mvvm package to be used with
+            Dmnk.Blazor.Dialogs.
+        </Description>
+        <PackageTags>Blazor;MVVM;Model-View-ViewModel</PackageTags>
+        
+        <PackageReleaseNotes>
+            Initial Release
+        </PackageReleaseNotes>
+        
+        <RepositoryUrl>
+            https://github.com/dominiksta/Dmnk.Toolkit
+        </RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReadmeFile>_readme_nuget.md</PackageReadmeFile>
+        <PackageProjectUrl>https://dominiksta.github.io/Dmnk.Toolkit</PackageProjectUrl>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <EnablePackageValidation>true</EnablePackageValidation>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    </PropertyGroup>
 
     <ItemGroup>
         <SupportedPlatform Include="browser"/>
@@ -25,6 +51,10 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Dmnk.Blazor.Dialogs\Dmnk.Blazor.Dialogs.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="..\..\_readme_nuget.md" Pack="true" PackagePath="" />
     </ItemGroup>
 
 </Project>
