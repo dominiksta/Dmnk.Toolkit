@@ -12,7 +12,6 @@ jobs:
       with:
         dotnet-version: 10.x
 
-    steps:
     - name: Run Unit-Tests
       uses: cake-build/cake-action@v3
       with:
