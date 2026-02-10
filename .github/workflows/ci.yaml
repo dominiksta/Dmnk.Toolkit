@@ -1,0 +1,20 @@
+on:
+  pull_request:
+
+jobs:
+  unit-test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Dotnet Setup
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 10.x
+
+    steps:
+    - name: Run Unit-Tests
+      uses: cake-build/cake-action@v3
+      with:
+        file-path: cake.cs
+        target: test
