@@ -9,7 +9,7 @@ public partial class TestViewModel : ObservableObject
     [NotifyCanExecuteChangedFor(nameof(ChangeTextOnlyAfterFirstAsyncChangeCommand))]
     private string _text = "Hello World!";
     
-    public string NonObservableText = "Hello World";
+    public string NonObservableText = "Hello World!";
     
     [RelayCommand]
     private void ChangeText()
