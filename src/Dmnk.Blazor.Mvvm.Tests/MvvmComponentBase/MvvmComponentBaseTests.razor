@@ -1,0 +1,100 @@
+﻿@inherits BunitContext
+@code
+{
+    [Test]
+    public void Should_Throw_Without_ViewModel_As_Parameter() =>
+      Assert.Throws<ArgumentNullException>(() => Render(@<Component />));
+  
+    [Test]
+    public void Should_Render_Text_From_ViewModel()
+    {
+        // Arrange
+        var vm = new TestViewModel();
+        
+        // Act
+        var cut = Render(@<Component Vm="vm" />);
+        
+        // Assert
+        Assert.That(cut.Find("#text-observable").TextContent, Is.EqualTo(vm.Text));
+        Assert.That(cut.Find("#text-non-observable").TextContent, Is.EqualTo(vm.NonObservableText));
+    }
+  
+    [Test]
+    public void Should_Update_Text_When_Command_Executed()
+    {
+        // Arrange
+        var vm = new TestViewModel();
+        var cut = Render(@<Component Vm="vm" />);
+        
+        // Act
+        vm.ChangeTextCommand.Execute(null);
+        
+        // Assert
+        Assert.That(vm.Text, Is.EqualTo("Text changed!"));
+        Assert.That(cut.Find("#text-observable").TextContent, Is.EqualTo("Text changed!"));
+    }
+    
+    [Test]
+    public async Task Should_Update_Text_When_Command_Executed_With_Wait()
+    {
+        // Arrange
+        var vm = new TestViewModel();
+        var cut = Render(@<Component Vm="vm" />);
+        
+        // Act
+        await vm.ChangeTextWaitCommand.ExecuteAsync(null);
+        await cut.WaitForStateAsync(
+            () => cut.Find("#text-observable").TextContent == "Text changed async!",
+            timeout: TimeSpan.FromMilliseconds(500));
+        
+        // Assert
+        Assert.That(
+            cut.Find("#text-observable").TextContent, 
+            Is.EqualTo("Text changed async!"));
+    }
+    
+    [Test]
+    public void Should_Not_Update_NonObservableText_When_Command_Executed()
+    {
+        // Arrange
+        var vm = new TestViewModel();
+        var cut = Render(@<Component Vm="vm" />);
+        
+        // Act
+        vm.ChangeNonObservableTextCommand.Execute(null);
+        
+        // Assert
+        Assert.That(cut.Find("#text-non-observable").TextContent, Is.EqualTo("Hello World!"));
+    }
+    
+    [Test]
+    public void CanExecute()
+    {
+        // Arrange
+        var vm = new TestViewModel();
+        var cut = Render(@<Component Vm="vm" />);
+        
+        // Act & Assert
+        const string btnAfterChange = "#change-text-only-after-first-change";
+        Assert.That(cut.Find(btnAfterChange).GetAttribute("disabled"), Is.Null,
+            "Button should be disabled before first change");
+        
+        cut.Find(btnAfterChange).Click();
+        
+        Assert.That(vm.Text, Is.EqualTo("Hello World!"),
+            "Text should not change when button is disabled");
+        
+        vm.ChangeTextCommand.Execute(null);
+        
+        Assert.That(cut.Find(btnAfterChange).GetAttribute("disabled"), Is.EqualTo(string.Empty),
+            "Button should be enabled after first change");
+        
+        cut.Find(btnAfterChange).Click();
+        
+        Assert.That(vm.Text, Is.EqualTo("Text changed only after first change!"),
+            "Text should change when button is enabled");
+        Assert.That(cut.Find("#text-observable").TextContent, 
+            Is.EqualTo("Text changed only after first change!"),
+            "UI should update when button is enabled");
+    }
+}

@@ -1,0 +1,4 @@
+/* hide inherited members */
+.typelist.inheritedMembers {
+    display: none;
+}

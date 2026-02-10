@@ -1,0 +1,21 @@
+﻿@inherits MvvmComponentBase<TestViewModel>
+
+<p id="text-observable">@Vm.Text</p>
+<p id="text-non-observable">@Vm.NonObservableText</p>
+
+<button id="change-text" @onclick="@Vm.ChangeTextCommand.Bind(this)">
+    Change Text
+</button>
+<button id="change-text-wait" @onclick="@Vm.ChangeTextWaitCommand.Bind(this)">
+    Change Text (Wait)
+</button>
+
+<button id="change-non-observable-text" 
+        @onclick="@Vm.ChangeNonObservableTextCommand.Bind(this)">
+    Change Non-Observable Text
+</button>
+<button id="change-text-only-after-first-change"
+        disabled="@Vm.ChangeTextOnlyAfterFirstAsyncChangeCommand.CanExecute(null)"
+        @onclick="@Vm.ChangeTextOnlyAfterFirstAsyncChangeCommand.Bind(this)">
+    Change Text Only After First Change
+</button>

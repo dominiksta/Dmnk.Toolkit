@@ -29,7 +29,7 @@ public abstract class OwningMvvmComponentBase<T> : AbstractMvvmComponentBase<T>
     /// <summary> <inheritdoc/> </summary>
     protected override void OnInitialized()
     {
-        if (Vm == null) throw new ArgumentNullException(nameof(Vm));
+        ArgumentNullException.ThrowIfNull(Vm);
         base.OnInitialized();
     }
 }

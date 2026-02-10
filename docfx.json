@@ -9,8 +9,10 @@
             "Dmnk.Blazor.Cookies/bin/Release/net10.0/Dmnk.Blazor.Cookies.dll",
             "Dmnk.Blazor.Dialogs/bin/Release/net10.0/Dmnk.Blazor.Dialogs.dll",
             "Dmnk.Blazor.Dialogs.Fluent/bin/Release/net10.0/Dmnk.Blazor.Dialogs.Fluent.dll",
+            "Dmnk.Blazor.Dialogs.CommunityToolkit/bin/Release/net10.0/Dmnk.Blazor.Dialogs.CommunityToolkit.dll",
             "Dmnk.Blazor.Focus/bin/Release/net10.0/Dmnk.Blazor.Focus.dll",
             "Dmnk.Blazor.Mvvm/bin/Release/net10.0/Dmnk.Blazor.Mvvm.dll",
+            "Dmnk.Blazor.Mvvm.CommunityToolkit/bin/Release/net10.0/Dmnk.Blazor.Mvvm.CommunityToolkit.dll",
             "Dmnk.Blazor.OverlayScrollbar/bin/Release/net10.0/Dmnk.Blazor.OverlayScrollbar.dll",
             "Dmnk.Blazor.Storage/bin/Release/net10.0/Dmnk.Blazor.Storage.dll",
             "Dmnk.Blazor.Suspense/bin/Release/net10.0/Dmnk.Blazor.Suspense.dll",
@@ -67,7 +69,8 @@
     "output": "docs/_site",
     "template": [
       "default",
-      "modern"
+      "modern",
+      "docs/template"
     ],
     "globalMetadata": {
       "_appName": "Dmnk.Toolkit.Docs",

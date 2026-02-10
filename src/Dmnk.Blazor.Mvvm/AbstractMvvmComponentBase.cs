@@ -17,7 +17,26 @@ public abstract class AbstractMvvmComponentBase<T> : ComponentBase, IDisposable
     // ReSharper disable once InconsistentNaming
     // ReSharper disable once MemberCanBeProtected.Global
     internal abstract T? __ViewModel { get; set; }
-
+    
+    // ReSharper disable once InconsistentNaming
+    internal readonly Dictionary<ICommand, Action> __CommandBindings = new();
+    
+    /// <summary>
+    /// Allow registering asynchronous command bindings. Useful to integrate with MVVM libraries
+    /// because regrettably, the standard ICommand does not support async execution, which means
+    /// that MVVM libraries typically have their own types for async commands. Since we do not
+    /// want to depend on any specific MVVM library here, this dictionary can be used to cache
+    /// lambdas created from such async commands.
+    /// </summary>
+    [Obsolete(
+        """
+        Not actually obsolete, but do NOT use this directly in a component.
+        Build some extension methods instead, like in Dmnk.Blazor.Mvvm.CommunityToolkit.
+        """
+    )]
+    // ReSharper disable once InconsistentNaming
+    public readonly Dictionary<object, Func<Task>> __CommandBindingsAsync = new();
+    
     private List<ICommand> GetCommandCanExecuteChanged(T viewModel)
     {
         List<ICommand> ret = [];

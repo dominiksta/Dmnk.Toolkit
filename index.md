@@ -14,10 +14,13 @@ Mostly small Blazor-related C# libraries. Documentation and Code are Work-In-Pro
 ### MVVM Pattern for Blazor
 
 - <xref:Dmnk.Blazor.Mvvm> - Base types to implement the MVVM pattern in Blazor applications.
+- <xref:Dmnk.Blazor.Mvvm.CommunityToolkit> - Teeny-tiny integration package for using the 
+  [MVVM Community Toolkit](https://learn.microsoft.com/en-us/dotnet/communitytoolkit/mvvm/) 
+  with <xref:Dmnk.Blazor.Mvvm>.
 - <xref:Dmnk.Blazor.Dialogs> - Base types to implement MVVM-based dialogs for Blazor applications, including support for
   nested dialogs and dialog results and some default dialogs like messageboxes.
 - <xref:Dmnk.Blazor.Dialogs.Fluent> - Fluent UI themed dialog implementation for use with <xref:Dmnk.Blazor.Dialogs>.
-- <xref:Dmnk.Blazor.Dialogs.CommunityToolkit> - Dead-simple integration package for using the 
+- <xref:Dmnk.Blazor.Dialogs.CommunityToolkit> - Teeny-tiny integration package for using the 
   [MVVM Community Toolkit](https://learn.microsoft.com/en-us/dotnet/communitytoolkit/mvvm/) 
   with <xref:Dmnk.Blazor.Dialogs>.
 

@@ -1,18 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
         <TargetFramework>net10.0</TargetFramework>
+        <LangVersion>14</LangVersion>
         <Nullable>enable</Nullable>
-        <ImplicitUsings>enable</ImplicitUsings>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     </PropertyGroup>
-
+    
     <PropertyGroup>
-        <PackageId>Dmnk.Blazor.Mvvm</PackageId>
+        <PackageId>Dmnk.Blazor.Mvvm.CommunityToolkit</PackageId>
         <Version>0.0.1</Version>
         <Authors>Dominik Stahmer</Authors>
-        <Description>Base types for using MVVM in Blazor.</Description>
+        <Description>Helpers to use the MVVM Community Toolkit in Blazor</Description>
         <PackageTags>Blazor;MVVM;Model-View-ViewModel</PackageTags>
         
         <PackageReleaseNotes>
@@ -33,16 +33,15 @@
     </PropertyGroup>
     
     <ItemGroup>
-        <SupportedPlatform Include="browser"/>
-    </ItemGroup>
-
-    <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
-        <InternalsVisibleTo Include="Dmnk.Blazor.Mvvm.Tests" />
+        <PackageReference Include="CommunityToolkit.Mvvm" />
     </ItemGroup>
 
     <ItemGroup>
         <None Include="..\..\_readme_nuget.md" Pack="true" PackagePath="" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Dmnk.Blazor.Mvvm\Dmnk.Blazor.Mvvm.csproj" />
+    </ItemGroup>
 </Project>
