@@ -1,3 +1,5 @@
+name: Publish GitHub Pages Docs
+
 # Adapted from https://dotnet.github.io/docfx/#publish-to-github-pages
 
 on:
