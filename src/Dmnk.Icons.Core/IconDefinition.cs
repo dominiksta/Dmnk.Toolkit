@@ -81,7 +81,7 @@ public abstract class IconDefinition(string technicalName)
 public class PngIconDefinition(string technicalName) : IconDefinition(technicalName)
 {
     /// <summary> The PNG data. </summary>
-    public byte[] Png { get; } = [];
+    public virtual byte[] Png { get; } = [];
 }
 
 /// <summary>
@@ -97,5 +97,5 @@ public class SvgIconDefinition(string technicalName) : IconDefinition(technicalN
     /// The actual <c>&lt;svg&gt;</c> tag should be excluded from this string, as the rendering
     /// logic will wrap it in an <c>&lt;svg&gt;</c> tag with the appropriate size and color.
     /// </summary>
-    public string Svg { get; set; } = string.Empty;
+    public virtual string Svg { get; } = string.Empty;
 }

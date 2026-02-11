@@ -6,8 +6,8 @@ A teeny-tiny (like 20 LOC) library that provides an extension methods on
 <xref:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand> to allow efficient binding in a blazor
 component.
 
-See <xref:Dmnk.Blazor.Mvvm.CommunityToolkit.CommandExtensions.Bind>, as well as
-<xref:Dmnk.Blazor.Mvvm.CommandExtensions.Bind>.
+See <xref:Dmnk.Blazor.Mvvm.CommunityToolkit.CommandExtensions>, as well as
+<xref:Dmnk.Blazor.Mvvm.CommandExtensions>.
 
 ## Usage
 
@@ -44,9 +44,9 @@ public class MyViewModel : ObservableObject
 ```razor
 @inherits MvvmComponentBase<MyViewModel>
 
-@* Uses to Dmnk.Dmnk.Blazor.Mvvm.CommunityToolkit.CommandExtensions.Bind *@
+@* Resolves to Dmnk.Dmnk.Blazor.Mvvm.CommunityToolkit.CommandExtensions.Bind *@
 <button @onclick="Vm.AsyncMethodCommand.Bind(this)">Click me</button>
 
-@* Uses to Dmnk.Dmnk.Blazor.Mvvm.CommandExtensions.Bind *@
+@* Resolves to Dmnk.Dmnk.Blazor.Mvvm.CommandExtensions.Bind *@
 <button @onclick="Vm.SyncMethodCommand.Bind(this)">Click me</button>
 ```
