@@ -2,6 +2,8 @@
 uid: Dmnk.Icons.Blazor
 ---
 
+![NuGet Version](https://img.shields.io/nuget/v/Dmnk.Icons.Blazor?style=flat-square&color=blue&link=https%3A%2F%2Fwww.nuget.org%2Fpackages%2FDmnk.Icons.Blazor%2F)
+
 Allow using icons defined using <xref:Dmnk.Icons.Core> in Blazor applications by generating
 `MarkupString`s. See <xref:Dmnk.Icons.Blazor.BlazorIconExtensions>.
 

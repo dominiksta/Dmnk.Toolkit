@@ -2,6 +2,8 @@
 uid: Dmnk.Blazor.Dialogs
 ---
 
+![NuGet Version](https://img.shields.io/nuget/v/Dmnk.Blazor.Dialogs?style=flat-square&color=blue&link=https%3A%2F%2Fwww.nuget.org%2Fpackages%2FDmnk.Blazor.Dialogs%2F)
+
 Provides a set of components and services to easily create and manage dialogs in Blazor applications
 using the MVVM pattern. Based on <xref:Dmnk.Blazor.Mvvm> (and <xref:Dmnk.Icons.Core>).
 

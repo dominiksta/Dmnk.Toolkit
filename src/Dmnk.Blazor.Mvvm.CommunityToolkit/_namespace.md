@@ -2,6 +2,8 @@
 uid: Dmnk.Blazor.Mvvm.CommunityToolkit
 ---
 
+![NuGet Version](https://img.shields.io/nuget/v/Dmnk.Blazor.Mvvm.CommunityToolkit?style=flat-square&color=blue&link=https%3A%2F%2Fwww.nuget.org%2Fpackages%2FDmnk.Blazor.Mvvm.CommunityToolkit%2F)
+
 A teeny-tiny (like 20 LOC) library that provides an extension methods on
 <xref:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand> to allow efficient binding in a blazor
 component.

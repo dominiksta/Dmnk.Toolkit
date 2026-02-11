@@ -2,6 +2,8 @@
 uid: Dmnk.Blazor.Mvvm
 ---
 
+![NuGet Version](https://img.shields.io/nuget/v/Dmnk.Blazor.Mvvm?style=flat-square&color=blue&link=https%3A%2F%2Fwww.nuget.org%2Fpackages%2FDmnk.Blazor.Mvvm%2F)
+
 This library provides some base types to inherit from in a Blazor application, to implement the MVVM
 pattern. It makes no assumptions about the implementation of the ViewModel, only that it must
 implement `INotifyPropertyChanged` and that commands implement `ICommand`.
