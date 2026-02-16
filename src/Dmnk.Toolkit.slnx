@@ -25,5 +25,6 @@
     <Project Path="Dmnk.Icons.Blazor.Fluent/Dmnk.Icons.Blazor.Fluent.csproj" />
     <Project Path="Dmnk.Icons.Blazor/Dmnk.Icons.Blazor.csproj" />
     <Project Path="Dmnk.Icons.Core/Dmnk.Icons.Core.csproj" />
+    <Project Path="Dmnk.Toolkit.TestUtil/Dmnk.Toolkit.TestUtil.csproj" />
   </Folder>
 </Solution>

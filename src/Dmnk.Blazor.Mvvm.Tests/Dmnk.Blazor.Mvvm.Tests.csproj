@@ -25,6 +25,7 @@
     <ItemGroup>
       <ProjectReference Include="..\Dmnk.Blazor.Mvvm.CommunityToolkit\Dmnk.Blazor.Mvvm.CommunityToolkit.csproj" />
       <ProjectReference Include="..\Dmnk.Blazor.Mvvm\Dmnk.Blazor.Mvvm.csproj" />
+      <ProjectReference Include="..\Dmnk.Toolkit.TestUtil\Dmnk.Toolkit.TestUtil.csproj" />
     </ItemGroup>
 
 </Project>
