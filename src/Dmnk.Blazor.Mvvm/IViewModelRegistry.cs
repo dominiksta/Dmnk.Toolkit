@@ -53,5 +53,12 @@ public interface IViewModelRegistry
     /// Retrieves the registered View type for a given ViewModel type, or null if no registration
     /// exists.
     /// </summary>
+    Type? GetViewForViewModel<TViewModel>(TViewModel viewModel) 
+        where TViewModel : INotifyPropertyChanged;
+    
+    /// <summary>
+    /// Like <see cref="GetViewForViewModel{TViewModel}(TViewModel)"/>, but accepts a Type parameter
+    /// instead of an instance.
+    /// </summary>
     Type? GetViewForViewModel(Type viewModelType);
 }

@@ -23,7 +23,12 @@ public class ViewModelRegistry(ILogger<ViewModelRegistry> log) : IViewModelRegis
         }
         _registry[typeof(TViewModel)] = typeof(TComponent);
     }
-    
+
+    /// <summary> <inheritdoc/> </summary>
+    public Type? GetViewForViewModel<TViewModel>(TViewModel viewModel) 
+        where TViewModel : INotifyPropertyChanged => 
+        GetViewForViewModel(typeof(TViewModel));
+
     /// <summary> <inheritdoc/> </summary>
     public Type? GetViewForViewModel(Type viewModelType) => 
         _registry.GetValueOrDefault(viewModelType);

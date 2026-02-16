@@ -37,7 +37,7 @@ else
     protected override void OnInitialized()
     {
         _parameters[nameof(Vm)] = Vm;
-        _viewType = ViewModelRegistry.GetViewForViewModel(Vm.GetType());
+        _viewType = ViewModelRegistry.GetViewForViewModel(Vm);
         if (_viewType == null)
         {
             Logger.LogError(
