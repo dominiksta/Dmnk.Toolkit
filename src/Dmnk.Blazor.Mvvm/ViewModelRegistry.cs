@@ -10,7 +10,7 @@ public class ViewModelRegistry(ILogger<ViewModelRegistry> log) : IViewModelRegis
 
     /// <summary> <inheritdoc/> </summary>
     public void Register<TViewModel, TComponent>()
-        where TComponent : AbstractMvvmComponentBase<TViewModel>
+        where TComponent : MvvmComponentBase<TViewModel>
         where TViewModel : INotifyPropertyChanged
     {
         if (_registry.ContainsKey(typeof(TViewModel)))

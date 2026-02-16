@@ -40,9 +40,13 @@ public interface IViewModelRegistry
 {
     /// <summary>
     /// Registers a View type for a given ViewModel type.
+    /// TComponent must be an <see cref="MvvmComponentBase{T}"/>, not with an optional or owned
+    /// viewmodel, because we pass a non-null ViewModel instance to the component when rendering.
+    /// Without that constraint, it would be possible to register a component that doesn't accept
+    /// the ViewModel as a parameter.
     /// </summary>
     void Register<TViewModel, TComponent>()
-        where TComponent : AbstractMvvmComponentBase<TViewModel>
+        where TComponent : MvvmComponentBase<TViewModel>
         where TViewModel : INotifyPropertyChanged;
 
     /// <summary>
