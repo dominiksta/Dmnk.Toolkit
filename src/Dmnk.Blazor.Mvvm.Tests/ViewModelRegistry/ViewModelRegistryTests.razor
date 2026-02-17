@@ -4,16 +4,14 @@
 @inherits BunitContext
 
 @code {
-    private readonly InMemoryLogger<ViewModelRegistry> _logger = new();
+    private readonly InMemoryLogger<AutoViewModelRegistry> _logger = new();
     
     [OneTimeSetUp]
-    public void TearDown()
+    public void OneTimeSetUp()
     {
-        var registry = new ViewModelRegistry(_logger);
-        registry.Register<SpecificViewModel1, SpecificView1>();
-        registry.Register<SpecificViewModel2, SpecificView2>();
-        registry.Register<SpecificViewModel2, SpecificView2>();
-        Services.AddSingleton(registry);
+        var registry = new AutoViewModelRegistry(_logger);
+        registry.AutoRegister();
+        Services.AddSingleton<IViewModelRegistry>(registry);
     }
     
     [Test]
@@ -37,7 +35,12 @@
     public void Should_Log_Error_On_Duplicate_Registration()
     {
         // Assert
-        Assert.That(_logger.Messages, Has.Exactly(1).Matches<InMemoryLogMessage>(
+        var logger = new InMemoryLogger<ViewModelRegistry>();
+        var registry = new ViewModelRegistry(logger);
+        registry.Register<SpecificViewModel1, SpecificView1>();
+        registry.Register<SpecificViewModel1, SpecificView1>(); // duplicate
+        
+        Assert.That(logger.Messages, Has.Exactly(1).Matches<InMemoryLogMessage>(
             entry => entry.Level == LogLevel.Error 
                      && entry.Message.Contains("already registered")));
     }
@@ -46,8 +49,8 @@
     public void Should_Return_Null_For_Unregistered_ViewModel()
     {
         // Act
-        var viewType = Services.GetRequiredService<ViewModelRegistry>()
-            .GetViewForViewModel(typeof(UnregisteredViewModel));
+        var viewType = Services.GetRequiredService<IViewModelRegistry>()
+            .GetViewForViewModelDynamic(typeof(UnregisteredViewModel));
         
         // Assert
         Assert.That(viewType, Is.Null);    

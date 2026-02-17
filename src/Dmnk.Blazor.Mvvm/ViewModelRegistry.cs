@@ -9,27 +9,34 @@ public class ViewModelRegistry(ILogger<ViewModelRegistry> log) : IViewModelRegis
     private readonly Dictionary<Type, Type> _registry = new();
 
     /// <summary> <inheritdoc/> </summary>
-    public void Register<TViewModel, TComponent>()
+    public void Register<TViewModel, TComponent>(bool noWarn = false)
         where TComponent : MvvmComponentBase<TViewModel>
         where TViewModel : INotifyPropertyChanged
     {
-        if (_registry.ContainsKey(typeof(TViewModel)))
+        RegisterDynamic(typeof(TViewModel), typeof(TComponent), noWarn);
+    }
+
+    /// <summary> <inheritdoc/> </summary>
+    public void RegisterDynamic(Type viewModelType, Type componentType, bool noWarn = false)
+    {
+        if (!noWarn && _registry.TryGetValue(viewModelType, out var view))
         {
             log.LogError(
                 "ViewModel {VmType} is already registered with view {ViewType}. " +
                 "Overwriting with {NewViewType}",
-                typeof(TViewModel).FullName, _registry[typeof(TViewModel)].FullName, 
-                typeof(TComponent).FullName);
+                viewModelType.FullName, view.FullName, 
+                componentType.FullName);
         }
-        _registry[typeof(TViewModel)] = typeof(TComponent);
+        
+        _registry[viewModelType] = componentType;
     }
 
     /// <summary> <inheritdoc/> </summary>
     public Type? GetViewForViewModel<TViewModel>(TViewModel viewModel) 
         where TViewModel : INotifyPropertyChanged => 
-        GetViewForViewModel(typeof(TViewModel));
+        GetViewForViewModelDynamic(typeof(TViewModel));
 
     /// <summary> <inheritdoc/> </summary>
-    public Type? GetViewForViewModel(Type viewModelType) => 
+    public Type? GetViewForViewModelDynamic(Type viewModelType) => 
         _registry.GetValueOrDefault(viewModelType);
 }

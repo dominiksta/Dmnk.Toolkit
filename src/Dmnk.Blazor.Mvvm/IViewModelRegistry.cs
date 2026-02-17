@@ -44,10 +44,28 @@ public interface IViewModelRegistry
     /// viewmodel, because we pass a non-null ViewModel instance to the component when rendering.
     /// Without that constraint, it would be possible to register a component that doesn't accept
     /// the ViewModel as a parameter.
+    ///
+    /// <p>
+    /// If you are not using trimming (enabled by default in Blazor WASM since .NET 6 with
+    /// <c>dotnet publish</c>) or AOT compilation, you may prefer using
+    /// <see cref="AutoViewModelRegistry.AutoRegister"/> for automatic registration.
+    /// Otherwise, use this method to manually register all View/ViewModel pairs.
+    /// </p>
     /// </summary>
-    void Register<TViewModel, TComponent>()
+    void Register<TViewModel, TComponent>(bool noWarn = false)
         where TComponent : MvvmComponentBase<TViewModel>
         where TViewModel : INotifyPropertyChanged;
+    
+    /// <summary>
+    /// Like <see cref="Register{TViewModel, TComponent}"/>, but accepts Type parameters instead of
+    /// generics.
+    ///
+    /// <p>
+    /// Note that there are no runtime checks for the constraints that apply to the generic version
+    /// of this method to allow usage with e.g. AOT compilation.
+    /// </p>
+    /// </summary>
+    void RegisterDynamic(Type viewModelType, Type componentType, bool noWarn = false);
 
     /// <summary>
     /// Retrieves the registered View type for a given ViewModel type, or null if no registration
@@ -60,5 +78,5 @@ public interface IViewModelRegistry
     /// Like <see cref="GetViewForViewModel{TViewModel}(TViewModel)"/>, but accepts a Type parameter
     /// instead of an instance.
     /// </summary>
-    Type? GetViewForViewModel(Type viewModelType);
+    Type? GetViewForViewModelDynamic(Type viewModelType);
 }
