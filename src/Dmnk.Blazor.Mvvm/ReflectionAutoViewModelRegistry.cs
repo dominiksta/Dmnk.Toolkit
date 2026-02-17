@@ -15,7 +15,8 @@ namespace Dmnk.Blazor.Mvvm;
 /// </summary>
 [RequiresUnreferencedCode(AutoRegisterTrimmingNotice)]
 [RequiresDynamicCode(AutoRegisterTrimmingNotice)]
-public class AutoViewModelRegistry(ILogger<AutoViewModelRegistry> log) : ViewModelRegistry(log)
+public class ReflectionAutoViewModelRegistry(ILogger<ReflectionAutoViewModelRegistry> log) 
+    : ViewModelRegistry(log)
 {
     private const string AutoRegisterTrimmingNotice = $"""
         Automatic registration of ViewModels and Views does not work with trimming or AOT

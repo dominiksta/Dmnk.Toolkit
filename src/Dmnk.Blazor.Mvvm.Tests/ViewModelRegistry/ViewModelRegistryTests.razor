@@ -4,12 +4,12 @@
 @inherits BunitContext
 
 @code {
-    private readonly InMemoryLogger<AutoViewModelRegistry> _logger = new();
+    private readonly InMemoryLogger<ReflectionAutoViewModelRegistry> _logger = new();
     
     [OneTimeSetUp]
     public void OneTimeSetUp()
     {
-        var registry = new AutoViewModelRegistry(_logger);
+        var registry = new ReflectionAutoViewModelRegistry(_logger);
         registry.AutoRegister();
         Services.AddSingleton<IViewModelRegistry>(registry);
     }

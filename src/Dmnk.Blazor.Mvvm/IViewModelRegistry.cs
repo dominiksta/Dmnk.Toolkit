@@ -48,7 +48,7 @@ public interface IViewModelRegistry
     /// <p>
     /// If you are not using trimming (enabled by default in Blazor WASM since .NET 6 with
     /// <c>dotnet publish</c>) or AOT compilation, you may prefer using
-    /// <see cref="AutoViewModelRegistry.AutoRegister"/> for automatic registration.
+    /// <see cref="ReflectionAutoViewModelRegistry.AutoRegister"/> for automatic registration.
     /// Otherwise, use this method to manually register all View/ViewModel pairs.
     /// </p>
     /// </summary>
