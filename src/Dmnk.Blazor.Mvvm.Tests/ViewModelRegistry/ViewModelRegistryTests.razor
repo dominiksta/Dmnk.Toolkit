@@ -5,21 +5,22 @@
 
 @code {
     private readonly InMemoryLogger<ReflectionAutoViewModelRegistry> _logger = new();
+    private IViewModelRegistry _registry = null!;
     
     [OneTimeSetUp]
     public void OneTimeSetUp()
     {
         var registry = new ReflectionAutoViewModelRegistry(_logger);
         registry.AutoRegister();
-        Services.AddSingleton<IViewModelRegistry>(registry);
+        _registry = registry;
     }
     
     [Test]
     public void Should_Render_Specific_View_For_Registered_ViewModel()
     {
         // Act
-        var cut1 = Render(@<RegisteredViewFor Vm="new SpecificViewModel1()"/>);
-        var cut2 = Render(@<RegisteredViewFor Vm="new SpecificViewModel2()"/>);
+        var cut1 = Render(@<RegisteredViewFor Vm="new SpecificViewModel1()" Registry="_registry"/>);
+        var cut2 = Render(@<RegisteredViewFor Vm="new SpecificViewModel2()" Registry="_registry"/>);
 
         // Assert
         Assert.Multiple(() =>
@@ -49,8 +50,7 @@
     public void Should_Return_Null_For_Unregistered_ViewModel()
     {
         // Act
-        var viewType = Services.GetRequiredService<IViewModelRegistry>()
-            .GetViewForViewModelDynamic(typeof(UnregisteredViewModel));
+        var viewType = _registry.GetViewForViewModelDynamic(typeof(UnregisteredViewModel));
         
         // Assert
         Assert.That(viewType, Is.Null);    
@@ -62,7 +62,7 @@
         var vm = new UnregisteredViewModel();
 
         // Act
-        var cut = Render(@<RegisteredViewFor Vm="vm"/>);
+        var cut = Render(@<RegisteredViewFor Vm="vm" Registry="_registry"/>);
 
         // Assert
         Assert.Multiple(() =>

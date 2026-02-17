@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 namespace Dmnk.Blazor.Mvvm;
 
 /// <summary> <inheritdoc/> </summary>
-public class ViewModelRegistry(ILogger<ViewModelRegistry> log) : IViewModelRegistry
+public class ViewModelRegistry(ILogger<ViewModelRegistry>? log = null) : IViewModelRegistry
 {
     private readonly Dictionary<Type, Type> _registry = new();
 
@@ -21,7 +21,7 @@ public class ViewModelRegistry(ILogger<ViewModelRegistry> log) : IViewModelRegis
     {
         if (!noWarn && _registry.TryGetValue(viewModelType, out var view))
         {
-            log.LogError(
+            log?.LogError(
                 "ViewModel {VmType} is already registered with view {ViewType}. " +
                 "Overwriting with {NewViewType}",
                 viewModelType.FullName, view.FullName, 

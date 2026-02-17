@@ -9,8 +9,7 @@ namespace Dmnk.Blazor.Mvvm;
 /// that automatically registers all ViewModels and their corresponding Views based on reflection.
 ///
 /// <p>
-/// Note that source-generation is impossible here, since razor templates are compiled by a source
-/// generator themselves, and ordering of source generators is not possible as of 2026-02.
+/// You may prefer using the source generator - see <see cref="ViewModelForAttribute"/>.
 /// </p>
 /// </summary>
 [RequiresUnreferencedCode(AutoRegisterTrimmingNotice)]

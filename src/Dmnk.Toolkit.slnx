@@ -18,6 +18,7 @@
     <Project Path="Dmnk.Blazor.Dialogs/Dmnk.Blazor.Dialogs.csproj" />
     <Project Path="Dmnk.Blazor.Focus/Dmnk.Blazor.Focus.csproj" />
     <Project Path="Dmnk.Blazor.Mvvm.CommunityToolkit/Dmnk.Blazor.Mvvm.CommunityToolkit.csproj" />
+    <Project Path="Dmnk.Blazor.Mvvm.SourceGen/Dmnk.Blazor.Mvvm.SourceGen.csproj" />
     <Project Path="Dmnk.Blazor.Mvvm.Tests/Dmnk.Blazor.Mvvm.Tests.csproj" />
     <Project Path="Dmnk.Blazor.Mvvm/Dmnk.Blazor.Mvvm.csproj" />
     <Project Path="Dmnk.Blazor.OverlayScrollbar/Dmnk.Blazor.OverlayScrollbar.csproj" />

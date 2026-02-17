@@ -2,8 +2,6 @@
 @using System.Text.Json
 @using Microsoft.Extensions.Logging
 @typeparam TViewModel where TViewModel : INotifyPropertyChanged
-@inject IViewModelRegistry ViewModelRegistry
-@inject ILogger<ViewModelRegistry> Logger
 
 @if (_viewType != null)
 {
@@ -29,18 +27,33 @@ else
 }
 
 @code {
+    /// <summary>
+    /// The ViewModel to display with its associated view.
+    /// </summary>
     [Parameter, EditorRequired] public required TViewModel Vm { get; set; }
+    
+    /// <summary>
+    /// A registry may be either provided via DI or passed directly as a parameter (which take
+    /// precedence over the DI registry). The registry is used to determine which view to display
+    /// for the given view model.
+    /// </summary>
+    [Parameter] public required IViewModelRegistry? Registry { get; set; }
     
     private Type? _viewType = null;
     private readonly Dictionary<string, object> _parameters = new();
 
     protected override void OnInitialized()
     {
+        var registry = Registry ?? viewModelRegistry ?? 
+            throw new ArgumentException(
+            "No registry provided. Either pass a registry via the Registry parameter or ensure " +
+            "a registry is registered in the service provider.");
+        
         _parameters[nameof(Vm)] = Vm;
-        _viewType = ViewModelRegistry.GetViewForViewModel(Vm);
+        _viewType = registry.GetViewForViewModel(Vm);
         if (_viewType == null)
         {
-            Logger.LogError(
+            logger?.LogError(
                 "No view registered for view model of type {ViewModelType}", 
                 Vm.GetType().FullName);
         }

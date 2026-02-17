@@ -46,6 +46,10 @@ public interface IViewModelRegistry
     /// the ViewModel as a parameter.
     ///
     /// <p>
+    /// You may prefer using the source generator - see <see cref="ViewModelForAttribute"/>.
+    /// </p>
+    ///
+    /// <p>
     /// If you are not using trimming (enabled by default in Blazor WASM since .NET 6 with
     /// <c>dotnet publish</c>) or AOT compilation, you may prefer using
     /// <see cref="ReflectionAutoViewModelRegistry.AutoRegister"/> for automatic registration.
