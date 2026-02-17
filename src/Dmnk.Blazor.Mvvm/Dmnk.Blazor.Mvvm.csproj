@@ -10,13 +10,13 @@
 
     <PropertyGroup>
         <PackageId>Dmnk.Blazor.Mvvm</PackageId>
-        <Version>0.0.1</Version>
+        <Version>0.0.2</Version>
         <Authors>Dominik Stahmer</Authors>
         <Description>Base types for using MVVM in Blazor.</Description>
         <PackageTags>Blazor;MVVM;Model-View-ViewModel</PackageTags>
         
         <PackageReleaseNotes>
-            Initial Release
+            Added ViewModelRegistry and RegisteredViewFor
         </PackageReleaseNotes>
         
         <RepositoryUrl>
