@@ -5,7 +5,7 @@ uid: Dmnk.Blazor.Mvvm.SourceGen
 (This is not a separate NuGet package, but built into in the main Dmnk.Blazor.Mvvm package)
 
 Use source-generation to register ViewModels with their Views, such that they can be used with 
-[<RegisteredViewFor>](xref:Dmnk.Blazor.Mvvm.RegisteredViewFor).
+[<RegisteredViewFor>](https://dominiksta.github.io/Dmnk.Toolkit//api/Dmnk.Blazor.Mvvm.RegisteredViewFor-1.html).
 
 ## Usage
 

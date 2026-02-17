@@ -63,6 +63,7 @@ public class ViewModelRegistryGenerator : IIncrementalGenerator
         defaultSeverity: DiagnosticSeverity.Warning,
         isEnabledByDefault: true);
 
+    /// <summary> <inheritdoc/> </summary>
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
         // Find all classes with the ViewFor attribute
