@@ -25,6 +25,14 @@
     <ItemGroup>
       <ProjectReference Include="..\Dmnk.Blazor.Mvvm.CommunityToolkit\Dmnk.Blazor.Mvvm.CommunityToolkit.csproj" />
       <ProjectReference Include="..\Dmnk.Blazor.Mvvm\Dmnk.Blazor.Mvvm.csproj" />
+      <ProjectReference Include="..\Dmnk.Toolkit.TestUtil\Dmnk.Toolkit.TestUtil.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- Direct reference to source generator for development/testing -->
+        <ProjectReference Include="..\Dmnk.Blazor.Mvvm.SourceGen\Dmnk.Blazor.Mvvm.SourceGen.csproj"
+                          OutputItemType="Analyzer"
+                          ReferenceOutputAssembly="false" />
     </ItemGroup>
 
 </Project>

@@ -1,0 +1,77 @@
+﻿@using Dmnk.Blazor.Mvvm;
+@using Dmnk.Toolkit.TestUtil
+@using Microsoft.Extensions.Logging
+@inherits BunitContext
+
+@code {
+    private readonly InMemoryLogger<ReflectionAutoViewModelRegistry> _logger = new();
+    private IViewModelRegistry _registry = null!;
+    
+    [OneTimeSetUp]
+    public void OneTimeSetUp()
+    {
+        var registry = new ReflectionAutoViewModelRegistry(_logger);
+        registry.AutoRegister();
+        _registry = registry;
+    }
+    
+    [Test]
+    public void Should_Render_Specific_View_For_Registered_ViewModel()
+    {
+        // Act
+        var cut1 = Render(@<RegisteredViewFor Vm="new SpecificViewModel1()" Registry="_registry"/>);
+        var cut2 = Render(@<RegisteredViewFor Vm="new SpecificViewModel2()" Registry="_registry"/>);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(cut1.Find("h3").TextContent, 
+                Is.EqualTo("Specific View 1 (Name: SpecificViewModel1)"));
+            Assert.That(cut2.Find("h3").TextContent, 
+                Is.EqualTo("Specific View 2 (Name: SpecificViewModel2)"));
+        });
+    }
+    
+    [Test]
+    public void Should_Log_Error_On_Duplicate_Registration()
+    {
+        // Assert
+        var logger = new InMemoryLogger<ViewModelRegistry>();
+        var registry = new ViewModelRegistry(logger);
+        registry.Register<SpecificViewModel1, SpecificView1>();
+        registry.Register<SpecificViewModel1, SpecificView1>(); // duplicate
+        
+        Assert.That(logger.Messages, Has.Exactly(1).Matches<InMemoryLogMessage>(
+            entry => entry.Level == LogLevel.Error 
+                     && entry.Message.Contains("already registered")));
+    }
+    
+    [Test]
+    public void Should_Return_Null_For_Unregistered_ViewModel()
+    {
+        // Act
+        var viewType = _registry.GetViewForViewModelDynamic(typeof(UnregisteredViewModel));
+        
+        // Assert
+        Assert.That(viewType, Is.Null);    
+    }
+    
+    [Test]
+    public void Should_Show_Error_Message_When_Rendering_Unregistered_ViewModel()
+    {
+        var vm = new UnregisteredViewModel();
+
+        // Act
+        var cut = Render(@<RegisteredViewFor Vm="vm" Registry="_registry"/>);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            var text = cut.Find("ul").TextContent;
+            Assert.That(text, Does.Contain("PROGRAM ERROR"));
+            Assert.That(text, Does.Contain(vm.ToString()));
+            Assert.That(text, Does.Contain("{")); // json
+        });
+    }
+    
+}

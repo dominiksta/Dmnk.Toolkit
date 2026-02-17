@@ -5,6 +5,7 @@
     <File Path="Directory.Packages.props" />
   </Folder>
   <Folder Name="/Docs/">
+    <File Path="../CHANGELOG.md" />
     <File Path="../index.md" />
     <File Path="../README.md" />
     <File Path="../_readme_nuget.md" />
@@ -17,6 +18,7 @@
     <Project Path="Dmnk.Blazor.Dialogs/Dmnk.Blazor.Dialogs.csproj" />
     <Project Path="Dmnk.Blazor.Focus/Dmnk.Blazor.Focus.csproj" />
     <Project Path="Dmnk.Blazor.Mvvm.CommunityToolkit/Dmnk.Blazor.Mvvm.CommunityToolkit.csproj" />
+    <Project Path="Dmnk.Blazor.Mvvm.SourceGen/Dmnk.Blazor.Mvvm.SourceGen.csproj" />
     <Project Path="Dmnk.Blazor.Mvvm.Tests/Dmnk.Blazor.Mvvm.Tests.csproj" />
     <Project Path="Dmnk.Blazor.Mvvm/Dmnk.Blazor.Mvvm.csproj" />
     <Project Path="Dmnk.Blazor.OverlayScrollbar/Dmnk.Blazor.OverlayScrollbar.csproj" />
@@ -25,5 +27,6 @@
     <Project Path="Dmnk.Icons.Blazor.Fluent/Dmnk.Icons.Blazor.Fluent.csproj" />
     <Project Path="Dmnk.Icons.Blazor/Dmnk.Icons.Blazor.csproj" />
     <Project Path="Dmnk.Icons.Core/Dmnk.Icons.Core.csproj" />
+    <Project Path="Dmnk.Toolkit.TestUtil/Dmnk.Toolkit.TestUtil.csproj" />
   </Folder>
 </Solution>

@@ -1,2 +1,5 @@
 [*]
 max_line_length = 100
+
+[*.razor]
+max_line_length = 100
