@@ -4,6 +4,8 @@ on:
   push:
     tags:                            # Pattern matched against refs/tags
       - 'v[0-9]+.[0-9]+.[0-9]+.*'    # Push events to every tag matching e.g. v0.0.1-something
+  # Allow manual triggering
+  workflow_dispatch:
 
 jobs:
   pack-and-publish:
