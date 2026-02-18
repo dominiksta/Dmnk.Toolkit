@@ -10,7 +10,7 @@
     public void OneTimeSetUp()
     {
         _registry = new ViewModelRegistry(_logger);
-        _registry.AutoRegisterFromSourceGen();
+        Dmnk.Blazor.Mvvm.Tests.SourceGeneratedViewModelRegistrations.Register(_registry);
     }
     
     [Test]
