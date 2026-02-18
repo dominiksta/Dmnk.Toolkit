@@ -50,7 +50,7 @@ else
             "a registry is registered in the service provider.");
         
         _parameters[nameof(Vm)] = Vm;
-        _viewType = registry.GetViewForViewModel(Vm);
+        _viewType = registry.GetViewForViewModelDynamic(Vm.GetType());
         if (_viewType == null)
         {
             logger?.LogError(
