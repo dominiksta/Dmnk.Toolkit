@@ -30,7 +30,8 @@ namespace Dmnk.Blazor.Mvvm.SourceGen;
 /// // ...
 /// ServiceProvider provider = services.BuildServiceProvider();
 /// 
-/// provider.GetRequiredService&lt;IViewModelRegistry&gt;().AutoRegisterFromSourceGen();
+/// var registry = provider.GetRequiredService&lt;IViewModelRegistry&gt;();
+/// My.Namespace.Containing.MyViewModel.SourceGeneratedViewModelRegistrations.Register(registry);
 /// </code>
 ///
 /// MyDynamicView.razor:

@@ -31,7 +31,8 @@ public class MyViewModel : INotifyPropertyChanged { ... }
 // ...
 ServiceProvider provider = services.BuildServiceProvider();
 
-provider.GetRequiredService<IViewModelRegistry>().AutoRegisterFromSourceGen();
+var registry = provider.GetRequiredService<IViewModelRegistry>();
+My.Namespace.Containing.MyViewModel.SourceGeneratedViewModelRegistrations.Register(registry);
 ```
 
 **MyDynamicView.razor**:
