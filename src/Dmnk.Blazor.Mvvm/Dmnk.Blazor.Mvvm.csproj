@@ -10,7 +10,7 @@
 
     <PropertyGroup>
         <PackageId>Dmnk.Blazor.Mvvm</PackageId>
-        <Version>0.0.3</Version>
+        <Version>0.0.4</Version>
         <Authors>Dominik Stahmer</Authors>
         <Description>Base types for using MVVM in Blazor.</Description>
         <PackageTags>Blazor;MVVM;Model-View-ViewModel</PackageTags>
@@ -18,14 +18,8 @@
         <PackageReleaseNotes>
             **Fixed:**
 
-            - `RegisteredViewFor` now works properly when passing a ViewModel cast to one of its
-               base types, e.g. `IMyViewModel` or `INotifyPropertyChanged`
-
-            **Breaking Changes:**
-
-            - The source generator for `ViewModelFor` now generates a class *in the namespace of the
-              project* that is using the `ViewModelFor` attribute instead of in `Dmnk.Blazor.Mvvm`.
-              This fixes usage in multiple projects.
+            - `RegisteredViewFor` now properly updates the view when the ViewModel changes, 
+               e.g. using in a `@foreach`
         </PackageReleaseNotes>
         
         <RepositoryUrl>

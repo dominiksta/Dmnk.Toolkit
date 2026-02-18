@@ -42,7 +42,7 @@ else
     private Type? _viewType = null;
     private readonly Dictionary<string, object> _parameters = new();
 
-    protected override void OnInitialized()
+    protected override void OnParametersSet()
     {
         var registry = Registry ?? viewModelRegistry ?? 
             throw new ArgumentException(

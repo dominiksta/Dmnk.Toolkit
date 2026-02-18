@@ -1,5 +1,11 @@
 ﻿# Changelog
 
+## `Dmnk.Blazor.Mvvm`: `0.0.4` - 2026-02-18
+
+**Fixed:**
+
+- `RegisteredViewFor` now properly updates the view when the ViewModel changes, e.g. using in a `@foreach`
+
 ## `Dmnk.Blazor.Mvvm`: `0.0.3` - 2026-02-18
 
 **Fixed:**
