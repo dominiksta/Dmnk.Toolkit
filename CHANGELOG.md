@@ -4,6 +4,7 @@
 
 - `Dmnk.Blazor.OverlayScrollbar`: 0.0.2
 - `Dmnk.Blazor.Mvvm`: 0.0.5
+- `Dmnk.Blazor.Dialogs.Fluent`: 0.0.2
 
 **Fixed:**
 
@@ -11,6 +12,7 @@
   They did exist but not in the `staticwebassets` folder where they belong.
 - `Dmnk.Blazor.Mvvm`: Views now respond to CanExecuteChanged events of commands that are defined as fields 
   instead of properties.
+- `Dmnk.Blazor.Dialogs.Fluent`: Fixed JS file location
 
 ## `Dmnk.Blazor.Mvvm`: `0.0.4` - 2026-02-18
 
