@@ -47,11 +47,16 @@ public class MyInputDialogViewModel : DialogViewModelBase
 ```csharp
 // you need a concrete implementation of IVmDialogController/BlazorVmDialogController
 // FluentVmDialogController is implemented in the Dmnk.Blazor.Dialogs.Fluent package using FluentUI
-var dialogController = new FluentVmDialogController();
+var dialogController = builder.Services.AddFluentMvvmDialogs();
 dialogController.Register<MyInputDialogViewModel, MyInputDialog>();
+```
 
-// obviously you could also just pass it in the constructor or inject it however you want
-builder.Services.AddSingleton<IVmDialogController>(dialogController);
+**SomeRootComponentWithInteractivity.razor**:
+```razor
+@using Dmnk.Blazor.Dialogs.Fluent
+@* again, if you don't use the fluent implementation you will have to supply your own *@
+
+<DialogControllerProvider/>
 ```
 
 **MyHostComponent.razor**:

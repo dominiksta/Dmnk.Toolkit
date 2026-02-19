@@ -9,6 +9,7 @@ namespace Dmnk.Blazor.Dialogs.SimpleMvvm;
 /// Internal basic MVVM implementation, just to not depend on e.g. the CommunityToolkit in the core
 /// library. Not intended for public use, use a proper MVVM library.
 /// </summary>
+[EditorBrowsable(EditorBrowsableState.Never)]
 public class SimpleViewModelBase : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;

@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.ComponentModel;
+using System.Windows.Input;
 
 namespace Dmnk.Blazor.Dialogs.SimpleMvvm;
 
@@ -8,6 +9,7 @@ namespace Dmnk.Blazor.Dialogs.SimpleMvvm;
 /// Internal basic MVVM implementation, just to not depend on e.g. the CommunityToolkit in the core
 /// library. Not intended for public use, use a proper MVVM library.
 /// </summary>
+[EditorBrowsable(EditorBrowsableState.Never)]
 public class SimpleAsyncRelayCommand(
     Func<object?, Task> executeFunction,
     Predicate<object?> canExecutePredicate

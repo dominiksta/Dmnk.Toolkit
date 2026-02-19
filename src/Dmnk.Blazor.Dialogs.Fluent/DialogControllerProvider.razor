@@ -102,7 +102,7 @@
         {
             _module = await Js.InvokeAsync<IJSObjectReference>(
                 "import", 
-                "./_content/Dmnk.Blazor.Dialogs/Blazor/DialogControllerProvider.razor.js"
+                "./_content/Dmnk.Blazor.Dialogs.Fluent/DialogControllerProvider.razor.js"
             );
             await _module.InvokeVoidAsync(
                 "addBodyKeyListener", DotNetObjectReference.Create(this)
