@@ -1,5 +1,17 @@
 ﻿# Changelog
 
+## `[Multiple]`:  2026-02-19
+
+- `Dmnk.Blazor.OverlayScrollbar`: 0.0.2
+- `Dmnk.Blazor.Mvvm`: 0.0.5
+
+**Fixed:**
+
+- `Dmnk.Blazor.OverlayScrollbar`: The JS and CSS files were not properly added to the nuget package. 
+  They did exist but not in the `staticwebassets` folder where they belong.
+- `Dmnk.Blazor.Mvvm`: Views now respond to CanExecuteChanged events of commands that are defined as fields 
+  instead of properties.
+
 ## `Dmnk.Blazor.Mvvm`: `0.0.4` - 2026-02-18
 
 **Fixed:**

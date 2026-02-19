@@ -10,7 +10,7 @@
 
     <PropertyGroup>
         <PackageId>Dmnk.Blazor.OverlayScrollbar</PackageId>
-        <Version>0.0.1</Version>
+        <Version>0.0.2</Version>
         <Authors>Dominik Stahmer</Authors>
         <Description>
             Wrapper around the OverlayScrollbars.js library for Blazor.
@@ -18,7 +18,7 @@
         <PackageTags>Blazor</PackageTags>
         
         <PackageReleaseNotes>
-            Initial Release
+            Fix inclusion of the required JS and CSS files.
         </PackageReleaseNotes>
         
         <RepositoryUrl>
@@ -41,13 +41,24 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
     </ItemGroup>
 
-    <Target Name="DownloadJsBundles" BeforeTargets="BeforeBuild"
+    <Target Name="DownloadJsBundles" BeforeTargets="BeforeBuild;GenerateNuspec"
             Condition="!Exists('wwwroot\overlayscrollbars.esm.min.js')">
-        <DownloadFile DestinationFolder="wwwroot" SourceUrl="https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/2.11.5/overlayscrollbars.esm.min.js"/>
-        <DownloadFile DestinationFolder="wwwroot" SourceUrl="https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/2.11.5/styles/overlayscrollbars.min.css"/>
+        <DownloadFile 
+                DestinationFolder="wwwroot" 
+                SourceUrl="https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/2.11.5/overlayscrollbars.esm.min.js"/>
+        <DownloadFile 
+                DestinationFolder="wwwroot" 
+                SourceUrl="https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/2.11.5/styles/overlayscrollbars.min.css"/>
+        
+        <!-- since the files don't exist when msbuild started, it will not pick them up as static 
+             web assets if we don't explicitly specify them here -->
+        <ItemGroup>
+            <Content Include="wwwroot\overlayscrollbars.esm.min.js" />
+            <Content Include="wwwroot\overlayscrollbars.min.css" />
+        </ItemGroup>
     </Target>
     
-    <Target Name="Name DeleteJsBundles" AfterTargets="Clean">
+    <Target Name="DeleteJsBundles" AfterTargets="Clean">
         <Delete Files="wwwroot\overlayscrollbars.esm.min.js"/>
         <Delete Files="wwwroot\overlayscrollbars.min.css"/>
     </Target>

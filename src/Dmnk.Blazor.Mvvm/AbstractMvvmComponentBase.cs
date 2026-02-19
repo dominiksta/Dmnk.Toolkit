@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Reflection;
 using System.Windows.Input;
 using Microsoft.AspNetCore.Components;
 
@@ -40,12 +41,21 @@ public abstract class AbstractMvvmComponentBase<T> : ComponentBase, IDisposable
     private List<ICommand> GetCommandCanExecuteChanged(T viewModel)
     {
         List<ICommand> ret = [];
+        
         foreach (var prop in typeof(T).GetProperties())
         {
             if (prop.PropertyType != typeof(ICommand) 
                 && !prop.PropertyType.IsAssignableTo(typeof(ICommand))) continue;
             ret.Add((ICommand) prop.GetValue(viewModel)!);
         }
+        
+        foreach (var prop in typeof(T).GetFields())
+        {
+            if (prop.FieldType != typeof(ICommand) 
+                && !prop.FieldType.IsAssignableTo(typeof(ICommand))) continue;
+            ret.Add((ICommand) prop.GetValue(viewModel)!);
+        }
+        
         return ret;
     }
 
