@@ -5,14 +5,16 @@
 @inherits BunitContext
 
 @code {
-    private readonly InMemoryLogger<ReflectionAutoViewModelRegistry> _logger = new();
+    private readonly InMemoryLogger<ViewModelRegistry> _logger = new();
     private IViewModelRegistry _registry = null!;
     
     [OneTimeSetUp]
     public void OneTimeSetUp()
     {
-        var registry = new ReflectionAutoViewModelRegistry(_logger);
-        registry.AutoRegister();
+        var registry = new ViewModelRegistry([
+            ViewModelRegistration.Create<SpecificViewModel1, SpecificView1>(),
+            ViewModelRegistration.Create<SpecificViewModel2, SpecificView2>()
+        ], _logger);
         _registry = registry;
     }
     
@@ -40,15 +42,23 @@
     [Test]
     public void Should_Log_Error_On_Duplicate_Registration()
     {
-        // Assert
         var logger = new InMemoryLogger<ViewModelRegistry>();
-        var registry = new ViewModelRegistry(logger);
-        registry.Register<SpecificViewModel1, SpecificView1>();
-        registry.Register<SpecificViewModel1, SpecificView1>(); // duplicate
+        var services = new ServiceCollection();
+        services.AddSingleton<ILogger<ViewModelRegistry>>(logger);
+        services.AddSingleton<IViewModelRegistry, ViewModelRegistry>();
         
+        services.AddSingleton(ViewModelRegistration.Create<SpecificViewModel1, SpecificView1>());
+        services.AddSingleton(ViewModelRegistration.Create<SpecificViewModel1, SpecificView1>());
+        
+        var provider = services.BuildServiceProvider();
+        
+        var registry = provider.GetRequiredService<IViewModelRegistry>();
+        registry.GetViewForViewModel(new SpecificViewModel1());
+        
+        // Assert
         Assert.That(logger.Messages, Has.Exactly(1).Matches<InMemoryLogMessage>(
             entry => entry.Level == LogLevel.Error 
-                     && entry.Message.Contains("already registered")));
+                     && entry.Message.ToLowerInvariant().Contains("duplicate")));
     }
     
     [Test]

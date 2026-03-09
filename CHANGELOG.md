@@ -1,5 +1,11 @@
 ﻿# Changelog
 
+## `Dmnk.Blazor.Mvvm`: `0.0.7` - [unreleased]
+
+**Changed:**
+
+- ViewModel Registrations now are done through DI (see type ViewModelRegistration).
+
 ## `Dmnk.Blazor.Mvvm`: `0.0.6` - 2026-03-06
 
 **Fixed:**

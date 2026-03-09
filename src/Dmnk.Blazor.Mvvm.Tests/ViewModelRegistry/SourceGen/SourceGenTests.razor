@@ -1,18 +1,17 @@
 ﻿@using Dmnk.Toolkit.TestUtil
+@using Microsoft.Extensions.Logging
 @using ViewModelRegistry = Dmnk.Blazor.Mvvm.ViewModelRegistry
 @inherits BunitContext
 
 @code {
-    private readonly InMemoryLogger<ViewModelRegistry> _logger = new();
-    private IViewModelRegistry _registry = null!;
-    
-    [OneTimeSetUp]
+    [SetUp]
     public void OneTimeSetUp()
     {
-        _registry = new ViewModelRegistry(_logger);
-        Dmnk.Blazor.Mvvm.Tests.SourceGeneratedViewModelRegistrations.Register(_registry);
+        Dmnk.Blazor.Mvvm.Tests.SourceGeneratedViewModelRegistrations.Register(Services);
+        Services.AddSingleton<ILogger<ViewModelRegistry>>(new InMemoryLogger<ViewModelRegistry>());
+        Services.AddSingleton<IViewModelRegistry, ViewModelRegistry>();
     }
-    
+
     [Test]
     public void Should_Render_Source_Generated_View_For_ViewModel()
     {
@@ -20,7 +19,7 @@
         var vm = new SourceGenTestViewModel { Message = "Hello from SourceGen!" };
 
         // Act
-        var cut = Render(@<RegisteredViewFor Vm="vm" Registry="_registry"/>);
+        var cut = Render(@<RegisteredViewFor Vm="vm"/>);
 
         // Assert
         Assert.That(cut.Find("h3").TextContent, Is.EqualTo("Source Generator Test View"));

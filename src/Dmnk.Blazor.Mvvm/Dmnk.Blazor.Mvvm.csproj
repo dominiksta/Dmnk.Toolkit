@@ -10,16 +10,15 @@
 
     <PropertyGroup>
         <PackageId>Dmnk.Blazor.Mvvm</PackageId>
-        <Version>0.0.6</Version>
+        <Version>0.0.7</Version>
         <Authors>Dominik Stahmer</Authors>
         <Description>Base types for using MVVM in Blazor.</Description>
         <PackageTags>Blazor;MVVM;Model-View-ViewModel</PackageTags>
         
         <PackageReleaseNotes>
-            **Fixed:**
+            **Changed:**
 
-            - AbstractMvvmComponentBase now implements both IDisposable and IAsyncDisposable 
-              (as virtual methods).
+            - ViewModel Registrations now are done through DI (see type ViewModelRegistration).
         </PackageReleaseNotes>
         
         <RepositoryUrl>

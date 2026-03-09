@@ -4,39 +4,53 @@ using Microsoft.Extensions.Logging;
 namespace Dmnk.Blazor.Mvvm;
 
 /// <summary> <inheritdoc/> </summary>
-public class ViewModelRegistry(ILogger<ViewModelRegistry>? log = null) : IViewModelRegistry
+public class ViewModelRegistry : IViewModelRegistry
 {
     private readonly Dictionary<Type, Type> _registry = new();
+    private readonly ILogger<ViewModelRegistry>? _log;
 
-    /// <summary> <inheritdoc/> </summary>
-    public void Register<TViewModel, TComponent>(bool noWarn = false)
-        where TComponent : MvvmComponentBase<TViewModel>
-        where TViewModel : INotifyPropertyChanged
+    /// <summary>
+    /// See <see cref="IViewModelRegistry"/>
+    /// </summary>
+    public ViewModelRegistry(
+        IEnumerable<ViewModelRegistration> registrations,
+        ILogger<ViewModelRegistry>? log = null)
     {
-        RegisterDynamic(typeof(TViewModel), typeof(TComponent), noWarn);
+        _log = log;
+        foreach (var reg in registrations)
+        {
+            if (_registry.TryGetValue(reg.ViewModelType, out var value))
+            {
+                _log?.LogError(
+                    "Duplicate registration for ViewModel type {ViewModelType}. " +
+                    "Existing View type: {ExistingViewType}, " +
+                    "New View type: {NewViewType}. " +
+                    "Using existing registration.",
+                    reg.ViewModelType, value, reg.ViewType);
+                continue;
+            }
+            _log?.LogTrace(
+                "Registering ViewModel type {ViewModelType} with View type {ViewType}", 
+                reg.ViewModelType, reg.ViewType);
+            _registry[reg.ViewModelType] = reg.ViewType;
+        }
     }
 
-    /// <summary> <inheritdoc/> </summary>
-    public void RegisterDynamic(Type viewModelType, Type componentType, bool noWarn = false)
+    private Type? GetViewForViewModelLogFailure(Type viewModelType)
     {
-        if (!noWarn && _registry.TryGetValue(viewModelType, out var view))
-        {
-            log?.LogError(
-                "ViewModel {VmType} is already registered with view {ViewType}. " +
-                "Overwriting with {NewViewType}",
-                viewModelType.FullName, view.FullName, 
-                componentType.FullName);
-        }
+        if (_registry.TryGetValue(viewModelType, out var viewType))
+            return viewType;
         
-        _registry[viewModelType] = componentType;
+        _log?.LogWarning("No view registered for ViewModel type {ViewModelType}", viewModelType);
+        return null;
     }
 
     /// <summary> <inheritdoc/> </summary>
     public Type? GetViewForViewModel<TViewModel>(TViewModel viewModel) 
         where TViewModel : INotifyPropertyChanged => 
-        GetViewForViewModelDynamic(typeof(TViewModel));
+        GetViewForViewModelLogFailure(typeof(TViewModel));
 
     /// <summary> <inheritdoc/> </summary>
     public Type? GetViewForViewModelDynamic(Type viewModelType) => 
-        _registry.GetValueOrDefault(viewModelType);
+        GetViewForViewModelLogFailure(viewModelType);
 }
