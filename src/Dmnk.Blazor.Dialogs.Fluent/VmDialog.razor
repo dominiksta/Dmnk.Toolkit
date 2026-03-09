@@ -13,7 +13,9 @@
                  style="display: flex; width: 100%; align-items: center; column-gap: 1em;">
                 @if (Params.Icon != null)
                 {
-                    <div style="height: 100%;">@(Params.Icon.ToMarkup())</div>
+                    <div style="height: 100%; display: inline-flex;">
+                        @(Params.Icon.ToMarkup())
+                    </div>
                 }
                 <span style="font-size: 120%;">
                     @if (Params.Title != null) { @Params.Title }
