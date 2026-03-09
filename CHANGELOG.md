@@ -1,5 +1,11 @@
 ﻿# Changelog
 
+## `Dmnk.Blazor.Mvvm`: `0.0.6` - 2026-03-06
+
+**Fixed:**
+
+- AbstractMvvmComponentBase now implements both IDisposable and IAsyncDisposable (as virtual methods).
+
 ## `[Multiple]`:  2026-02-19
 
 - `Dmnk.Blazor.OverlayScrollbar`: 0.0.2

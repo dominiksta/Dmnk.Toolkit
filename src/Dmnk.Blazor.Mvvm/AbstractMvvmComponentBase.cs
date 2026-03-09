@@ -12,7 +12,8 @@ namespace Dmnk.Blazor.Mvvm;
 /// when any property of type ICommand fires CanExecuteChanged.
 /// </summary>
 /// <typeparam name="T">The ViewModel</typeparam>
-public abstract class AbstractMvvmComponentBase<T> : ComponentBase, IDisposable 
+public abstract class AbstractMvvmComponentBase<T> : 
+    ComponentBase, IDisposable, IAsyncDisposable
     where T : INotifyPropertyChanged
 {
     // ReSharper disable once InconsistentNaming
@@ -96,8 +97,16 @@ public abstract class AbstractMvvmComponentBase<T> : ComponentBase, IDisposable
     /// <summary> <inheritdoc/> </summary>
     public virtual void Dispose()
     {
-        if (__ViewModel == null) return;
-        SetViewModel(default);
+        if (__ViewModel != null) 
+            SetViewModel(default);
+    }
+
+    /// <summary> <inheritdoc/> </summary>
+    public virtual ValueTask DisposeAsync()
+    {
+        // blazor internally only calls DisposeAsync if present.
+        Dispose();
         GC.SuppressFinalize(this);
+        return ValueTask.CompletedTask;
     }
 }
