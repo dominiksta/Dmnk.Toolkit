@@ -38,7 +38,13 @@ else
     /// for the given view model.
     /// </summary>
     [Parameter] public required IViewModelRegistry? Registry { get; set; }
-    
+
+    /// <summary>
+    /// Optional additional parameters to pass to the resolved view component, merged on top of
+    /// the default <c>Vm</c> parameter.
+    /// </summary>
+    [Parameter] public IReadOnlyDictionary<string, object?>? AdditionalParameters { get; set; }
+
     private Type? _viewType = null;
     private readonly Dictionary<string, object> _parameters = new();
 
@@ -50,6 +56,11 @@ else
             "a registry is registered in the service provider.");
         
         _parameters[nameof(Vm)] = Vm;
+        if (AdditionalParameters != null)
+        {
+            foreach (var (key, value) in AdditionalParameters)
+                if (value != null) _parameters[key] = value;
+        }
         _viewType = registry.GetViewForViewModelDynamic(Vm.GetType());
         if (_viewType == null)
         {

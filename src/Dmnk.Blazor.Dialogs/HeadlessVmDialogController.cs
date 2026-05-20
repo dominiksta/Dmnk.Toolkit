@@ -6,22 +6,12 @@ using Dmnk.Icons.Core;
 namespace Dmnk.Blazor.Dialogs;
 
 /// <summary>
-/// Intended for unit tests: ViewModels are registered and opened without an
-/// actual view.
+/// Intended for unit tests: ViewModels are opened without an actual view.
 /// </summary>
 public class HeadlessVmDialogController : IVmDialogController
 {
-    private readonly HashSet<Type> _viewModels = new();
     private readonly List<(IVmDialogViewModel ViewModel, DateTime Opened)> _instances = [];
 
-    /// <summary> See <see cref="HeadlessVmDialogController"/> </summary>
-    public HeadlessVmDialogController()
-    {
-        Register(typeof(InputDialogViewModel<>));
-        Register<MessageBoxViewModel>();
-        Register<ConfirmationDialogViewModel>();
-    }
-    
     /// <summary>
     /// Get the last opened instance of a viewmodel type. This is useful for unit tests to verify
     /// that a dialog was opened with the correct viewmodel and parameters.
@@ -32,40 +22,11 @@ public class HeadlessVmDialogController : IVmDialogController
             .OrderBy(i => i.Opened)
             .First().ViewModel;
 
-    /// <summary>
-    /// Register a viewmodel type.
-    /// Equivalent of <see cref="BlazorVmDialogController.Register(Type, Type)"/>.
-    /// </summary>
-    public void Register(Type viewModelType)
-    {
-        if (!viewModelType.IsAssignableTo(typeof(IVmDialogViewModel)))
-            throw new InvalidOperationException(
-                $"Only types assignable to {typeof(IVmDialogViewModel)} can be registered"
-            );
-        if (_viewModels.Contains(viewModelType)) 
-            throw new InvalidOperationException($"{viewModelType} was already registered");
-        _viewModels.Add(viewModelType);
-    }
-    
-    /// <summary>
-    /// Register a viewmodel type.
-    /// Equivalent of <see cref="BlazorVmDialogController.Register{TComponent, TViewModel}"/>.
-    /// </summary>
-    public void Register<TViewModel>() where TViewModel : IVmDialogViewModel 
-        => Register(typeof(TViewModel));
-
     /// <summary> <inheritdoc/> </summary>
     public Task<VmDialogReference> Show<T>(
         VmDialogParameters parameters, T viewModel
     ) where T : IVmDialogViewModel
     {
-        var vmType = typeof(T).IsGenericType 
-            ? typeof(T).GetGenericTypeDefinition() : typeof(T);
-        if (!_viewModels.Contains(vmType))
-            throw new InvalidOperationException(
-                $"viewmodel of type {vmType} was not registered"
-            );
-        
         var toAdd = (viewModel, DateTime.Now);
         _instances.Add(toAdd);
         var reference = new VmDialogReference(async () =>

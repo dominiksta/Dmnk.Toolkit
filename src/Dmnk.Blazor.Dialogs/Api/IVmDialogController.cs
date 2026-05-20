@@ -11,9 +11,9 @@ public interface IVmDialogController
     /// <summary>
     /// Show the dialog for a given viewmodel.
     /// <p>
-    /// Before calling this, the component should be registered with its
-    /// corresponding viewmodel using e.g.
-    /// <see cref="BlazorVmDialogController.Register{TComponent, TViewModel}"/>.
+    /// Dialog views are resolved via DI through <see cref="Dmnk.Blazor.Mvvm.IViewModelRegistry"/>.
+    /// Register view-viewmodel pairs using <see cref="Dmnk.Blazor.Mvvm.ViewModelRegistration"/> in
+    /// your DI setup (e.g. via <c>AddFluentMvvmDialogs()</c>).
     /// </p>
     /// </summary>
     public Task<VmDialogReference> Show<T>(

@@ -1,20 +1,21 @@
 ﻿@using Dmnk.Blazor.Dialogs.Api
+@using Dmnk.Blazor.Mvvm
 @using Microsoft.AspNetCore.Components.Web
 @using Microsoft.FluentUI.AspNetCore.Components
 @using Microsoft.JSInterop
 @implements IAsyncDisposable
 @inject Dialogs.BlazorVmDialogController DialogController
+@inject IViewModelRegistry ViewModelRegistry
 @inject IJSRuntime Js
 
 <div class="r-dialog-provider">
     @for (var i = 0; i < _activeDialogs.Count; i++)
     {
         var dlg = _activeDialogs[i];
-        Dictionary<string, object?> parameters = new()
+        Dictionary<string, object?> additionalParams = new()
         {
             { nameof(IVmDialogView.Dialog), dlg.Reference },
             { nameof(IVmDialogView.Params), dlg.Parameters },
-            { "Vm", dlg.ViewModel },
         };
         <div class="r-dialog-backdrop" @key="i" 
              style="z-index: @(BaseZIndex + i);"
@@ -26,7 +27,7 @@
                 <VmDialog
                     Params="@dlg.Parameters"
                     Dialog="@dlg.Reference">
-                    <DynamicComponent Type="@dlg.Component" Parameters="parameters"/>
+                    <RegisteredViewFor Vm="@dlg.ViewModel" Registry="@ViewModelRegistry" AdditionalParameters="@additionalParams"/>
                 </VmDialog>
             </div>
         </div>
@@ -44,7 +45,7 @@
     public static int BaseZIndex = 1000;
 
     private List<(
-        VmDialogParameters Parameters, Type Component, 
+        VmDialogParameters Parameters,
         IVmDialogViewModel ViewModel, VmDialogReference Reference
     )> _activeDialogs = [];
 
@@ -62,7 +63,7 @@
     }
 
     private void OnShow((
-        VmDialogParameters Parameters, Type Component, 
+        VmDialogParameters Parameters,
         IVmDialogViewModel ViewModel, VmDialogReference Reference
     ) args)
     {

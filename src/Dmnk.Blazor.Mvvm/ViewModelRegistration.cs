@@ -35,4 +35,13 @@ public record ViewModelRegistration
         where TViewModel : INotifyPropertyChanged 
         where TView : MvvmComponentBase<TViewModel> 
         => new(typeof(TViewModel), typeof(TView));
+
+    /// <summary>
+    /// Creates a new instance for open generic type pairs
+    /// (e.g. <c>typeof(MyViewModel&lt;&gt;)</c> and <c>typeof(MyView&lt;&gt;)</c>).
+    /// No compile-time type checks are performed; invalid types will fail at runtime in
+    /// <see cref="ViewModelRegistry"/>.
+    /// </summary>
+    public static ViewModelRegistration CreateOpenGeneric(Type viewModelType, Type viewType)
+        => new(viewModelType, viewType);
 }

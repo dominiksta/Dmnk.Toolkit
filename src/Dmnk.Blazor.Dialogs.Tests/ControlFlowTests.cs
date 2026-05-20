@@ -8,7 +8,6 @@ public class ControlFlowTests
     public async Task Custom_Dialog()
     {
         var controller = new HeadlessVmDialogController();
-        controller.Register<BasicCustomDialogViewModel>();
         
         var vmHost = new HostViewModel(controller);
 

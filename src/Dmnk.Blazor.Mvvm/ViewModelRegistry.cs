@@ -40,7 +40,14 @@ public class ViewModelRegistry : IViewModelRegistry
     {
         if (_registry.TryGetValue(viewModelType, out var viewType))
             return viewType;
-        
+
+        if (viewModelType.IsGenericType)
+        {
+            var openGenericVmType = viewModelType.GetGenericTypeDefinition();
+            if (_registry.TryGetValue(openGenericVmType, out var openGenericViewType))
+                return openGenericViewType.MakeGenericType(viewModelType.GetGenericArguments());
+        }
+
         _log?.LogWarning("No view registered for ViewModel type {ViewModelType}", viewModelType);
         return null;
     }
