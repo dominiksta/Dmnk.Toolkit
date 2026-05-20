@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/App/">
+    <Project Path="Dmnk.Toolkit.TestApp/Dmnk.Toolkit.TestApp.csproj" />
+  </Folder>
   <Folder Name="/Build/">
     <File Path="../cake.cs" />
     <File Path=".editorconfig" />
