@@ -1,5 +1,11 @@
 ﻿# Changelog
 
+## `Dmnk.Icons.Blazor.Fluent`: `0.0.2` - [unreleased]
+
+**Fixed:**
+
+- Icons had a hard-coded `background-color: var(--neutral-layer-1)`. This is now removed.
+
 ## `Dmnk.Blazor.Mvvm`: `0.0.7` - [unreleased]
 
 **Changed:**

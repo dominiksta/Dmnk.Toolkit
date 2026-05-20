@@ -10,7 +10,7 @@
 
     <PropertyGroup>
         <PackageId>Dmnk.Icons.Blazor.Fluent</PackageId>
-        <Version>0.0.1</Version>
+        <Version>0.0.2</Version>
         <Authors>Dominik Stahmer</Authors>
         <Description>
             Use FluentUI Icons with Dmnk.Icons in Blazor.
@@ -18,7 +18,9 @@
         <PackageTags>Blazor;Icons</PackageTags>
         
         <PackageReleaseNotes>
-            Initial Release
+            **Fixed:**
+
+            - Icons had a hard-coded `background-color: var(--neutral-layer-1)`. This is now removed.
         </PackageReleaseNotes>
         
         <RepositoryUrl>
