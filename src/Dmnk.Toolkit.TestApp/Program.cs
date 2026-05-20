@@ -1,12 +1,20 @@
+using Dmnk.Blazor.Dialogs.Fluent;
+using Dmnk.Blazor.Mvvm;
+using Dmnk.Toolkit.TestApp;
 using Dmnk.Toolkit.TestApp.Components;
 using Microsoft.FluentUI.AspNetCore.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddFluentUIComponents();
+
+builder.Services.AddSingleton<ILogger<ViewModelRegistry>, Logger<ViewModelRegistry>>();
+builder.Services.AddSingleton<IViewModelRegistry, ViewModelRegistry>();
+builder.Services.AddViewModelRegistrations();
+builder.Services.AddDynamicItemViewModels();
+builder.Services.AddFluentMvvmDialogs();
 
 var app = builder.Build();
 

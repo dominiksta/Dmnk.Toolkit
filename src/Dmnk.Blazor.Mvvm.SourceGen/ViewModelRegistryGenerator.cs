@@ -240,9 +240,9 @@ public class ViewModelRegistryGenerator : IIncrementalGenerator
         foreach (var vm in viewModels)
         {
             if (vm.IsOpenGeneric)
-                sb.AppendLine($"        services.AddSingleton(ViewModelRegistration.CreateOpenGeneric(typeof({vm.ViewModelType}), typeof({vm.ViewType})));");
+                sb.AppendLine($"        services.AddSingleton(Dmnk.Blazor.Mvvm.ViewModelRegistration.CreateOpenGeneric(typeof({vm.ViewModelType}), typeof({vm.ViewType})));");
             else
-                sb.AppendLine($"        services.AddSingleton(ViewModelRegistration.Create<{vm.ViewModelType}, {vm.ViewType}>());");
+                sb.AppendLine($"        services.AddSingleton(Dmnk.Blazor.Mvvm.ViewModelRegistration.Create<{vm.ViewModelType}, {vm.ViewType}>());");
         }
 
         sb.AppendLine("    }");

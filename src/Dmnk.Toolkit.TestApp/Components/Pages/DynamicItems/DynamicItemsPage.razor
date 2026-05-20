@@ -1,0 +1,13 @@
+@page "/dynamic-items"
+@rendermode InteractiveServer
+@inject IEnumerable<IDynamicItemViewModel> DynamicItemViewModels
+
+<h1>Dynamic Items</h1>
+
+@foreach (var itemVm in DynamicItemViewModels)
+{
+    <p>Dynamic ViewModel Name: @itemVm.Name</p>
+    <hr />
+    <RegisteredViewFor @key="@itemVm.Name" Vm="itemVm" />
+    <hr />
+}

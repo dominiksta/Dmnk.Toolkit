@@ -1,0 +1,8 @@
+@page "/test-dialog"
+@rendermode InteractiveServer
+@using Dmnk.Blazor.Dialogs.Api
+@inject IVmDialogController DialogController
+
+<h1>Test Dialog</h1>
+
+<DialogHostView Vm="new DialogHostViewModel(DialogController)"/>

@@ -16,9 +16,17 @@
       <ProjectReference Include="..\Dmnk.Blazor.Dialogs.CommunityToolkit\Dmnk.Blazor.Dialogs.CommunityToolkit.csproj" />
       <ProjectReference Include="..\Dmnk.Blazor.Dialogs.Fluent\Dmnk.Blazor.Dialogs.Fluent.csproj" />
       <ProjectReference Include="..\Dmnk.Blazor.Dialogs\Dmnk.Blazor.Dialogs.csproj" />
+      <ProjectReference Include="..\Dmnk.Blazor.Mvvm.CommunityToolkit\Dmnk.Blazor.Mvvm.CommunityToolkit.csproj" />
       <ProjectReference Include="..\Dmnk.Blazor.Mvvm\Dmnk.Blazor.Mvvm.csproj" />
       <ProjectReference Include="..\Dmnk.Icons.Blazor.Fluent\Dmnk.Icons.Blazor.Fluent.csproj" />
       <ProjectReference Include="..\Dmnk.Icons.Blazor\Dmnk.Icons.Blazor.csproj" />
       <ProjectReference Include="..\Dmnk.Icons.Core\Dmnk.Icons.Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- Direct reference to source generator for development/testing -->
+        <ProjectReference Include="..\Dmnk.Blazor.Mvvm.SourceGen\Dmnk.Blazor.Mvvm.SourceGen.csproj"
+                          OutputItemType="Analyzer"
+                          ReferenceOutputAssembly="false" />
     </ItemGroup>
 </Project>

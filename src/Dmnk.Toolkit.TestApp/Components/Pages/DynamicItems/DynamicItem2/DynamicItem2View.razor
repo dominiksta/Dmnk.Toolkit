@@ -1,0 +1,7 @@
+@inherits MvvmComponentBase<DynamicItem2ViewModel>
+
+<h3>DynamicItem2View</h3>
+
+<p>Counter: @Vm.Counter (Injected as transient, so will be refreshed on navigation)</p>
+
+<FluentButton OnClick="@(() => Vm.Counter++)">Increment</FluentButton>

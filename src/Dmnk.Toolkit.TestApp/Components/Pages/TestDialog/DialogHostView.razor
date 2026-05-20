@@ -1,0 +1,7 @@
+@inherits MvvmComponentBase<DialogHostViewModel>
+
+<h3>DialogHostView</h3>
+
+<FluentButton OnClick="@Vm.ShowDialogCommand.Bind(this)">
+    Show Dialog
+</FluentButton>
