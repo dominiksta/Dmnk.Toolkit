@@ -1,0 +1,67 @@
+@page "/icons"
+@rendermode InteractiveServer
+@using Dmnk.Icons.Core
+@using Dmnk.Icons.Blazor
+@using Dmnk.Icons.Blazor.Fluent
+
+<PageTitle>Icons</PageTitle>
+
+<h1>Icons Demo</h1>
+
+<h2>Fluent UI icons wrapped as generic <code>Icon</code></h2>
+<p>
+    Fluent icons are converted to <code>Dmnk.Icons.Core.Icon</code> via
+    <code>.ToGenericIcon()</code> and rendered via <code>.ToMarkup()</code>.
+</p>
+
+<FluentStack Orientation="Orientation.Horizontal" HorizontalGap="16">
+    @foreach (var item in _fluentIcons)
+    {
+        <FluentStack Orientation="Orientation.Vertical" HorizontalAlignment="HorizontalAlignment.Center">
+            @(item.Icon.ToMarkup())
+            <small>@item.Label</small>
+        </FluentStack>
+    }
+</FluentStack>
+
+<h2>Custom SVG icon</h2>
+<p>
+    A custom star icon defined as an <code>SvgIconDefinition</code>, rendered at different sizes
+    and colors.
+</p>
+
+<FluentStack Orientation="Orientation.Horizontal" HorizontalGap="16">
+    @foreach (var item in _customIcons)
+    {
+        <FluentStack Orientation="Orientation.Vertical" HorizontalAlignment="HorizontalAlignment.Center">
+            @(item.Icon.ToMarkup())
+            <small>@item.Label</small>
+        </FluentStack>
+    }
+</FluentStack>
+
+@code {
+    private record IconItem(Dmnk.Icons.Core.Icon Icon, string Label);
+
+    private IReadOnlyList<IconItem> _fluentIcons =
+    [
+        new(new Icons.Regular.Size24.Home().ToGenericIcon(), "Home"),
+        new(new Icons.Regular.Size24.Settings().ToGenericIcon(), "Settings"),
+        new(new Icons.Regular.Size24.Person().ToGenericIcon(), "Person"),
+        new(new Icons.Regular.Size24.Heart().ToGenericIcon(), "Heart"),
+        new(new Icons.Regular.Size24.Star().ToGenericIcon(), "Star"),
+        new(new Icons.Regular.Size24.Search().ToGenericIcon(), "Search"),
+        new(new Icons.Regular.Size24.Alert().ToGenericIcon(), "Alert"),
+        new(new Icons.Regular.Size24.Checkmark().ToGenericIcon(), "Checkmark"),
+    ];
+
+    private IReadOnlyList<IconItem> _customIcons =
+    [
+        new(StarIconDefinition.Instance.Size16, "16px (default)"),
+        new(StarIconDefinition.Instance.Size24, "24px (default)"),
+        new(StarIconDefinition.Instance.Size32, "32px (default)"),
+        new(StarIconDefinition.Instance.Size24.WithColor(System.Drawing.Color.Crimson), "24px crimson"),
+        new(StarIconDefinition.Instance.Size24.WithColor(System.Drawing.Color.SteelBlue), "24px steel blue"),
+        new(StarIconDefinition.Instance.CustomSize(48), "48px (default)"),
+    ];
+}
