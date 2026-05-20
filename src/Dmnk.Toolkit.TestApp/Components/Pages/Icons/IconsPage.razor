@@ -43,6 +43,9 @@
 @code {
     private record IconItem(Dmnk.Icons.Core.Icon Icon, string Label);
 
+    private static readonly CustomIconDefinition Home = 
+        new Icons.Regular.Size24.Home().ToGenericIconDefinition();
+
     private IReadOnlyList<IconItem> _fluentIcons =
     [
         new(new Icons.Regular.Size24.Home().ToGenericIcon(), "Home"),
@@ -50,6 +53,8 @@
             .WithColor(System.Drawing.Color.Red), "Home (Red)"),
         new(new Icons.Regular.Size24.Home().WithColor(Color.Warning).ToGenericIcon(), 
             "Home (Fluent Warning)"),
+        new(Home.Size24, "Home (from def, size 24)"),
+        new(Home.Size32, "Home (from def, size 32)"),
         new(new Icons.Regular.Size24.Settings().ToGenericIcon(), "Settings"),
         new(new Icons.Regular.Size24.Person().ToGenericIcon(), "Person"),
         new(new Icons.Regular.Size24.Heart().ToGenericIcon(), "Heart"),

@@ -30,7 +30,8 @@ public static class BlazorIconExtensions
         {
             SvgIconDefinition svgIconDefinition => FromSvg(icon, svgIconDefinition),
             PngIconDefinition pngIconDefinition => FromPng(icon, pngIconDefinition),
-            CustomIconDefinition customIconDefinition => customIconDefinition.ToMarkup(icon.Color),
+            CustomIconDefinition customIconDefinition => customIconDefinition.ToMarkup(
+                icon.Color, icon.Size.Width),
             #if DEBUG
             _ => throw new NotSupportedException(
                 $"Icon definition of type {icon.GetType().FullName} is not supported in Blazor."
@@ -58,17 +59,17 @@ public static class BlazorIconExtensions
     
     private static MarkupString FromSvg(Icon icon, SvgIconDefinition def)
     {
-      return new MarkupString(
-          // language=svg
-          $"""
-           <svg viewBox="0 0 {icon.Size.Width} {icon.Size.Height}" 
-               width="{icon.Size.Width}" 
-               height="{icon.Size.Height}"
-               fill="{icon.Color?.ToHexString() ?? DefaultColor}" 
-               alt="{icon.AccessibleName}">
-               {def.Svg}
-           </svg>
-           """
-      );
+        return new MarkupString(
+            // language=svg
+            $"""
+             <svg viewBox="0 0 {def.ViewBox.Width} {def.ViewBox.Height}" 
+                 width="{icon.Size.Width}" 
+                 height="{icon.Size.Height}"
+                 fill="{icon.Color?.ToHexString() ?? DefaultColor}" 
+                 alt="{icon.AccessibleName}">
+                 {def.Svg}
+             </svg>
+             """
+        );
     }
 }

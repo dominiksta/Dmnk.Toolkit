@@ -19,6 +19,7 @@
         
         <PackageReleaseNotes>
             - Fixed: Colors applied through WithColor for CustomIconDefinitions were not applied.
+            - Fixed: Size was not applied.
         </PackageReleaseNotes>
         
         <RepositoryUrl>

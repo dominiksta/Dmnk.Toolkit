@@ -21,4 +21,11 @@ public static class FluentIconExtensions
             new Size((int) fluentIcon.Size, (int) fluentIcon.Size)
         );
     }
+    
+    /// <summary>
+    /// Converts a Fluent UI <see cref="Fluent::Icon"/> to a generic <see
+    /// cref="CustomIconDefinition"/>.
+    /// </summary>
+    public static CustomIconDefinition ToGenericIconDefinition(this Fluent::Icon fluentIcon) => 
+        new FluentIconDefinition(fluentIcon);
 }

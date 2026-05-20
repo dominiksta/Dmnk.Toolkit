@@ -5,6 +5,7 @@
 **Fixed:**
 
 - Colors applied through WithColor for CustomIconDefinitions were not applied.
+- Size was not applied.
 
 ## `Dmnk.Icons.Core`: `0.0.2` - [unreleased]
 
@@ -18,6 +19,7 @@
 
 - Icons had a hard-coded `background-color: var(--neutral-layer-1)`. This is now removed.
 - Colors applied through WithColor for CustomIconDefinitions were not applied.
+- Icon sizes were not applied beyond the initial fluent icon size.
 
 ## `Dmnk.Blazor.Mvvm`: `0.0.7` - [unreleased]
 

@@ -98,4 +98,11 @@ public class SvgIconDefinition(string technicalName) : IconDefinition(technicalN
     /// logic will wrap it in an <c>&lt;svg&gt;</c> tag with the appropriate size and color.
     /// </summary>
     public virtual string Svg { get; } = string.Empty;
+
+    /// <summary>
+    /// The coordinate space of the SVG content, used as the <c>viewBox</c>.
+    /// This should match the coordinate system the <see cref="Svg"/> paths were authored in.
+    /// Defaults to 24×24. Override when your SVG uses a different coordinate space.
+    /// </summary>
+    public virtual Size ViewBox => new Size(24, 24);
 }

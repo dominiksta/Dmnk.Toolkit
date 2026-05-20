@@ -15,7 +15,10 @@ public abstract class CustomIconDefinition(string technicalName) : IconDefinitio
     /// Return a <see cref="MarkupString"/> that represents this icon to render in the DOM.
     /// </summary>
     /// <param name="color">
-    /// An optional CSS color string to apply. If null, the definition's own default color is used.
+    /// An optional color to apply. If null, the definition's own default color is used.
     /// </param>
-    public abstract MarkupString ToMarkup(Color? color = null);
+    /// <param name="size">
+    /// An optional size in pixels to render at. If null, the definition's own default size is used.
+    /// </param>
+    public abstract MarkupString ToMarkup(Color? color = null, int? size = null);
 }

@@ -8,9 +8,10 @@ internal class FluentIconDefinition(
     Fluent::Icon fluentIcon
 ) : CustomIconDefinition(fluentIcon.Name)
 {
-    public override MarkupString ToMarkup(System.Drawing.Color? color = null)
+    public override MarkupString ToMarkup(System.Drawing.Color? color = null, int? size = null)
     {
-        var markup = fluentIcon.ToMarkup(color: color?.ToHexString()).Value;
+        var cssSize = size.HasValue ? $"{size.Value}px" : null;
+        var markup = fluentIcon.ToMarkup(size: cssSize, color: color?.ToHexString()).Value;
         // The Fluent ToMarkup() hard-codes "background-color: var(--neutral-layer-1);" into the SVG
         // style attribute.
         markup = markup.Replace("background-color: var(--neutral-layer-1); ", string.Empty);

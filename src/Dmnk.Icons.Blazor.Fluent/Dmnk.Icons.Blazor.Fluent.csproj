@@ -20,6 +20,7 @@
         <PackageReleaseNotes>
             - Fixed: Icons had a hard-coded `background-color: var(--neutral-layer-1)`. This is now removed.
             - Fixed: Colors applied through WithColor for CustomIconDefinitions were not applied.
+            - Fixed: Icon sizes were not applied beyond the initial fluent icon size.
         </PackageReleaseNotes>
         
         <RepositoryUrl>
