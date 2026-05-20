@@ -1,19 +1,19 @@
 ﻿# Changelog
 
-## `Dmnk.Icons.Blazor`: `0.0.2` - [unreleased]
+## `Dmnk.Icons.Blazor`: `0.0.2` - 2026-05-29
 
 **Fixed:**
 
 - Colors applied through WithColor for CustomIconDefinitions were not applied.
 - Size was not applied.
 
-## `Dmnk.Icons.Core`: `0.0.2` - [unreleased]
+## `Dmnk.Icons.Core`: `0.0.2` - 2026-05-29
 
 **Added**:
 
 - SystemDrawingColorExtensions.ToHexString
 
-## `Dmnk.Icons.Blazor.Fluent`: `0.0.2` - [unreleased]
+## `Dmnk.Icons.Blazor.Fluent`: `0.0.2` - 2026-05-29
 
 **Fixed:**
 
@@ -21,11 +21,30 @@
 - Colors applied through WithColor for CustomIconDefinitions were not applied.
 - Icon sizes were not applied beyond the initial fluent icon size.
 
-## `Dmnk.Blazor.Mvvm`: `0.0.7` - [unreleased]
+## `Dmnk.Blazor.Dialogs`: `0.0.2` - 2026-05-29
+
+**Changed:**
+
+- ViewModel registration is now done through DI (see type ViewModelRegistration).
+  This is with the same mechanism as in Dmnk.Blazor.Mvvm and replaces the previous Register calls
+  on the DialogControllers.
+
+## `Dmnk.Blazor.Dialogs.Fluent`: `0.0.3` - 2026-05-29
+
+**Fixed:**
+
+- Alignment of Icon and Text in dialog headers
+
+## `Dmnk.Blazor.Mvvm`: `0.0.7` - 2026-05-20
 
 **Changed:**
 
 - ViewModel Registrations now are done through DI (see type ViewModelRegistration).
+
+**Added:**
+
+- ViewModel Registrations now support open generics through the new `RegisterOpenGeneric` method,
+  as well as through the existing `ViewModelFor` source generator.
 
 ## `Dmnk.Blazor.Mvvm`: `0.0.6` - 2026-03-06
 

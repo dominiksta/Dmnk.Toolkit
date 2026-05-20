@@ -10,7 +10,7 @@
 
     <PropertyGroup>
         <PackageId>Dmnk.Blazor.Dialogs.Fluent</PackageId>
-        <Version>0.0.2</Version>
+        <Version>0.0.3</Version>
         <Authors>Dominik Stahmer</Authors>
         <Description>
             Implementation of Dmnk.Blazor.Dialogs using Fluent UI styles and components.
@@ -18,7 +18,7 @@
         <PackageTags>Blazor;MVVM;Model-View-ViewModel;Fluent;FluentUI</PackageTags>
         
         <PackageReleaseNotes>
-            Fix JS file location
+            - Fixed: Alignment of Icon and Text in dialog headers
         </PackageReleaseNotes>
         
         <RepositoryUrl>

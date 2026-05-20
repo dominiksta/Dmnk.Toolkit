@@ -16,9 +16,10 @@
         <PackageTags>Blazor;MVVM;Model-View-ViewModel</PackageTags>
         
         <PackageReleaseNotes>
-            **Changed:**
-
-            - ViewModel Registrations now are done through DI (see type ViewModelRegistration).
+            - Changed: ViewModel Registrations now are done through DI (see type ViewModelRegistration).
+            - Added: ViewModel Registrations now support open generics through the new
+              `RegisterOpenGeneric` method, as well as through the existing `ViewModelFor` source
+              generator.
         </PackageReleaseNotes>
         
         <RepositoryUrl>
