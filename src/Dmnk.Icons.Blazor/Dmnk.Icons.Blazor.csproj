@@ -10,7 +10,7 @@
 
     <PropertyGroup>
         <PackageId>Dmnk.Icons.Blazor</PackageId>
-        <Version>0.0.1</Version>
+        <Version>0.0.2</Version>
         <Authors>Dominik Stahmer</Authors>
         <Description>
             Get MarkupStrings from Dmnk.Icons to use in Blazor applications.
@@ -18,7 +18,7 @@
         <PackageTags>Blazor;Icons</PackageTags>
         
         <PackageReleaseNotes>
-            Initial Release
+            - Fixed: Colors applied through WithColor for CustomIconDefinitions were not applied.
         </PackageReleaseNotes>
         
         <RepositoryUrl>

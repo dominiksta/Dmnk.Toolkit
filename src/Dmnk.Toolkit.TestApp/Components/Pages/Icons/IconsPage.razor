@@ -46,6 +46,10 @@
     private IReadOnlyList<IconItem> _fluentIcons =
     [
         new(new Icons.Regular.Size24.Home().ToGenericIcon(), "Home"),
+        new(new Icons.Regular.Size24.Home().ToGenericIcon()
+            .WithColor(System.Drawing.Color.Red), "Home (Red)"),
+        new(new Icons.Regular.Size24.Home().WithColor(Color.Warning).ToGenericIcon(), 
+            "Home (Fluent Warning)"),
         new(new Icons.Regular.Size24.Settings().ToGenericIcon(), "Settings"),
         new(new Icons.Regular.Size24.Person().ToGenericIcon(), "Person"),
         new(new Icons.Regular.Size24.Heart().ToGenericIcon(), "Heart"),

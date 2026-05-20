@@ -1,4 +1,5 @@
-﻿using Dmnk.Icons.Core;
+﻿using System.Drawing;
+using Dmnk.Icons.Core;
 using Microsoft.AspNetCore.Components;
 
 namespace Dmnk.Icons.Blazor;
@@ -13,5 +14,8 @@ public abstract class CustomIconDefinition(string technicalName) : IconDefinitio
     /// <summary>
     /// Return a <see cref="MarkupString"/> that represents this icon to render in the DOM.
     /// </summary>
-    public abstract MarkupString ToMarkup();
+    /// <param name="color">
+    /// An optional CSS color string to apply. If null, the definition's own default color is used.
+    /// </param>
+    public abstract MarkupString ToMarkup(Color? color = null);
 }

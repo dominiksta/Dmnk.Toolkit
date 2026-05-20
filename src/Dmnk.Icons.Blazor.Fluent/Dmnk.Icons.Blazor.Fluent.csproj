@@ -18,9 +18,8 @@
         <PackageTags>Blazor;Icons</PackageTags>
         
         <PackageReleaseNotes>
-            **Fixed:**
-
-            - Icons had a hard-coded `background-color: var(--neutral-layer-1)`. This is now removed.
+            - Fixed: Icons had a hard-coded `background-color: var(--neutral-layer-1)`. This is now removed.
+            - Fixed: Colors applied through WithColor for CustomIconDefinitions were not applied.
         </PackageReleaseNotes>
         
         <RepositoryUrl>

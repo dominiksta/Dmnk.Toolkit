@@ -1,10 +1,23 @@
 ﻿# Changelog
 
+## `Dmnk.Icons.Blazor`: `0.0.2` - [unreleased]
+
+**Fixed:**
+
+- Colors applied through WithColor for CustomIconDefinitions were not applied.
+
+## `Dmnk.Icons.Core`: `0.0.2` - [unreleased]
+
+**Added**:
+
+- SystemDrawingColorExtensions.ToHexString
+
 ## `Dmnk.Icons.Blazor.Fluent`: `0.0.2` - [unreleased]
 
 **Fixed:**
 
 - Icons had a hard-coded `background-color: var(--neutral-layer-1)`. This is now removed.
+- Colors applied through WithColor for CustomIconDefinitions were not applied.
 
 ## `Dmnk.Blazor.Mvvm`: `0.0.7` - [unreleased]
 

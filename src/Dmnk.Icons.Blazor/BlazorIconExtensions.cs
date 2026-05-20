@@ -30,7 +30,7 @@ public static class BlazorIconExtensions
         {
             SvgIconDefinition svgIconDefinition => FromSvg(icon, svgIconDefinition),
             PngIconDefinition pngIconDefinition => FromPng(icon, pngIconDefinition),
-            CustomIconDefinition customIconDefinition => customIconDefinition.ToMarkup(),
+            CustomIconDefinition customIconDefinition => customIconDefinition.ToMarkup(icon.Color),
             #if DEBUG
             _ => throw new NotSupportedException(
                 $"Icon definition of type {icon.GetType().FullName} is not supported in Blazor."
@@ -71,7 +71,4 @@ public static class BlazorIconExtensions
            """
       );
     }
-
-    private static string ToHexString(this System.Drawing.Color color) => 
-        $"#{color.R:X2}{color.G:X2}{color.B:X2}";
 }
