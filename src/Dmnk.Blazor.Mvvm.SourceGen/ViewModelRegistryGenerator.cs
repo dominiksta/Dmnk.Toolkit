@@ -103,10 +103,20 @@ public class ViewModelRegistryGenerator : IIncrementalGenerator
                 {
                     var diagnostics = new List<DiagnosticInfo>();
                     var originalViewTypeName = viewTypeSymbol.Name;
-                    var viewTypeName = 
-                        viewTypeSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
-                    var viewModelTypeName = classSymbol.ToDisplayString(
-                        SymbolDisplayFormat.FullyQualifiedFormat);
+                    var isOpenGeneric = classSymbol.IsGenericType;
+
+                    // For open-generic VMs, we need the unbound form (e.g. MyVm<>) for typeof()
+                    var viewModelTypeName = isOpenGeneric
+                        ? classSymbol.ConstructUnboundGenericType()
+                            .ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
+                        : classSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
+
+                    // View type: if already unbound (typeof(View<>)) use as-is; if open-generic, unbind
+                    var resolvedViewTypeSymbol = (isOpenGeneric && !viewTypeSymbol.IsUnboundGenericType && viewTypeSymbol.IsGenericType)
+                        ? viewTypeSymbol.ConstructUnboundGenericType()
+                        : viewTypeSymbol;
+                    var viewTypeName =
+                        resolvedViewTypeSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
                     
                     // DMVB003: Check if view type inherits from ComponentBase
                     if (!InheritsFromComponentBase(viewTypeSymbol, context.SemanticModel.Compilation))
@@ -134,6 +144,7 @@ public class ViewModelRegistryGenerator : IIncrementalGenerator
                     return new ViewModelInfoWithDiagnostics(
                         ViewModelType: viewModelTypeName,
                         ViewType: viewTypeName,
+                        IsOpenGeneric: isOpenGeneric,
                         Diagnostics: diagnostics.ToArray()
                     );
                 }
@@ -189,7 +200,7 @@ public class ViewModelRegistryGenerator : IIncrementalGenerator
         }
 
         var distinctViewModels = validViewModels
-            .Select(vm => new ViewModelInfo(vm.ViewModelType, vm.ViewType))
+            .Select(vm => new ViewModelInfo(vm.ViewModelType, vm.ViewType, vm.IsOpenGeneric))
             .Distinct()
             .OrderBy(vm => vm.ViewModelType)
             .ToList();
@@ -228,7 +239,10 @@ public class ViewModelRegistryGenerator : IIncrementalGenerator
 
         foreach (var vm in viewModels)
         {
-            sb.AppendLine($"        services.AddSingleton(ViewModelRegistration.Create<{vm.ViewModelType}, {vm.ViewType}>());");
+            if (vm.IsOpenGeneric)
+                sb.AppendLine($"        services.AddSingleton(ViewModelRegistration.CreateOpenGeneric(typeof({vm.ViewModelType}), typeof({vm.ViewType})));");
+            else
+                sb.AppendLine($"        services.AddSingleton(ViewModelRegistration.Create<{vm.ViewModelType}, {vm.ViewType}>());");
         }
 
         sb.AppendLine("    }");
@@ -288,11 +302,12 @@ public class ViewModelRegistryGenerator : IIncrementalGenerator
         return false;
     }
 
-    private record struct ViewModelInfo(string ViewModelType, string ViewType);
+    private record struct ViewModelInfo(string ViewModelType, string ViewType, bool IsOpenGeneric);
     
     private record struct ViewModelInfoWithDiagnostics(
         string ViewModelType, 
-        string ViewType, 
+        string ViewType,
+        bool IsOpenGeneric,
         DiagnosticInfo[] Diagnostics);
     
     private record struct DiagnosticInfo(

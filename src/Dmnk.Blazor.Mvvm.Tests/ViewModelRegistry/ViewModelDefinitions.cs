@@ -22,3 +22,9 @@ public class UnregisteredViewModel : AbstractViewModel
     public override string Name => "UnregisteredViewModel";
     public override string ToString() => "Custom ToString for UnregisteredViewModel";
 }
+
+[ViewModelFor(typeof(GenericView<>))]
+public partial class GenericViewModel<T> : ObservableObject
+{
+    public string TypeName => typeof(T).Name;
+}

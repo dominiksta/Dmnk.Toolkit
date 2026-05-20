@@ -88,5 +88,25 @@
             Assert.That(text, Does.Contain("{")); // json
         });
     }
+
+    [Test]
+    public void Open_Generic_Should_Resolve_Closed_View_From_Manual_Registration()
+    {
+        var registry = new ViewModelRegistry([
+            ViewModelRegistration.CreateOpenGeneric(typeof(GenericViewModel<>), typeof(GenericView<>))
+        ], _logger);
+
+        var vmStr = new GenericViewModel<string>();
+        var vmInt = new GenericViewModel<int>();
+
+        var cutStr = Render(@<RegisteredViewFor Vm="vmStr" Registry="registry"/>);
+        var cutInt = Render(@<RegisteredViewFor Vm="vmInt" Registry="registry"/>);
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(cutStr.Find("h3").TextContent, Is.EqualTo("Generic View (T: String)"));
+            Assert.That(cutInt.Find("h3").TextContent, Is.EqualTo("Generic View (T: Int32)"));
+        });
+    }
     
 }

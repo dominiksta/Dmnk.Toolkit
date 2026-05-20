@@ -1,10 +1,11 @@
 ﻿@using Dmnk.Toolkit.TestUtil
 @using Microsoft.Extensions.Logging
 @using ViewModelRegistry = Dmnk.Blazor.Mvvm.ViewModelRegistry
+@using Dmnk.Blazor.Mvvm.Tests.ViewModelRegistry
 @inherits BunitContext
 
 @code {
-    [SetUp]
+    [OneTimeSetUp]
     public void OneTimeSetUp()
     {
         Dmnk.Blazor.Mvvm.Tests.SourceGeneratedViewModelRegistrations.Register(Services);
@@ -24,5 +25,21 @@
         // Assert
         Assert.That(cut.Find("h3").TextContent, Is.EqualTo("Source Generator Test View"));
         Assert.That(cut.Find("p").TextContent, Is.EqualTo("Hello from SourceGen!"));
+    }
+
+    [Test]
+    public void Open_Generic_Should_Resolve_Closed_View_From_Source_Gen_Registration()
+    {
+        var vmStr = new GenericViewModel<string>();
+        var vmInt = new GenericViewModel<int>();
+
+        var cutStr = Render(@<RegisteredViewFor Vm="vmStr"/>);
+        var cutInt = Render(@<RegisteredViewFor Vm="vmInt"/>);
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(cutStr.Find("h3").TextContent, Is.EqualTo("Generic View (T: String)"));
+            Assert.That(cutInt.Find("h3").TextContent, Is.EqualTo("Generic View (T: Int32)"));
+        });
     }
 }
