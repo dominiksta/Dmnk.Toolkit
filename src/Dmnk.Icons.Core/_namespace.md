@@ -14,3 +14,6 @@ code-first definitions, the compiler can strip the unused icons, keeping the bun
 There seemed to be no existing library that provides this functionality beyond specific icon packs
 from specific design systems, so this library was created to allow defining Icons in a generic way
 (Blazor) ViewModels.
+
+When subclassing `SvgIconDefinition`, set `ViewBox` to match the SVG coordinate space of your path
+data (default `(24, 24)`). This is separate from the render size set via `Icon.Size`.

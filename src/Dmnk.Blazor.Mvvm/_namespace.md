@@ -8,6 +8,11 @@ This library provides some base types to inherit from in a Blazor application, t
 pattern. It makes no assumptions about the implementation of the ViewModel, only that it must
 implement `INotifyPropertyChanged` and that commands implement `ICommand`.
 
+ViewModels are registered with their Views via DI using `ViewModelRegistration`. The
+`ViewModelRegistry` resolves both closed and open-generic registrations. Use the
+`[ViewModelFor]` attribute together with the source generator (see
+<xref:Dmnk.Blazor.Mvvm.SourceGen>) to have registrations emitted automatically.
+
 ## Example
 
 ```csharp
@@ -37,3 +42,17 @@ public class MyViewModel : ObservableObject
 
 <button @onclick="@Vm.DoSomethingCommand.Bind(this)">Click me</button>
 ```
+
+## Registering ViewModels
+
+```csharp
+// Program.cs — register each View/ViewModel pair as a singleton:
+services.AddSingleton(ViewModelRegistration.Create<MyViewModel, MyView>());
+// For open-generic types:
+services.AddSingleton(ViewModelRegistration.CreateOpenGeneric(
+    typeof(MyViewModel<>), typeof(MyView<>)));
+services.AddSingleton<IViewModelRegistry, ViewModelRegistry>();
+```
+
+Or use the `[ViewModelFor]` attribute and the source generator to emit these calls automatically —
+see <xref:Dmnk.Blazor.Mvvm.SourceGen>.

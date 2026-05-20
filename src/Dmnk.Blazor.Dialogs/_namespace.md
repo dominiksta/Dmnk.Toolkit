@@ -45,10 +45,9 @@ public class MyInputDialogViewModel : DialogViewModelBase
 **Program.cs**:
 
 ```csharp
-// you need a concrete implementation of IVmDialogController/BlazorVmDialogController
-// FluentVmDialogController is implemented in the Dmnk.Blazor.Dialogs.Fluent package using FluentUI
+// Dialog views are resolved via IViewModelRegistry — register each pair as a singleton:
+services.AddSingleton(ViewModelRegistration.Create<MyInputDialog, MyInputDialogViewModel>());
 var dialogController = builder.Services.AddFluentMvvmDialogs();
-dialogController.Register<MyInputDialogViewModel, MyInputDialog>();
 ```
 
 **SomeRootComponentWithInteractivity.razor**:

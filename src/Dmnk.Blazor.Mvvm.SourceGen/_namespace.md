@@ -7,6 +7,8 @@ uid: Dmnk.Blazor.Mvvm.SourceGen
 Use source-generation to register ViewModels with their Views, such that they can be used with 
 [<RegisteredViewFor>](https://dominiksta.github.io/Dmnk.Toolkit//api/Dmnk.Blazor.Mvvm.RegisteredViewFor-1.html).
 
+Both closed and open-generic types are supported.
+
 ## Usage
 
 **MyViewModel.cs**:
@@ -16,6 +18,10 @@ Use source-generation to register ViewModels with their Views, such that they ca
 // namespace in the attribute. This is a limitation of using source-generation for razor components.
 [ViewModelFor(typeof(MyView))]
 public class MyViewModel : INotifyPropertyChanged { ... }
+
+// Open-generic types are also supported:
+[ViewModelFor(typeof(MyGenericView<>))]
+public class MyGenericViewModel<T> : INotifyPropertyChanged { ... }
 ```
 
 **MyView.razor**:
@@ -28,7 +34,7 @@ public class MyViewModel : INotifyPropertyChanged { ... }
 **Program.cs**:
 
 ```csharp
-// ...
+// Call the generated Register() method, then register the registry itself:
 My.Namespace.Containing.MyViewModel.SourceGeneratedViewModelRegistrations.Register(services);
 services.AddSingleton<IViewModelRegistry, ViewModelRegistry>();
 ```

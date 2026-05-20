@@ -10,6 +10,9 @@ library is based off of a Blazor component library, it only works in Blazor appl
 it could be refactored using code-generation to pull icons from the [official main repo for Fluent
 icons](https://github.com/microsoft/fluentui-system-icons/).
 
+The hard-coded `background-color` injected by Fluent UI's `ToMarkup()` is automatically stripped,
+and `Icon.Color` / `Icon.Size` are forwarded correctly to the rendered SVG.
+
 ## Example
 
 ```csharp
