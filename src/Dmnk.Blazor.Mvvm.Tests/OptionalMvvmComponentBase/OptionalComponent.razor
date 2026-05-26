@@ -1,0 +1,5 @@
+@inherits OptionalMvvmComponentBase<TestViewModel>
+
+@if (Vm == null) return;
+
+<p id="text-observable">@Vm.Text</p>

@@ -1,0 +1,38 @@
+@inherits BunitContext
+@code
+{
+    /// <summary>
+    /// Verifies that when <c>Vm</c> is passed as a parameter (e.g. from a parent component or
+    /// dialog), changes to the ViewModel's properties are reflected in the UI.
+    ///
+    /// <para>
+    /// The bug: <c>OptionalMvvmComponentBase.Vm</c> setter assigned <c>_vm = value</c> *before*
+    /// calling <c>SetViewModel(_vm)</c>. Because <c>SetViewModel</c> checks
+    /// <c>__ViewModel == viewModel</c> (both backed by <c>_vm</c> at that point) it always found
+    /// them equal and returned early — so <c>PropertyChanged</c> was never subscribed to and the
+    /// UI never updated.
+    /// </para>
+    /// </summary>
+    [Test]
+    public void Should_Update_When_Vm_Passed_As_Parameter_And_Property_Changes()
+    {
+        // Arrange
+        var vm = new TestViewModel();
+        var cut = Render(@<OptionalComponent Vm="vm" />);
+
+        Assert.That(cut.Find("#text-observable").TextContent, Is.EqualTo("Hello World!"));
+
+        // Act
+        vm.ChangeTextCommand.Execute(null);
+
+        // Assert
+        Assert.That(cut.Find("#text-observable").TextContent, Is.EqualTo("Text changed!"));
+    }
+
+    [Test]
+    public void Should_Render_When_Vm_Is_Null()
+    {
+        var cut = Render(@<OptionalComponent />);
+        Assert.That(cut.Markup, Is.EqualTo(""));
+    }
+}
