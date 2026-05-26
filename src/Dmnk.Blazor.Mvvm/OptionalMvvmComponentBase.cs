@@ -32,8 +32,8 @@ public abstract class OptionalMvvmComponentBase<T> : AbstractMvvmComponentBase<T
         set
         {
             if (EqualityComparer<T>.Default.Equals(_vm, value)) return;
+            SetViewModel(value);
             _vm = value;
-            SetViewModel(_vm);
         }
     }
 }

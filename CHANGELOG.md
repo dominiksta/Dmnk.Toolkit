@@ -1,5 +1,12 @@
 ﻿# Changelog
 
+## `Dmnk.Blazor.Mvvm`: `0.0.8` - 2026-05-26
+
+**Fixed:**
+
+- `OptionalMvvmComponentBase`: When `Vm` was passed as a parameter (e.g. from a parent component),
+  `PropertyChanged` events were never subscribed to, causing the UI to never update reactively.
+
 ## `Dmnk.Icons.Blazor`: `0.0.2` - 2026-05-29
 
 **Fixed:**
