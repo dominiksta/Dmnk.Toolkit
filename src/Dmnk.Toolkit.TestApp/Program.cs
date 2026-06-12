@@ -11,7 +11,7 @@ builder.Services.AddRazorComponents()
 builder.Services.AddFluentUIComponents();
 
 builder.Services.AddSingleton<ILogger<ViewModelRegistry>, Logger<ViewModelRegistry>>();
-builder.Services.AddSingleton<IViewModelRegistry, ViewModelRegistry>();
+builder.Services.AddBlazorMvvm();
 builder.Services.AddViewModelRegistrations();
 builder.Services.AddDynamicItemViewModels();
 builder.Services.AddFluentMvvmDialogs();

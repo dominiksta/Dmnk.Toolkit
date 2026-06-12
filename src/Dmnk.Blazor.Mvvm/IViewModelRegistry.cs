@@ -18,9 +18,9 @@ namespace Dmnk.Blazor.Mvvm;
 /// </code>
 /// DI Setup:
 /// <code>
-/// services.AddSingleton(ViewModelRegistration.Create&lt;MySpecificViewModel1, MyComponent1&gt;());
-/// services.AddSingleton(ViewModelRegistration.Create&lt;MySpecificViewModel2, MyComponent2&gt;());
-/// services.AddSingleton&lt;IViewModelRegistry, ViewModelRegistry&gt;();
+/// services.AddBlazorMvvm();
+/// services.AddViewModelRegistration&lt;MySpecificViewModel1, MyComponent1&gt;();
+/// services.AddViewModelRegistration&lt;MySpecificViewModel2, MyComponent2&gt;();
 /// </code>
 /// In Component:
 /// <code lang="razor">

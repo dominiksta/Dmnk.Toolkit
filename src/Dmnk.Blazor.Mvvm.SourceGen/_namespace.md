@@ -36,7 +36,7 @@ public class MyGenericViewModel<T> : INotifyPropertyChanged { ... }
 ```csharp
 // Call the generated Register() method, then register the registry itself:
 My.Namespace.Containing.MyViewModel.SourceGeneratedViewModelRegistrations.Register(services);
-services.AddSingleton<IViewModelRegistry, ViewModelRegistry>();
+services.AddBlazorMvvm();
 ```
 
 **MyDynamicView.razor**:

@@ -45,10 +45,10 @@
         var logger = new InMemoryLogger<ViewModelRegistry>();
         var services = new ServiceCollection();
         services.AddSingleton<ILogger<ViewModelRegistry>>(logger);
-        services.AddSingleton<IViewModelRegistry, ViewModelRegistry>();
+        services.AddBlazorMvvm();
         
-        services.AddSingleton(ViewModelRegistration.Create<SpecificViewModel1, SpecificView1>());
-        services.AddSingleton(ViewModelRegistration.Create<SpecificViewModel1, SpecificView1>());
+        services.AddViewModelRegistration<SpecificViewModel1, SpecificView1>();
+        services.AddViewModelRegistration<SpecificViewModel1, SpecificView1>();
         
         var provider = services.BuildServiceProvider();
         

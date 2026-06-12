@@ -27,8 +27,8 @@ namespace Dmnk.Blazor.Mvvm.SourceGen;
 ///
 /// Program.cs:
 /// <code>
+/// services.AddBlazorMvvm();
 /// My.Namespace.Containing.MyViewModel.SourceGeneratedViewModelRegistrations.Register(services);
-/// services.AddSingleton&lt;IViewModelRegistry, ViewModelRegistry&gt;();
 /// </code>
 ///
 /// MyDynamicView.razor:

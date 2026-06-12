@@ -47,11 +47,10 @@ public class MyViewModel : ObservableObject
 
 ```csharp
 // Program.cs — register each View/ViewModel pair as a singleton:
-services.AddSingleton(ViewModelRegistration.Create<MyViewModel, MyView>());
+services.AddViewModelRegistration<MyViewModel, MyView>();
 // For open-generic types:
-services.AddSingleton(ViewModelRegistration.CreateOpenGeneric(
-    typeof(MyViewModel<>), typeof(MyView<>)));
-services.AddSingleton<IViewModelRegistry, ViewModelRegistry>();
+services.AddViewModelRegistrationOpenGeneric(typeof(MyViewModel<>), typeof(MyView<>));
+services.AddBlazorMvvm();
 ```
 
 Or use the `[ViewModelFor]` attribute and the source generator to emit these calls automatically —

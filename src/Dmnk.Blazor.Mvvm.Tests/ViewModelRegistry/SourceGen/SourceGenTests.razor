@@ -10,7 +10,7 @@
     {
         Dmnk.Blazor.Mvvm.Tests.SourceGeneratedViewModelRegistrations.Register(Services);
         Services.AddSingleton<ILogger<ViewModelRegistry>>(new InMemoryLogger<ViewModelRegistry>());
-        Services.AddSingleton<IViewModelRegistry, ViewModelRegistry>();
+        Services.AddBlazorMvvm();
     }
 
     [Test]

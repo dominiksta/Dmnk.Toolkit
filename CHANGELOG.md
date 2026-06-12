@@ -1,5 +1,13 @@
 ﻿# Changelog
 
+## `Dmnk.Blazor.Mvvm`: `0.0.9` - *unreleased*
+
+**Added:**
+
+- `IServiceCollection.AddBlazorMvvm()`, `IServiceCollection.AddViewModelRegistration()`
+  and `IServiceCollection.AddViewModelRegistrationOpenGeneric()` extension methods for
+  less verbose DI setup.
+
 ## `Dmnk.Blazor.Dialogs.Fluent`: `0.0.4` - *unreleased*
 
 **Fixed**:

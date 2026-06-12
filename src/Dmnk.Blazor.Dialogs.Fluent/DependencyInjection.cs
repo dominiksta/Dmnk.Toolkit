@@ -28,10 +28,10 @@ public static class DependencyInjection
         services.AddScoped<IVmDialogController>(
             sp => sp.GetRequiredService<BlazorVmDialogController>());
 
-        services.AddSingleton(ViewModelRegistration.Create<MessageBoxViewModel, MessageBoxView>());
-        services.AddSingleton(ViewModelRegistration.Create<ConfirmationDialogViewModel, ConfirmationDialogView>());
-        services.AddSingleton(ViewModelRegistration.CreateOpenGeneric(
-            typeof(InputDialogViewModel<>), typeof(InputDialogView<>)));
+        services.AddViewModelRegistration<MessageBoxViewModel, MessageBoxView>();
+        services.AddViewModelRegistration<ConfirmationDialogViewModel, ConfirmationDialogView>();
+        services.AddViewModelRegistrationOpenGeneric(
+            typeof(InputDialogViewModel<>), typeof(InputDialogView<>));
 
         return services;
     }
