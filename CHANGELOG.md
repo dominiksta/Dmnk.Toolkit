@@ -1,5 +1,11 @@
 ﻿# Changelog
 
+## `Dmnk.Blazor.Dialogs.Fluent`: `0.0.4` - *unreleased*
+
+**Fixed**:
+
+- `DisposeAsync()` of `DialogControllerProvider` would error on page refresh / tab close
+
 ## `Dmnk.Blazor.Mvvm`: `0.0.8` - 2026-05-26
 
 **Fixed:**

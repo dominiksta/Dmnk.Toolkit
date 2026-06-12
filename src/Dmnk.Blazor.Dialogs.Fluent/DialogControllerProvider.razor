@@ -92,7 +92,20 @@
         DialogController.OnShow -= OnShow;
         DialogController.OnClose -= OnClose;
         await InvokeAsync(StateHasChanged);
-        if (_module != null) await _module.InvokeVoidAsync("removeBodyKeyListener");
+        if (_module != null)
+        {
+            try
+            {
+                await _module.InvokeVoidAsync("removeBodyKeyListener");
+                await _module.DisposeAsync();
+            }
+            // when the tab is closed / the page is refreshed, the js runtime is not available
+            // and this exception will throw. we can ignore it since the page is going away anyway.
+            // we do however need to keep the cleanup call in general, because the
+            // DialogControllerProvider may e.g. only be on a wasm-rendered page, and then be
+            // disposed on navigation to a non-interactive server-rendered page.
+            catch (JSDisconnectedException) { }
+        }
     }
 
     private IJSObjectReference? _module;
