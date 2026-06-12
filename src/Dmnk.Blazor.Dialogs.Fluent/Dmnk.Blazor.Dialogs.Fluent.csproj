@@ -22,6 +22,8 @@
               page refresh / tab close
             - Fixed: BlazorVmDialogController/IVmDialogController were registered as 
               singletons, causing issues with shared state between tabs in Blazor server
+            - Fixed: Dialogs with AllowCancel=false could still be closed by hitting escape twice
+              (from the internal `OnDocumentKeyDownEscape` method)
         </PackageReleaseNotes>
         
         <RepositoryUrl>

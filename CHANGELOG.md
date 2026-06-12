@@ -7,6 +7,8 @@
 - `DisposeAsync()` of `DialogControllerProvider` would error on page refresh / tab close
 - `BlazorVmDialogController`/`IVmDialogController` were registered as 
   singletons, causing issues with shared state between tabs in Blazor server
+- Dialogs with `AllowCancel = false` could still be closed by hitting escape twice 
+  (from the internal `OnDocumentKeyDownEscape` method) and would then hang the event handler
 
 ## `Dmnk.Blazor.Mvvm`: `0.0.8` - 2026-05-26
 

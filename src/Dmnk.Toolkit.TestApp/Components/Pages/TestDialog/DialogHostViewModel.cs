@@ -7,15 +7,18 @@ namespace Dmnk.Toolkit.TestApp.Components.Pages.TestDialog;
 
 public partial class DialogHostViewModel(IVmDialogController dialogController) : ObservableObject
 {
-    [RelayCommand]
-    private async Task ShowDialog()
+    private async Task DoShowDialog(bool allowCancel = true)
     {
         var vm = new TestDialogViewModel(dialogController)
         {
             InputValue = "Initial Input Value"
         };
         var dlg = await dialogController.Show(
-            new VmDialogParameters { Title = "Input Dialog" }, vm);
+            new VmDialogParameters
+            {
+                Title = "Input Dialog",
+                AllowCancel = allowCancel
+            }, vm);
 
         await dlg.WaitClosed;
 
@@ -27,5 +30,12 @@ public partial class DialogHostViewModel(IVmDialogController dialogController) :
         Console.WriteLine($"Dialog closed with input: {vm.InputValue}");
 
         await dialogController.ShowSuccess($"You entered: {vm.InputValue}");
+        
     }
+
+    [RelayCommand]
+    private async Task ShowDialog() => await DoShowDialog();
+    
+    [RelayCommand]
+    private async Task ShowDialogWithoutCancel() => await DoShowDialog(false);
 }

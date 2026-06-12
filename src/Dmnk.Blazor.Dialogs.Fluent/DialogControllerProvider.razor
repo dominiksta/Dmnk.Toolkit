@@ -129,7 +129,10 @@
     {
         if (_activeDialogs.Count == 0) return;
         var topDialog = _activeDialogs[^1];
-        await OnBackDropClick(topDialog.Parameters, topDialog.Reference);
-        _activeDialogs.Remove(topDialog);
+        if (topDialog.Parameters.AllowCancel)
+        {
+            await OnBackDropClick(topDialog.Parameters, topDialog.Reference);
+            _activeDialogs.Remove(topDialog);
+        }
     }
 }
