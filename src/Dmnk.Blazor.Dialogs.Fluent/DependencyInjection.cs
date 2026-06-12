@@ -12,8 +12,7 @@ namespace Dmnk.Blazor.Dialogs.Fluent;
 public static class DependencyInjection
 {
     /// <summary>
-    /// Registers relevant types in DI and returns an instance of <see
-    /// cref="FluentVmDialogController"/>.
+    /// Registers relevant types in DI.
     /// An <see cref="Dmnk.Blazor.Mvvm.IViewModelRegistry"/> must also be registered separately
     /// (e.g. via <c>AddMvvm()</c>) for the <c>DialogControllerProvider</c> to resolve dialog views.
     /// <p>
@@ -23,17 +22,17 @@ public static class DependencyInjection
     /// <see cref="ViewModelRegistry"/>.
     /// </p>
     /// </summary>
-    public static FluentVmDialogController AddFluentMvvmDialogs(this IServiceCollection services)
+    public static IServiceCollection AddFluentMvvmDialogs(this IServiceCollection services)
     {
-        var dialogController = new FluentVmDialogController();
-        services.AddSingleton<BlazorVmDialogController>(dialogController);
-        services.AddSingleton<IVmDialogController>(dialogController);
+        services.AddScoped<BlazorVmDialogController, FluentVmDialogController>();
+        services.AddScoped<IVmDialogController>(
+            sp => sp.GetRequiredService<BlazorVmDialogController>());
 
         services.AddSingleton(ViewModelRegistration.Create<MessageBoxViewModel, MessageBoxView>());
         services.AddSingleton(ViewModelRegistration.Create<ConfirmationDialogViewModel, ConfirmationDialogView>());
         services.AddSingleton(ViewModelRegistration.CreateOpenGeneric(
             typeof(InputDialogViewModel<>), typeof(InputDialogView<>)));
 
-        return dialogController;
+        return services;
     }
 }

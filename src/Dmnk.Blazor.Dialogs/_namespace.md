@@ -47,7 +47,7 @@ public class MyInputDialogViewModel : DialogViewModelBase
 ```csharp
 // Dialog views are resolved via IViewModelRegistry — register each pair as a singleton:
 services.AddSingleton(ViewModelRegistration.Create<MyInputDialog, MyInputDialogViewModel>());
-var dialogController = builder.Services.AddFluentMvvmDialogs();
+builder.Services.AddFluentMvvmDialogs();
 ```
 
 **SomeRootComponentWithInteractivity.razor**:

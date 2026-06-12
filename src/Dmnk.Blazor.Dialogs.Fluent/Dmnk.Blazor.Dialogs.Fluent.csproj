@@ -20,6 +20,8 @@
         <PackageReleaseNotes>
             - Fixed: DisposeAsync() of DialogControllerProvider would error on 
               page refresh / tab close
+            - Fixed: BlazorVmDialogController/IVmDialogController were registered as 
+              singletons, causing issues with shared state between tabs in Blazor server
         </PackageReleaseNotes>
         
         <RepositoryUrl>
