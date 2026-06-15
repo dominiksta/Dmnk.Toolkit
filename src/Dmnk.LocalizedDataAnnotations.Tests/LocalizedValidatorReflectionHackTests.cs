@@ -13,16 +13,6 @@ public class LocalizedValidatorReflectionHackTests
         [Required] public string? Name { get; set; }
     }
 
-    private class StringLengthModel
-    {
-        [StringLength(5)] public string? Name { get; set; }
-    }
-
-    private class RangeModel
-    {
-        [System.ComponentModel.DataAnnotations.Range(1, 10)] public int Value { get; set; } = 99;
-    }
-
     [TearDown]
     public void TearDown()
     {
@@ -47,6 +37,32 @@ public class LocalizedValidatorReflectionHackTests
         Validator.TryValidateObject(model, context, results, true);
         return results;
     }
+
+    // -- Shared localization cases ---------------------------------------------
+
+    [Test, TestCaseSource(typeof(ValidatorTestCases), nameof(ValidatorTestCases.All))]
+    public void Localizes(ValidatorTestCase tc)
+    {
+        LocalizedValidatorReflectionHack.Hack(doThrow: true);
+
+        SetCulture("de-DE");
+        var deResults = Validate(tc.Model);
+        foreach (var s in tc.MessagesGermanContaining)
+            Assert.That(
+                deResults.Any(r => r.ErrorMessage?.Contains(s) == true), Is.True,
+                $"No German message contained: \"{s}\"");
+
+        if (!tc.CanSwitchAtRuntimeWithHack) return;
+        
+        SetCulture("en-US");
+        var enResults = Validate(tc.Model);
+        foreach (var s in tc.MessagesEnglishContaining)
+            Assert.That(
+                enResults.Any(r => r.ErrorMessage?.Contains(s) == true), Is.True,
+                $"No English message contained: \"{s}\"");
+    }
+
+    // -- Hack-specific behavior ------------------------------------------------
 
     [Test]
     public void Hack_LocalizesRequiredAttribute()
@@ -101,26 +117,6 @@ public class LocalizedValidatorReflectionHackTests
         Assert.That(
             Validate(new RequiredModel())[0].ErrorMessage, Contains.Substring("is required"),
             "Should remain unlocalized after no-op un-hack");
-    }
-
-    [Test]
-    public void Hack_LocalizesStringLengthAttribute()
-    {
-        LocalizedValidatorReflectionHack.Hack(doThrow: true);
-        SetCulture("de-DE");
-
-        var results = Validate(new StringLengthModel { Name = "way too long string" });
-        Assert.That(results[0].ErrorMessage, Contains.Substring("Zeichenfolge"));
-    }
-
-    [Test]
-    public void Hack_LocalizesRangeAttribute()
-    {
-        LocalizedValidatorReflectionHack.Hack(doThrow: true);
-        SetCulture("de-DE");
-
-        var results = Validate(new RangeModel());
-        Assert.That(results[0].ErrorMessage, Contains.Substring("liegen"));
     }
 
     [Test]

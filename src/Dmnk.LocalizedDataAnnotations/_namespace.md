@@ -21,7 +21,7 @@ This package provides two mechanisms to work around this issue:
 - `IValidator` and `LocalizedValidator` behave pretty much exactly like `Validator`, but they
   will be localized by default, using the old translations from .NET Framework **with some slight
   custom adaptations** (see below). You can also provide your own translations by implementing
-  `IDefaultValidationResourceProvider`.
+  `IDefaultValidationMessageProvider`.
 - `LocalizedValidatorReflectionHack.Hack()` rewrites the `ResourceManager` on a private field
   of an internal class in `System.ComponentModel.DataAnnotations` to use the old translations.
   This *should* be reasonably reliable, since it has been a long time since the last change to
@@ -37,14 +37,38 @@ You may use the method outlined below to acquire the old translations.
 
 ## `IValidator` and `LocalizedValidator`
 
+Be aware that this approach re-implements the internal logic of validator. There are a good amount
+of test-cases. Just be aware of that risk profile.
+
 ```csharp
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using Dmnk.LocalizedDataAnnotations;
+
+IValidator validator = new LocalizedValidator();
+var model = new MyModel { Name = "" };
+ValidationContext context = new ValidationContext(model);
+ICollection<ValidationResult> results = new List<ValidationResult>();
+bool isValid = validator.TryValidateObject(model, context, results, validateAllProperties: true);
+
+class MyModel
+{
+    [Required]
+    public string Name { get; set; }
+}
 
 ```
 
 ## `LocalizedValidatorReflectionHack.Hack()`
 
-```csharp
+Be aware that some attributes *cache their error message*. This means that you **cannot reliably
+switch culture at runtime** and expect correct localization.
 
+```csharp
+using Dmnk.LocalizedDataAnnotations;
+
+// somewhere early in e.g. Program.cs
+LocalizedValidatorReflectionHack.Hack();
 ```
 
 # How where the old translations acquired?

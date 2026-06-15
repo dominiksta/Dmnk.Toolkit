@@ -31,8 +31,10 @@ internal class MessageLocalizer(IDefaultValidationMessageProvider messageProvide
             MaxLengthAttribute mla => Format2(messageProvider.MaxLength, fieldName, mla.Length),
             MinLengthAttribute mla => Format2(messageProvider.MinLength, fieldName, mla.Length),
             RequiredAttribute => Format1(messageProvider.Required, fieldName),
-            // For CustomValidationAttribute and other unknown attributes, use the fallback only as a
-            // last resort. Returning null causes the caller to use the attribute's own message.
+            // EnumDataTypeAttribute has no dedicated message; the generic fallback is appropriate.
+            EnumDataTypeAttribute => Format1(messageProvider.Fallback, fieldName),
+            // For CustomValidationAttribute and other unknown attributes, return null so the caller
+            // uses the attribute's own message (which may come from a custom validator method).
             _ => null,
         };
     }
