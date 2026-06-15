@@ -76,8 +76,9 @@ public class LocalizedValidator : IValidator
                 isValid = false;
         }
 
-        // IValidatableObject support
-        if (instance is IValidatableObject validatable)
+        // IValidatableObject support — matches Validator behavior: only called when
+        // all attribute validations pass.
+        if (isValid && instance is IValidatableObject validatable)
         {
             foreach (var vr in validatable.Validate(validationContext))
             {

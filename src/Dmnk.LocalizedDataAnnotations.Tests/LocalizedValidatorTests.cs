@@ -80,14 +80,16 @@ public class LocalizedValidatorTests
         foreach (var s in tc.MessagesGermanContaining)
             Assert.That(
                 deResults.Any(r => r.ErrorMessage?.Contains(s) == true), Is.True,
-                $"No German message contained: \"{s}\"");
+                $"No German message contained: \"{s}\". Got messages: " +
+                $"{string.Join(", ", deResults.Select(r => $"\"{r.ErrorMessage}\""))}");
 
         SetCulture("en-US");
         var enResults = ValidateObject(tc.Model);
         foreach (var s in tc.MessagesEnglishContaining)
             Assert.That(
                 enResults.Any(r => r.ErrorMessage?.Contains(s) == true), Is.True,
-                $"No English message contained: \"{s}\"");
+                $"No English message contained: \"{s}\". Got messages: " +
+                $"{string.Join(", ", enResults.Select(r => $"\"{r.ErrorMessage}\""))}");
     }
 
     // -- TryValidateValue ------------------------------------------------------
