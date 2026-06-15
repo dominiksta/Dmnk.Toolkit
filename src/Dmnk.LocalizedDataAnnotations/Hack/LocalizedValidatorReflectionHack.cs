@@ -117,7 +117,8 @@ public static class LocalizedValidatorReflectionHack
     {
         var srAssembly = AppDomain.CurrentDomain
             .GetAssemblies()
-            .First(assembly => assembly.FullName.StartsWith("System.ComponentModel.Annotations,"));
+            .First(assembly => assembly.FullName?.StartsWith("System.ComponentModel.Annotations,") 
+                               ?? false);
         var srType = srAssembly.GetType("System.SR");
         if (srType == null) throw new InvalidOperationException(
             "Could not find System.SR type in System.ComponentModel.Annotations assembly.");

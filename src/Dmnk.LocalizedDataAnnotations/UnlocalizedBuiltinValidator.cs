@@ -8,6 +8,7 @@ namespace Dmnk.LocalizedDataAnnotations;
 /// </summary>
 public sealed class UnlocalizedBuiltinValidator : IValidator
 {
+    /// <summary> <inheritdoc/> </summary>
     public bool TryValidateObject(
         object instance, 
         ValidationContext validationContext, 
@@ -16,12 +17,14 @@ public sealed class UnlocalizedBuiltinValidator : IValidator
         Validator.TryValidateObject(
             instance, validationContext, validationResults, validateAllProperties);
 
+    /// <summary> <inheritdoc/> </summary>
     public bool TryValidateProperty(
         object? value,
         ValidationContext validationContext,
         ICollection<ValidationResult> validationResults)
         => Validator.TryValidateProperty(value, validationContext, validationResults);
 
+    /// <summary> <inheritdoc/> </summary>
     public bool TryValidateValue(
         object? value, 
         ValidationContext validationContext, 

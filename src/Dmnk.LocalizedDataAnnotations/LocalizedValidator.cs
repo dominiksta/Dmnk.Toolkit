@@ -19,6 +19,7 @@ public class LocalizedValidator : IValidator
 {
     private readonly MessageLocalizer _localizer;
     
+    /// <summary> Instantiate a new <see cref="LocalizedValidator"/>. </summary>
     public LocalizedValidator(IDefaultValidationMessageProvider? messageProvider = null)
     {
         var messageProvider1 = 
@@ -30,6 +31,7 @@ public class LocalizedValidator : IValidator
     // API
     // ======================================================================
     
+    /// <summary> <inheritdoc/> </summary>
     public bool TryValidateObject(
         object instance,
         ValidationContext validationContext,
@@ -91,6 +93,7 @@ public class LocalizedValidator : IValidator
         return isValid;
     }
 
+    /// <summary> <inheritdoc/> </summary>
     public bool TryValidateProperty(
         object? value,
         ValidationContext validationContext,
@@ -108,6 +111,7 @@ public class LocalizedValidator : IValidator
         return TryValidateValue(value, validationContext, validationResults, attrs);
     }
 
+    /// <summary> <inheritdoc/> </summary>
     public bool TryValidateValue(
         object? value,
         ValidationContext validationContext,

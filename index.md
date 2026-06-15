@@ -31,6 +31,8 @@ Mostly small Blazor-related C# libraries. Documentation and Code are Work-In-Pro
 - <xref:Dmnk.Blazor.Focus> - Blazor components and extensions to manage keyboard focus
 - <xref:Dmnk.Blazor.Cookies> - Utility methods to read generic cookies as well as ASP.NET CultureInfo cookies in Blazor
   WASM applications.
+- <xref:Dmnk.LocalizedDataAnnotations> - Localization for `System.ComponentModel.DataAnnotations` 
+  in modern .NET and netstandard2.0
 
 ### Icons
 
