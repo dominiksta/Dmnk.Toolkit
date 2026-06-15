@@ -9,11 +9,22 @@ namespace Dmnk.LocalizedDataAnnotations;
 
 /// <summary>
 /// A localized version of <see cref="IValidator"/> based on the messages provided
-/// by <paramref name="messageProvider"/>.
+/// by the passed <see cref="IDefaultValidationMessageProvider"/>.
+/// <p>
+/// If no message provider is passed, the default best-effort provider will be used, for which
+/// see the package documentation.
+/// </p>
 /// </summary>
-public class LocalizedValidator(IDefaultValidationMessageProvider messageProvider) : IValidator
+public class LocalizedValidator : IValidator
 {
-    private readonly MessageLocalizer _localizer = new(messageProvider);
+    private readonly MessageLocalizer _localizer;
+    
+    public LocalizedValidator(IDefaultValidationMessageProvider? messageProvider = null)
+    {
+        var messageProvider1 = 
+            messageProvider ?? new DefaultBestEffortValidationMessageProvider();
+        _localizer = new MessageLocalizer(messageProvider1);
+    }
     
     // ======================================================================
     // API

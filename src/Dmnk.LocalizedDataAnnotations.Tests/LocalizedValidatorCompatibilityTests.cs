@@ -9,7 +9,7 @@ namespace Dmnk.LocalizedDataAnnotations.Tests;
 /// Verifies that <see cref="LocalizedValidator"/> produces identical English error messages
 /// to the builtin <see cref="Validator"/> for all known attribute types.
 /// </summary>
-[TestFixture, Parallelizable(ParallelScope.None)]
+[TestFixture, Parallelizable(ParallelScope.None), SetCulture("en")]
 public class LocalizedValidatorCompatibilityTests
 {
     private LocalizedValidator _validator = null!;
@@ -18,15 +18,6 @@ public class LocalizedValidatorCompatibilityTests
     public void SetUp()
     {
         _validator = new LocalizedValidator(new DefaultBestEffortValidationMessageProvider());
-    }
-
-    private static void SetCulture(string cultureName)
-    {
-        var culture = new CultureInfo(cultureName);
-        CultureInfo.DefaultThreadCurrentCulture = culture;
-        CultureInfo.DefaultThreadCurrentUICulture = culture;
-        Thread.CurrentThread.CurrentCulture = culture;
-        Thread.CurrentThread.CurrentUICulture = culture;
     }
 
     private static List<ValidationResult> ValidateWithBuiltin(object model)

@@ -30,6 +30,7 @@
     <Project Path="Dmnk.Icons.Blazor.Fluent/Dmnk.Icons.Blazor.Fluent.csproj" />
     <Project Path="Dmnk.Icons.Blazor/Dmnk.Icons.Blazor.csproj" />
     <Project Path="Dmnk.Icons.Core/Dmnk.Icons.Core.csproj" />
+    <Project Path="Dmnk.LocalizedDataAnnotations.Hack.Tests/Dmnk.LocalizedDataAnnotations.Hack.Tests.csproj" />
     <Project Path="Dmnk.LocalizedDataAnnotations.Tests/Dmnk.LocalizedDataAnnotations.Tests.csproj" />
     <Project Path="Dmnk.LocalizedDataAnnotations/Dmnk.LocalizedDataAnnotations.csproj" />
     <Project Path="Dmnk.Toolkit.TestUtil/Dmnk.Toolkit.TestUtil.csproj" />

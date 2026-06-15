@@ -1,18 +1,19 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Resources;
-using Dmnk.LocalizedDataAnnotations.Hack;
+using Dmnk.LocalizedDataAnnotations.Tests;
 
-namespace Dmnk.LocalizedDataAnnotations.Tests;
+namespace Dmnk.LocalizedDataAnnotations.Hack.Tests;
 
-[TestFixture, Parallelizable(ParallelScope.None)]
+/// <summary>
+/// This needs to live in a seperate assembly so that nunit can run it as a seperate
+/// *process*. This is required because the built-in ValidationAttributes sometimes
+/// cache their localized messages after the first validation, thereby preventing us from
+/// switching culture at runtime.
+/// </summary>
+[TestFixture, Parallelizable(ParallelScope.None), SetCulture("en-US")]
 public class LocalizedValidatorReflectionHackTests
 {
-    private class RequiredModel
-    {
-        [Required] public string? Name { get; set; }
-    }
-
     [TearDown]
     public void TearDown()
     {
@@ -68,19 +69,19 @@ public class LocalizedValidatorReflectionHackTests
     public void Hack_LocalizesRequiredAttribute()
     {
         Assert.That(
-            Validate(new RequiredModel())[0].ErrorMessage, Contains.Substring("is required"),
+            Validate(new ValidatorTestCases.RequiredModel())[0].ErrorMessage, Contains.Substring("is required"),
             "Sanity check: English before hack");
 
         LocalizedValidatorReflectionHack.Hack(doThrow: true);
 
         SetCulture("de-DE");
         Assert.That(
-            Validate(new RequiredModel())[0].ErrorMessage, Contains.Substring("ist erforderlich"),
+            Validate(new ValidatorTestCases.RequiredModel())[0].ErrorMessage, Contains.Substring("ist erforderlich"),
             "After hack, de-DE");
 
         SetCulture("en-US");
         Assert.That(
-            Validate(new RequiredModel())[0].ErrorMessage, Contains.Substring("is required"),
+            Validate(new ValidatorTestCases.RequiredModel())[0].ErrorMessage, Contains.Substring("is required"),
             "After hack, en-US");
     }
 
@@ -92,7 +93,8 @@ public class LocalizedValidatorReflectionHackTests
 
         SetCulture("de-DE");
         Assert.That(
-            Validate(new RequiredModel())[0].ErrorMessage, Contains.Substring("is required"),
+            Validate(new ValidatorTestCases.RequiredModel())[0].ErrorMessage, 
+            Contains.Substring("is required"),
             "After un-hack, de-DE should still return English");
     }
 
@@ -104,7 +106,7 @@ public class LocalizedValidatorReflectionHackTests
 
         SetCulture("de-DE");
         Assert.That(
-            Validate(new RequiredModel())[0].ErrorMessage, 
+            Validate(new ValidatorTestCases.RequiredModel())[0].ErrorMessage, 
             Contains.Substring("ist erforderlich"));
     }
 
@@ -115,7 +117,8 @@ public class LocalizedValidatorReflectionHackTests
 
         SetCulture("de-DE");
         Assert.That(
-            Validate(new RequiredModel())[0].ErrorMessage, Contains.Substring("is required"),
+            Validate(new ValidatorTestCases.RequiredModel())[0].ErrorMessage, 
+            Contains.Substring("is required"),
             "Should remain unlocalized after no-op un-hack");
     }
 
@@ -126,7 +129,7 @@ public class LocalizedValidatorReflectionHackTests
             doThrow: true, 
             resourceManager: new CustomResourceManager());
 
-        var results = Validate(new RequiredModel());
+        var results = Validate(new ValidatorTestCases.RequiredModel());
         Assert.That(results[0].ErrorMessage, Contains.Substring("CUSTOM_REQUIRED"));
     }
 

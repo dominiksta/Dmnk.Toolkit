@@ -7,7 +7,7 @@ using RangeAttribute = System.ComponentModel.DataAnnotations.RangeAttribute;
 
 namespace Dmnk.LocalizedDataAnnotations.Tests;
 
-[TestFixture, Parallelizable(ParallelScope.None)]
+[TestFixture, Parallelizable(ParallelScope.None), SetCulture("en")]
 public class LocalizedValidatorTests
 {
     private LocalizedValidator _validator = null!;
