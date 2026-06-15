@@ -66,13 +66,23 @@ public interface IDefaultValidationMessageProvider
     /// <summary> key: MinLengthAttribute_ValidationError </summary>
     public string? MinLength { get; }
     
-    /// <summary>
-    /// Note that technically, net10 specifies extra i18n fields for min/max exclusive settings.
-    /// To remain compatible with the old netfx translations, we instead add/subtract before
-    /// showing the message as necessary.
-    /// <p> key: RangeAttribute_ValidationError </p>
-    /// </summary>
+    /// <summary> key: RangeAttribute_ValidationError </summary>
     public string? Range { get; }
+    /// <summary>
+    /// net8+: RangeAttribute with exclusive range
+    /// <p> key: RangeAttribute_ValidationError_MaxExclusive </p>
+    /// </summary>
+    public string? RangeMaxExclusive { get; }
+    /// <summary>
+    /// net8+: RangeAttribute with exclusive range
+    /// <p> key: RangeAttribute_ValidationError_MinExclusive </p>
+    /// </summary>
+    public string? RangeMinExclusive { get; }
+    /// <summary>
+    /// net8+: RangeAttribute with exclusive range
+    /// <p> key: RangeAttribute_ValidationError_MinExclusive_MaxExclusive </p>
+    /// </summary>
+    public string? RangeMinMaxExclusive { get; }
     
     /// <summary> key: RegexAttribute_ValidationError </summary>
     public string? RegularExpression { get; }

@@ -3,15 +3,15 @@
 namespace Dmnk.LocalizedDataAnnotations.MessageProvider;
 
 /// <summary>
-/// Sets only the values that were present in the net48/netstandard2.0 version of
-/// <see cref="System.ComponentModel.DataAnnotations"/>.
+/// Uses keys based on the actual old netfx translations where possible and custom keys when
+/// necessary. See the documentation site or <c>_namespace.md</c> file in the repo for details.
 /// </summary>
-public class NetFxDefaultValidationMessageProvider : IDefaultValidationMessageProvider
+public class DefaultBestEffortValidationMessageProvider : IDefaultValidationMessageProvider
 {
-    public virtual string? AllowedValues => null;
-    public virtual string? DeniedValues => null;
-    public virtual string? Base64String => null;
-    public virtual string? Length => null;
+    public virtual string? AllowedValues => I18nLocalizedDataAnnotations.AllowedValuesAttribute_Invalid;
+    public virtual string? DeniedValues => I18nLocalizedDataAnnotations.DeniedValuesAttribute_Invalid;
+    public virtual string? Base64String => I18nLocalizedDataAnnotations.Base64StringAttribute_Invalid;
+    public virtual string? Length => I18nLocalizedDataAnnotations.LengthAttribute_ValidationError;
 
     public virtual string Fallback => I18nLocalizedDataAnnotations.ValidationAttribute_ValidationError;
     
@@ -28,7 +28,10 @@ public class NetFxDefaultValidationMessageProvider : IDefaultValidationMessagePr
     public virtual string? MinLength => I18nLocalizedDataAnnotations.MinLengthAttribute_ValidationError;
     
     public virtual string? Range => I18nLocalizedDataAnnotations.RangeAttribute_ValidationError;
-    
+    public string? RangeMaxExclusive => I18nLocalizedDataAnnotations.RangeAttribute_ValidationError_MaxExclusive;
+    public string? RangeMinExclusive => I18nLocalizedDataAnnotations.RangeAttribute_ValidationError_MinExclusive;
+    public string? RangeMinMaxExclusive => I18nLocalizedDataAnnotations.RangeAttribute_ValidationError_MinExclusive_MaxExclusive;
+
     public virtual string? RegularExpression => I18nLocalizedDataAnnotations.RegexAttribute_ValidationError;
     public virtual string? Required => I18nLocalizedDataAnnotations.RequiredAttribute_ValidationError;
 
