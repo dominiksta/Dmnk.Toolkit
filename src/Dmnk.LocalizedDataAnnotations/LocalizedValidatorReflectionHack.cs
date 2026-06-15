@@ -126,6 +126,13 @@ public static class LocalizedValidatorReflectionHack
             "Could not find s_resourceManager field in System.SR type.");
         return field;
     }
+    
+    internal static ResourceManager GetCurrentResourceManager()
+    {
+        EnsureAssemblyIsLoaded();
+        FieldInfo resourceManagerFieldInfo = GetResourceManagerFieldInfo();
+        return (ResourceManager)resourceManagerFieldInfo.GetValue(null)!;
+    }
 
     /// <summary>
     /// Force lazy initialization of System.SR.s_resourceManager, which only happens on the first
