@@ -60,6 +60,15 @@ namespace Dmnk.LocalizedDataAnnotations.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Das Feld {0} entspricht keinem der eingeschlossenen Werte..
+        /// </summary>
+        internal static string AllowedValuesAttribute_Invalid {
+            get {
+                return ResourceManager.GetString("AllowedValuesAttribute_Invalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Das {0}-Argument darf nicht NULL oder leer sein oder nur aus Leerraum bestehen..
         /// </summary>
         internal static string ArgumentIsNullOrWhitespace {
@@ -101,6 +110,15 @@ namespace Dmnk.LocalizedDataAnnotations.Properties {
         internal static string AttributeStore_Unknown_Property {
             get {
                 return ResourceManager.GetString("AttributeStore_Unknown_Property", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Das Feld {0} enhält keine valide Base64-kodierte Zeichenfolge..
+        /// </summary>
+        internal static string Base64StringAttribute_Invalid {
+            get {
+                return ResourceManager.GetString("Base64StringAttribute_Invalid", resourceCulture);
             }
         }
         
@@ -231,6 +249,15 @@ namespace Dmnk.LocalizedDataAnnotations.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Das Feld {0} entspricht einem ausgeschlossenen Wert..
+        /// </summary>
+        internal static string DeniedValuesAttribute_Invalid {
+            get {
+                return ResourceManager.GetString("DeniedValuesAttribute_Invalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Die {0}-Eigenschaft wurde nicht festgelegt. Rufen Sie den Wert mit der {1}-Methode ab..
         /// </summary>
         internal static string DisplayAttribute_PropertyNotSet {
@@ -272,6 +299,42 @@ namespace Dmnk.LocalizedDataAnnotations.Properties {
         internal static string FileExtensionsAttribute_Invalid {
             get {
                 return ResourceManager.GetString("FileExtensionsAttribute_Invalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LengthAttribute must have a MaximumLength value that is greater than or equal to MinimumLength..
+        /// </summary>
+        internal static string LengthAttribute_InvalidMaxLength {
+            get {
+                return ResourceManager.GetString("LengthAttribute_InvalidMaxLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LengthAttribute must have a MinimumLength value that is zero or greater..
+        /// </summary>
+        internal static string LengthAttribute_InvalidMinLength {
+            get {
+                return ResourceManager.GetString("LengthAttribute_InvalidMinLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The field of type {0} must be a string, array or ICollection type..
+        /// </summary>
+        internal static string LengthAttribute_InvalidValueType {
+            get {
+                return ResourceManager.GetString("LengthAttribute_InvalidValueType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Das Feld {0} muss eine Zeichenfolge oder einen Listen-Typ mit Mindestlänge &quot;{1}&quot; und Maximallänge &quot;{2}&quot; sein..
+        /// </summary>
+        internal static string LengthAttribute_ValidationError {
+            get {
+                return ResourceManager.GetString("LengthAttribute_ValidationError", resourceCulture);
             }
         }
         
@@ -348,6 +411,15 @@ namespace Dmnk.LocalizedDataAnnotations.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot use exclusive bounds when the maximum value is equal to the minimum value..
+        /// </summary>
+        internal static string RangeAttribute_CannotUseExclusiveBoundsWhenTheyAreEqual {
+            get {
+                return ResourceManager.GetString("RangeAttribute_CannotUseExclusiveBoundsWhenTheyAreEqual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Der Höchstwert &quot;{0}&quot; muss größer oder gleich dem Mindestwert &quot;{1}&quot; sein..
         /// </summary>
         internal static string RangeAttribute_MinGreaterThanMax {
@@ -380,6 +452,33 @@ namespace Dmnk.LocalizedDataAnnotations.Properties {
         internal static string RangeAttribute_ValidationError {
             get {
                 return ResourceManager.GetString("RangeAttribute_ValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Das Feld &quot;{0}&quot; muss zwischen {1} und {2} exklusive liegen..
+        /// </summary>
+        internal static string RangeAttribute_ValidationError_MaxExclusive {
+            get {
+                return ResourceManager.GetString("RangeAttribute_ValidationError_MaxExclusive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Das Feld &quot;{0}&quot; muss zwischen {1} exklusive und {2} liegen..
+        /// </summary>
+        internal static string RangeAttribute_ValidationError_MinExclusive {
+            get {
+                return ResourceManager.GetString("RangeAttribute_ValidationError_MinExclusive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Das Feld &quot;{0}&quot; muss zwischen {1} exklusive und {2} exklusive liegen..
+        /// </summary>
+        internal static string RangeAttribute_ValidationError_MinExclusive_MaxExclusive {
+            get {
+                return ResourceManager.GetString("RangeAttribute_ValidationError_MinExclusive_MaxExclusive", resourceCulture);
             }
         }
         

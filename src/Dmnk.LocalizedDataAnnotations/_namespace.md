@@ -66,3 +66,40 @@ Do note that these files contain a lot more translations than just the validatio
 e.g. for thrown exceptions. Despite not being necessary, the original keys are left unchanged,
 mostly to make them more easily identifiable/reproducable. This may also mean though that
 you might get some localized exceptions when using the reflection hack.
+
+# How exactly were the translations files in this repo created?
+
+The initial English version was taken from the current `System.ComponentModel.DataAnnotations` in
+net10. Then, a German version was extracted using the method above. There were a few keys missing:
+
+**In netfx, but not in net10** (de in this example):
+
+- (internal exception): `ArgumentIsNullOrWhiteSpace`
+- (internal exception): `AttributeStore_Type_Must_Be_Public`
+- (internal exception): `AttributeStore_Unknown_Method`
+- (honestly, no idea): `Common_NullOrEmpty`
+- (internal exception): `ValidationContextServiceContainer_ItemAlreadyExists`
+- (internal exception): `ValidationContextServiceContainer_Must_Be_Method`
+
+Most of these are for internal exceptions and not user-facing. The only exception is
+`Common_NullOrEmpty`, of which I am unsure where it was used.
+
+**In net10, but not in netfx** (en in this example):
+
+- (user-facing): `AllowedValuesAttribute_Invalid`
+- (user-facing): `Base64StringAttribute_Invalid`
+- (user-facing): `DeniedValuesAttribute_Invalid`
+- (internal exception): `LengthAttribute_InvalidMaxLength`
+- (internal exception): `LengthAttribute_InvalidMinLength`
+- (internal exception): `LengthAttribute_InvalidValueType`
+- (user-facing): `LengthAttribute_ValidationError`
+- (user-facing): `RangeAttribute_ValidationError_MaxExclusive`
+- (user-facing): `RangeAttribute_ValidationError_MinExclusive`
+- (user-facing): `RangeAttribute_ValidationError_MinExclusive_MaxExclusive`
+
+As is clear in the list above, a lot of these are very much user-facing keys.  As a native german,
+I (dominiksta) decided to **write my own German translations** of these keys and 
+**use AI for the missing French keys** (For the time being. This library will likely see some use at
+*my workplace at which point the French translations will be revisited).
+
+For the non-user-facing keys I decided to simply use the English versions.

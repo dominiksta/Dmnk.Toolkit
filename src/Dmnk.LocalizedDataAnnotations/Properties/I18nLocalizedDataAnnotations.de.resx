@@ -196,4 +196,37 @@
     <data name="ValidationAttribute_IsValid_NotImplemented" xml:space="preserve">
         <value>"IsValid(object value)" wurde von dieser Klasse nicht implementiert. Der bevorzugte Einstiegspunkt ist "GetValidationResult()" und Klassen sollten "IsValid(object value, ValidationContext context)" überschreiben.</value>
     </data>
+    <data name="LengthAttribute_InvalidMaxLength" xml:space="preserve">
+        <value>LengthAttribute must have a MaximumLength value that is greater than or equal to MinimumLength.</value>
+    </data>
+    <data name="LengthAttribute_InvalidMinLength" xml:space="preserve">
+        <value>LengthAttribute must have a MinimumLength value that is zero or greater.</value>
+    </data>
+    <data name="LengthAttribute_InvalidValueType" xml:space="preserve">
+        <value>The field of type {0} must be a string, array or ICollection type.</value>
+    </data>
+    <data name="AllowedValuesAttribute_Invalid" xml:space="preserve">
+        <value>Das Feld {0} entspricht keinem der eingeschlossenen Werte.</value>
+    </data>
+    <data name="Base64StringAttribute_Invalid" xml:space="preserve">
+        <value>Das Feld {0} enhält keine valide Base64-kodierte Zeichenfolge.</value>
+    </data>
+    <data name="DeniedValuesAttribute_Invalid" xml:space="preserve">
+        <value>Das Feld {0} entspricht einem ausgeschlossenen Wert.</value>
+    </data>
+    <data name="LengthAttribute_ValidationError" xml:space="preserve">
+        <value>Das Feld {0} muss eine Zeichenfolge oder einen Listen-Typ mit Mindestlänge "{1}" und Maximallänge "{2}" sein.</value>
+    </data>
+    <data name="RangeAttribute_CannotUseExclusiveBoundsWhenTheyAreEqual" xml:space="preserve">
+        <value>Cannot use exclusive bounds when the maximum value is equal to the minimum value.</value>
+    </data>
+    <data name="RangeAttribute_ValidationError_MaxExclusive" xml:space="preserve">
+        <value>Das Feld "{0}" muss zwischen {1} und {2} exklusive liegen.</value>
+    </data>
+    <data name="RangeAttribute_ValidationError_MinExclusive" xml:space="preserve">
+        <value>Das Feld "{0}" muss zwischen {1} exklusive und {2} liegen.</value>
+    </data>
+    <data name="RangeAttribute_ValidationError_MinExclusive_MaxExclusive" xml:space="preserve">
+        <value>Das Feld "{0}" muss zwischen {1} exklusive und {2} exklusive liegen.</value>
+    </data>
 </root>
