@@ -136,15 +136,15 @@ public class LocalizedValidator : IValidator
     // Helpers
     // ======================================================================
     
-    private readonly Lazy<FieldInfo> _defaultErrorMessageProperty = new(
+    private readonly Lazy<FieldInfo> _defaultErrorMessageField = new(
         () => typeof(ValidationAttribute).GetField(
             "_defaultErrorMessage", BindingFlags.NonPublic | BindingFlags.Instance) 
               ?? throw new InvalidOperationException(
-                  "Could not find _defaultErrorMessage property via reflection."));
+                  "Could not find _defaultErrorMessage field via reflection."));
 
     private bool HasUserDefinedErrorMessage(ValidationAttribute attr)
     {
-        var defaultErrorMessage = (string?)_defaultErrorMessageProperty.Value.GetValue(attr);
+        var defaultErrorMessage = (string?)_defaultErrorMessageField.Value.GetValue(attr);
         return attr.ErrorMessage != defaultErrorMessage;
     }
     

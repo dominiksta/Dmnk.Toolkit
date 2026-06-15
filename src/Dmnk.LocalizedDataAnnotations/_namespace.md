@@ -71,7 +71,7 @@ using Dmnk.LocalizedDataAnnotations;
 LocalizedValidatorReflectionHack.Hack();
 ```
 
-# How where the old translations acquired?
+# How were the old translations acquired?
 
 This is more for documentation of what was done here - you don't have to do it.
 
@@ -125,6 +125,6 @@ Most of these are for internal exceptions and not user-facing. The only exceptio
 As is clear in the list above, a lot of these are very much user-facing keys.  As a native german,
 I (dominiksta) decided to **write my own German translations** of these keys and 
 **use AI for the missing French keys** (For the time being. This library will likely see some use at
-*my workplace at which point the French translations will be revisited).
+my workplace, at which point the French translations will be revisited).
 
 For the non-user-facing keys I decided to simply use the English versions.

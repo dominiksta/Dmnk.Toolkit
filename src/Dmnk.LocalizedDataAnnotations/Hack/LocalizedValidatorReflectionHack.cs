@@ -51,14 +51,16 @@ public static class LocalizedValidatorReflectionHack
         
         if (IsHacked) return;
         
-        try { DoHack(resourceManager); }
+        try
+        {
+            DoHack(resourceManager);
+            IsHacked = true;
+        }
         catch (Exception ex)
         {
             Console.Error.WriteLine($"Failed to hack the ResourceManager: {ex}");
             if (doThrow.Value) throw;
         }
-        
-        IsHacked = true;
     }
 
     /// <summary>
@@ -75,14 +77,16 @@ public static class LocalizedValidatorReflectionHack
         
         if (!IsHacked) return;
         
-        try { DoUnHack(); }
+        try
+        {
+            DoUnHack();
+            IsHacked = false;
+        }
         catch (Exception ex)
         {
             Console.Error.WriteLine($"Failed to un-hack the ResourceManager: {ex}");
             if (doThrow.Value) throw;
         }
-        
-        IsHacked = false;
     }
 
     private static bool ShouldThrowDefault()
