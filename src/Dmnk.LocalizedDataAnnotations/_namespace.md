@@ -9,18 +9,19 @@ Localized `System.ComponentModel.DataAnnotations`.
 # Why?
 
 Regrettably, `System.ComponentModel.DataAnnotations` is no longer localized in modern .NET. This
-would not be so big of an issue if one could at least provide their own translations. However,
-the only official way of doing this is on every single attribute usage. Even more weird/annoying
-is that the messages have not changed for a long time, so MS *could* just ship the old translations,
-maybe as a nuget package.
+would not be so big of an issue if one could at least provide their own translations. However, the
+only official way of doing this is on every single attribute usage. Even more weird/annoying is that
+the messages have *almost* not changed for a long time, so MS *could* just ship the old
+translations with minimal effort, maybe as a nuget package.
 
 # Overview
 
 This package provides two mechanisms to work around this issue:
 
 - `IValidator` and `LocalizedValidator` behave pretty much exactly like `Validator`, but they
-  will be localized by default, using the old translations from .NET Framework. You can also
-  provide your own translations by implementing `IDefaultValidationResourceProvider`.
+  will be localized by default, using the old translations from .NET Framework **with some slight
+  custom adaptations** (see below). You can also provide your own translations by implementing
+  `IDefaultValidationResourceProvider`.
 - `LocalizedValidatorReflectionHack.Hack()` rewrites the `ResourceManager` on a private field
   of an internal class in `System.ComponentModel.DataAnnotations` to use the old translations.
   This *should* be reasonably reliable, since it has been a long time since the last change to
