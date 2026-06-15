@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Globalization;
+using System.Linq;
 using Dmnk.LocalizedDataAnnotations.MessageProvider;
 
 namespace Dmnk.LocalizedDataAnnotations;
@@ -18,7 +20,7 @@ internal class MessageLocalizer(IDefaultValidationMessageProvider messageProvide
 #if NET8_0_OR_GREATER
             LengthAttribute la => FormatLength(la, fieldName),
 #endif
-            FileExtensionsAttribute fea => Format2(messageProvider.DataTypeFileExtension, fieldName, fea.Extensions),
+            FileExtensionsAttribute fea => FormatFileExtensions(fea, fieldName),
             CreditCardAttribute => Format1(messageProvider.DataTypeCreditCard, fieldName),
             EmailAddressAttribute => Format1(messageProvider.DataTypeEmailAddress, fieldName),
             PhoneAttribute => Format1(messageProvider.DataTypePhone, fieldName),
@@ -50,6 +52,17 @@ internal class MessageLocalizer(IDefaultValidationMessageProvider messageProvide
 
     private string? FormatCompare(CompareAttribute ca, string fieldName) =>
         Format2(messageProvider.Compare, fieldName, ca.OtherProperty);
+    
+    private string? FormatFileExtensions(FileExtensionsAttribute fea, string fieldName)
+    {
+        string[] extensions = fea.Extensions
+            .Split(',').Select(e => e.Trim())
+            .OrderBy(e => e, StringComparer.CurrentCultureIgnoreCase)
+            .Select(e => e.StartsWith(".") ? e : "." + e)
+            .ToArray();
+        string extensionsFormatted = string.Join(", ", extensions);
+        return Format2(messageProvider.DataTypeFileExtension, fieldName, extensionsFormatted);
+    }
 
     private string? FormatRange(RangeAttribute ra, string fieldName)
     {

@@ -33,8 +33,6 @@ public class LocalizedValidatorTests
     // -- Models used only by API-specific tests below --------------------------
 
     private class RequiredModel { [Required] public string? Name { get; set; } }
-    private class StringLengthModel { [StringLength(5)] public string? Name { get; set; } }
-    private class RangeModel { [Range(1, 10)] public int Value { get; set; } = 99; }
     private class MaxLengthModel { [MaxLength(3)] public string? Value { get; set; } = "toolong"; }
 
     private class CustomMessageModel
