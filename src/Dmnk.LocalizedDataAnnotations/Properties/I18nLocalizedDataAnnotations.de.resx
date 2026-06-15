@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0,
+            Culture=neutral, PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0,
+            Culture=neutral, PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+
+    <data name="ValidationContextServiceContainer_ItemAlreadyExists" xml:space="preserve">
+        <value>Ein Dienst vom Typ "{0}" ist im Container bereits vorhanden.</value>
+    </data>
+    <data name="ValidationContext_Must_Be_Method" xml:space="preserve">
+        <value>Vom ValidationContext für den Typ "{0}", Membername "{1}", muss MethodInfo bereitgestellt werden.</value>
+    </data>
+    <data name="CompareAttribute_UnknownProperty" xml:space="preserve">
+        <value>Eine Eigenschaft mit dem Namen {0} konnte nicht gefunden werden.</value>
+    </data>
+    <data name="CustomValidationAttribute_Type_Conversion_Failed" xml:space="preserve">
+        <value>Der Wert vom Typ "{0}" konnte nicht in "{1}" konvertiert werden. Dies wurde von der Methode "{2}.{3}" erwartet.</value>
+    </data>
+    <data name="RangeAttribute_MinGreaterThanMax" xml:space="preserve">
+        <value>Der Höchstwert "{0}" muss größer oder gleich dem Mindestwert "{1}" sein.</value>
+    </data>
+    <data name="CustomValidationAttribute_Type_Must_Be_Public" xml:space="preserve">
+        <value>Der benutzerdefinierte Validierungstyp "{0}" muss öffentlich sein.</value>
+    </data>
+    <data name="RangeAttribute_ValidationError" xml:space="preserve">
+        <value>Das Feld "{0}" muss zwischen {1} und {2} liegen.</value>
+    </data>
+  <data name="ArgumentIsNullOrWhitespace" xml:space="preserve">
+    <value>Das {0}-Argument darf nicht NULL oder leer sein oder nur aus Leerraum bestehen.</value>
+  </data>
+    <data name="RegularExpressionAttribute_Empty_Pattern" xml:space="preserve">
+        <value>Das Muster muss auf einen gültigen regulären Ausdruck festgelegt werden.</value>
+    </data>
+    <data name="CreditCardAttribute_Invalid" xml:space="preserve">
+        <value>Das Feld {0} enthält keine gültige Kreditkartennummer.</value>
+    </data>
+    <data name="UIHintImplementation_ControlParameterKeyIsNotAString" xml:space="preserve">
+        <value>Der Schlüsselparameter an Position {0} mit dem Wert "{1}" ist keine Zeichenfolge. Jeder Schlüsselsteuerparameter muss eine Zeichenfolge sein.</value>
+    </data>
+    <data name="StringLengthAttribute_ValidationError" xml:space="preserve">
+        <value>Das Feld "{0}" muss eine Zeichenfolge mit einer maximalen Länge von {1} sein.</value>
+    </data>
+    <data name="LocalizableString_LocalizationFailed" xml:space="preserve">
+        <value>Die Eigenschaft "{0}" kann aufgrund eines Lokalisierungsfehlers nicht abgerufen werden. Typ "{1}" ist nicht öffentlich oder enthält keine öffentliche statische Zeichenfolgeneigenschaft mit dem Namen "{2}".</value>
+    </data>
+    <data name="StringLengthAttribute_ValidationErrorIncludingMinimum" xml:space="preserve">
+        <value>Das Feld "{0}" muss eine Zeichenfolge mit der Mindestlänge {2} und der Höchstlänge {1} sein.</value>
+    </data>
+    <data name="AttributeStore_Unknown_Method" xml:space="preserve">
+        <value>Der Typ "{0}" enthält keine öffentliche Methode namens "{1}".</value>
+    </data>
+    <data name="CustomValidationAttribute_Method_Required" xml:space="preserve">
+        <value>Die CustomValidationAttribute.Method wurde nicht angegeben.</value>
+    </data>
+    <data name="AttributeStore_Unknown_Property" xml:space="preserve">
+        <value>Der Typ "{0}" enthält keine öffentliche Eigenschaft namens "{1}".</value>
+    </data>
+    <data name="MaxLengthAttribute_ValidationError" xml:space="preserve">
+        <value>Das Feld "{0}" muss ein Zeichenfolgen- oder Arraytyp mit einer maximalen Länge von {1} sein.</value>
+    </data>
+    <data name="Validator_Property_Value_Wrong_Type" xml:space="preserve">
+        <value>Der Wert für die Eigenschaft "{0}" muss vom Typ "{1}" sein.</value>
+    </data>
+    <data name="CustomValidationAttribute_Method_Not_Found" xml:space="preserve">
+        <value>Die CustomValidationAttribute-Methode "{0}" ist in Typ "{1}" nicht vorhanden oder ist nicht öffentlich und statisch.</value>
+    </data>
+    <data name="PhoneAttribute_Invalid" xml:space="preserve">
+        <value>Das Feld {0} enthält keine gültige Telefonnummer.</value>
+    </data>
+    <data name="UrlAttribute_Invalid" xml:space="preserve">
+        <value>Das Feld {0} enthält keine gültige vollqualifizierte HTTP-, HTTPS- oder FTP-URL.</value>
+    </data>
+    <data name="ValidationAttribute_ValidationError" xml:space="preserve">
+        <value>Das Feld "{0}" ist ungültig.</value>
+    </data>
+    <data name="EnumDataTypeAttribute_TypeNeedsToBeAnEnum" xml:space="preserve">
+        <value>Der Typ "{0}" muss einen Aufzählungstyp darstellen.</value>
+    </data>
+    <data name="RangeAttribute_ArbitraryTypeNotIComparable" xml:space="preserve">
+        <value>Der Typ "{0}" muss "{1}" implementieren.</value>
+    </data>
+    <data name="FileExtensionsAttribute_Invalid" xml:space="preserve">
+        <value>Das Feld {0} akzeptiert nur Dateien mit folgenden Erweiterungen: {1}</value>
+    </data>
+    <data name="ValidationAttribute_NeedBothResourceTypeAndResourceName" xml:space="preserve">
+        <value>Für dieses Attribut muss sowohl ErrorMessageResourceType als auch ErrorMessageResourceName festgelegt werden.</value>
+    </data>
+    <data name="Validator_InstanceMustMatchValidationContextInstance" xml:space="preserve">
+        <value>Die angegebene Instanz muss der ObjectInstance im bereitgestellten ValidationContext entsprechen.</value>
+    </data>
+    <data name="MinLengthAttribute_ValidationError" xml:space="preserve">
+        <value>Das Feld "{0}" muss ein Zeichenfolgen- oder Arraytyp mit einer minimalen Länge von {1} sein.</value>
+    </data>
+    <data name="MetadataTypeAttribute_TypeCannotBeNull" xml:space="preserve">
+        <value>MetadataClassType darf nicht NULL sein.</value>
+    </data>
+    <data name="CustomValidationAttribute_ValidatorType_Required" xml:space="preserve">
+        <value>Der CustomValidationAttribute.ValidatorType wurde nicht angegeben.</value>
+    </data>
+    <data name="RangeAttribute_Must_Set_Min_And_Max" xml:space="preserve">
+        <value>Die Mindest- und Höchstwerte müssen festgelegt werden.</value>
+    </data>
+    <data name="ValidationAttribute_ResourceTypeDoesNotHaveProperty" xml:space="preserve">
+        <value>Der Ressourcentyp "{0}" besitzt keine statische Eigenschaft namens "{1}", auf die zugegriffen werden kann.</value>
+    </data>
+    <data name="MaxLengthAttribute_InvalidMaxLength" xml:space="preserve">
+        <value>MaxLengthAttribute muss einen Length-Wert größer als null aufweisen. Verwenden Sie MaxLength() ohne Parameter, um anzugeben, dass die Zeichenfolge oder das Array die zulässige maximale Länge aufweisen kann.</value>
+    </data>
+    <data name="Common_PropertyNotFound" xml:space="preserve">
+        <value>Die Eigenschaft {0}.{1} konnte nicht gefunden werden.</value>
+    </data>
+    <data name="CustomValidationAttribute_ValidationError" xml:space="preserve">
+        <value>"{0}" ist nicht gültig.</value>
+    </data>
+    <data name="Common_NullOrEmpty" xml:space="preserve">
+        <value>Der Wert darf nicht NULL oder leer sein.</value>
+    </data>
+    <data name="StringLengthAttribute_InvalidMaxLength" xml:space="preserve">
+        <value>Die maximale Länge muss eine nicht negative Ganzzahl sein.</value>
+    </data>
+    <data name="RegexAttribute_ValidationError" xml:space="preserve">
+        <value>Das Feld "{0}" muss dem regulären Ausdruck "{1}" entsprechen.</value>
+    </data>
+    <data name="EnumDataTypeAttribute_TypeCannotBeNull" xml:space="preserve">
+        <value>Der für EnumDataTypeAttribute angegebene Typ darf nicht NULL sein.</value>
+    </data>
+    <data name="RangeAttribute_Must_Set_Operand_Type" xml:space="preserve">
+        <value>Der OperandType muss festgelegt werden, wenn für Mindest- und Höchstwerte Zeichenfolgen verwendet werden.</value>
+    </data>
+    <data name="ValidationAttribute_ResourcePropertyNotStringType" xml:space="preserve">
+        <value>Die {0}-Eigenschaft des Ressourcentyps "{1}" ist kein Zeichenfolgentyp.</value>
+    </data>
+    <data name="RequiredAttribute_ValidationError" xml:space="preserve">
+        <value>Das Feld "{0}" ist erforderlich.</value>
+    </data>
+    <data name="CompareAttribute_MustMatch" xml:space="preserve">
+        <value>'{0}' und '{1}' stimmen nicht überein.</value>
+    </data>
+    <data name="EmailAddressAttribute_Invalid" xml:space="preserve">
+        <value>Das Feld {0} enthält keine gültige E-Mail-Adresse.</value>
+    </data>
+    <data name="AssociatedMetadataTypeTypeDescriptor_MetadataTypeContainsUnknownProperties"
+          xml:space="preserve">
+        <value>Der zugeordnete Metadatentyp für Typ "{0}" enthält die folgenden unbekannten Eigenschaften oder Felder: {1}. Stellen Sie sicher, dass die Namen dieser Member mit den Eigenschaftennamen des Haupttyps übereinstimmen.</value>
+    </data>
+    <data name="CustomValidationAttribute_Method_Must_Return_ValidationResult" xml:space="preserve">
+        <value>Von der CustomValidationAttribute-Methode "{0}" in Typ "{1}" muss System.ComponentModel.DataAnnotations.ValidationResult zurückgegeben werden. Verwenden Sie System.ComponentModel.DataAnnotations.ValidationResult.Success, um einen erfolgreichen Verlauf anzuzeigen.</value>
+    </data>
+    <data name="UIHintImplementation_ControlParameterKeyOccursMoreThanOnce" xml:space="preserve">
+        <value>Der Schlüsselparameter an Position {0} mit dem Wert "{1}" ist mehrmals vorhanden.</value>
+    </data>
+    <data name="UIHintImplementation_NeedEvenNumberOfControlParameters" xml:space="preserve">
+        <value>Die Anzahl der Steuerparameter muss gerade sein.</value>
+    </data>
+    <data name="CustomValidationAttribute_Method_Signature" xml:space="preserve">
+        <value>Die CustomValidationAttribute-Methode "{0}" in Typ "{1}" muss der erwarteten Signatur entsprechen: öffentliches, statisches ValidationResult {0}(Objektwert, ValidationContext-Kontext). Der Wert kann stark typisiert werden. Der ValidationContext-Parameter ist optional.</value>
+    </data>
+    <data name="MinLengthAttribute_InvalidMinLength" xml:space="preserve">
+        <value>MinLengthAttribute muss einen Length-Wert größer als null aufweisen.</value>
+    </data>
+    <data name="DataTypeAttribute_EmptyDataTypeString" xml:space="preserve">
+        <value>Die benutzerdefinierte DataType-Zeichenfolge darf nicht NULL oder leer sein.</value>
+    </data>
+    <data name="ValidationAttribute_Cannot_Set_ErrorMessage_And_Resource" xml:space="preserve">
+        <value>Es muss entweder ErrorMessageString oder ErrorMessageResourceName festgelegt werden, nicht jedoch beide Werte.</value>
+    </data>
+    <data name="AttributeStore_Type_Must_Be_Public" xml:space="preserve">
+        <value>Der Typ "{0}" muss öffentlich sein.</value>
+    </data>
+    <data name="UIHintImplementation_ControlParameterKeyIsNull" xml:space="preserve">
+        <value>Der Schlüsselparameter an Position {0} ist NULL. Jeder Schlüsselsteuerparameter muss eine Zeichenfolge sein.</value>
+    </data>
+    <data name="DisplayAttribute_PropertyNotSet" xml:space="preserve">
+        <value>Die {0}-Eigenschaft wurde nicht festgelegt. Rufen Sie den Wert mit der {1}-Methode ab.</value>
+    </data>
+    <data name="ValidationAttribute_IsValid_NotImplemented" xml:space="preserve">
+        <value>"IsValid(object value)" wurde von dieser Klasse nicht implementiert. Der bevorzugte Einstiegspunkt ist "GetValidationResult()" und Klassen sollten "IsValid(object value, ValidationContext context)" überschreiben.</value>
+    </data>
+    <data name="LengthAttribute_InvalidMaxLength" xml:space="preserve">
+        <value>LengthAttribute must have a MaximumLength value that is greater than or equal to MinimumLength.</value>
+    </data>
+    <data name="LengthAttribute_InvalidMinLength" xml:space="preserve">
+        <value>LengthAttribute must have a MinimumLength value that is zero or greater.</value>
+    </data>
+    <data name="LengthAttribute_InvalidValueType" xml:space="preserve">
+        <value>The field of type {0} must be a string, array or ICollection type.</value>
+    </data>
+    <data name="AllowedValuesAttribute_Invalid" xml:space="preserve">
+        <value>Das Feld {0} entspricht keinem der eingeschlossenen Werte.</value>
+    </data>
+    <data name="Base64StringAttribute_Invalid" xml:space="preserve">
+        <value>Das Feld {0} enhält keine valide Base64-kodierte Zeichenfolge.</value>
+    </data>
+    <data name="DeniedValuesAttribute_Invalid" xml:space="preserve">
+        <value>Das Feld {0} entspricht einem ausgeschlossenen Wert.</value>
+    </data>
+    <data name="LengthAttribute_ValidationError" xml:space="preserve">
+        <value>Das Feld {0} muss eine Zeichenfolge oder einen Listen-Typ mit Mindestlänge "{1}" und Maximallänge "{2}" sein.</value>
+    </data>
+    <data name="RangeAttribute_CannotUseExclusiveBoundsWhenTheyAreEqual" xml:space="preserve">
+        <value>Cannot use exclusive bounds when the maximum value is equal to the minimum value.</value>
+    </data>
+    <data name="RangeAttribute_ValidationError_MaxExclusive" xml:space="preserve">
+        <value>Das Feld "{0}" muss zwischen {1} und {2} exklusive liegen.</value>
+    </data>
+    <data name="RangeAttribute_ValidationError_MinExclusive" xml:space="preserve">
+        <value>Das Feld "{0}" muss zwischen {1} exklusive und {2} liegen.</value>
+    </data>
+    <data name="RangeAttribute_ValidationError_MinExclusive_MaxExclusive" xml:space="preserve">
+        <value>Das Feld "{0}" muss zwischen {1} exklusive und {2} exklusive liegen.</value>
+    </data>
+</root>

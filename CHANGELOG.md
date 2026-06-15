@@ -1,6 +1,10 @@
 ﻿# Changelog
 
-## `Dmnk.Blazor.Mvvm`: `0.0.9` - *unreleased*
+## `Dmnk.LocalizedDataAnnotations`: `0.0.1` - *unreleased*
+
+Initial release.
+
+## `Dmnk.Blazor.Mvvm`: `0.0.9` - *2026-06-12*
 
 **Added:**
 
@@ -8,7 +12,7 @@
   and `IServiceCollection.AddViewModelRegistrationOpenGeneric()` extension methods for
   less verbose DI setup.
 
-## `Dmnk.Blazor.Dialogs.Fluent`: `0.0.4` - *unreleased*
+## `Dmnk.Blazor.Dialogs.Fluent`: `0.0.4` - *2026-06-12*
 
 **Fixed**:
 
