@@ -38,6 +38,12 @@ public static class LocalizedValidatorReflectionHack
     /// By default, the method will use the ResourceManager defined by this library's resources.
     /// These contain the old .NET Framework localizations. You may provide your own
     /// ResourceManager if you want to use your own localizations.
+    /// <p>
+    /// Note that the resource manager must provide the relevant keys. You may reference
+    /// <see cref="MessageProvider.IDefaultValidationMessageProvider"/> for a list of
+    /// necessary keys related to the actual validation and the resx files in the repo for
+    /// a full list of all keys need to be defined for e.g. exceptions to work properly.
+    /// </p>
     /// </param>
     public static void Hack(bool? doThrow = null, ResourceManager? resourceManager = null)
     {

@@ -29,6 +29,9 @@ This package provides two mechanisms to work around this issue:
 All default subclasses of `ValidationAttribute` are supported. Your own custom subclasses should
 use their own `FormatMessage` implementation anyway, so this package does not affect them.
 
+Currently, only English, German and French translations are included. Pull requests are welcome.
+You may use the method outlined below to acquire the old translations.
+
 # Usage
 
 ## `IValidator` and `LocalizedValidator`
