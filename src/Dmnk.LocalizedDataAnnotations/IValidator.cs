@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Dmnk.LocalizedDataAnnotations;
 
+/// <summary>
+/// Mimics the API of <see cref="Validator"/> such that we can e.g. have a localized version.
+/// </summary>
 public interface IValidator
 {
     /// <summary>

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Resources;
+using Dmnk.LocalizedDataAnnotations.Hack;
 
 namespace Dmnk.LocalizedDataAnnotations.Tests;
 

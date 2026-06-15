@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Resources;
 using Dmnk.LocalizedDataAnnotations.Properties;
 
-namespace Dmnk.LocalizedDataAnnotations;
+namespace Dmnk.LocalizedDataAnnotations.Hack;
 
 /// <summary>
 /// See <see cref="Hack"/>

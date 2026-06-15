@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Resources;
+using Dmnk.LocalizedDataAnnotations.Hack;
 using Dmnk.LocalizedDataAnnotations.MessageProvider;
 using Dmnk.LocalizedDataAnnotations.Properties;
 using RangeAttribute = System.ComponentModel.DataAnnotations.RangeAttribute;
