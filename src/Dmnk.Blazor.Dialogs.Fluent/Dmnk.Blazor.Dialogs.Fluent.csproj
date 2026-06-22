@@ -10,7 +10,7 @@
 
     <PropertyGroup>
         <PackageId>Dmnk.Blazor.Dialogs.Fluent</PackageId>
-        <Version>0.0.5</Version>
+        <Version>0.0.6</Version>
         <Authors>Dominik Stahmer</Authors>
         <Description>
             Implementation of Dmnk.Blazor.Dialogs using Fluent UI styles and components.
@@ -18,8 +18,7 @@
         <PackageTags>Blazor;MVVM;Model-View-ViewModel;Fluent;FluentUI</PackageTags>
         
         <PackageReleaseNotes>
-            - Fixed/Changed: VmDialogBody now has more predictable overflow behavior
-              as it is a `display: block` element.
+            - Fixed/Changed: VmDialogBody by default grows and has full width.
         </PackageReleaseNotes>
         
         <RepositoryUrl>

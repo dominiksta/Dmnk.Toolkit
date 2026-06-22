@@ -1,6 +1,8 @@
 ﻿::deep .r-dialog-component .r-dialog-body {
     display: block;
     overflow: auto;
+    width: 100%;
+    flex-grow: 1;
 }
 
 ::deep .r-dialog-component .r-dialog-footer {

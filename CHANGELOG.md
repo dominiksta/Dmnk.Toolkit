@@ -1,5 +1,11 @@
 ﻿# Changelog
 
+## `Dmnk.Blazor.Dialogs.Fluent`: `0.0.6` - *2026-06-22*
+
+**Fixed/Changed:**
+
+- `VmDialogBody` by default grows and has full width.
+
 ## `Dmnk.Blazor.Dialogs.Fluent`: `0.0.5` - *2026-06-22*
 
 **Fixed/Changed:**
