@@ -1,14 +1,30 @@
-@using Dmnk.Blazor.Dialogs.Api
-@using Dmnk.Blazor.Dialogs.Fluent
 @inherits Dmnk.Blazor.Dialogs.Api.BlazorVmDialogViewFor<TestDialogViewModel>
 
 <VmDialogBody>
-    <FluentTextField @bind-Value="@Vm.InputValue"
-                     @onkeydown="OnInputKeyDown"
-                     Placeholder="Enter something..."/>
-    <FluentButton OnClick="@Vm.ShowNestedMessageBoxCommand.Bind(this)">
-        Show Nested MessageBox
-    </FluentButton>
+    <FluentStack Orientation="Orientation.Vertical" VerticalGap="10"
+                 Style="margin-bottom: 1em;">
+        <FluentTextField @bind-Value="@Vm.InputValue"
+                         Style="display: block;"
+                         @onkeydown="OnInputKeyDown"
+                         Placeholder="Enter something..."/>
+
+        <FluentButton OnClick="@Vm.ShowNestedMessageBoxCommand.Bind(this)">
+            Show Nested MessageBox
+        </FluentButton>
+    </FluentStack>
+
+    <FluentAccordion>
+        <FluentAccordionItem Heading="Provoke Overflow">
+            @for (int i = 0; i < 20; i++)
+            {
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Donec suscipit auctor dui, a commodo nisl efficitur ut.
+                </p>
+            }
+        </FluentAccordionItem>
+
+    </FluentAccordion>
 </VmDialogBody>
 
 <VmDialogFooter>

@@ -1,6 +1,12 @@
 ﻿# Changelog
 
-## `Dmnk.LocalizedDataAnnotations`: `0.0.1` - *unreleased*
+## `Dmnk.Blazor.Dialogs.Fluent`: `0.0.5` - *2026-06-22*
+
+**Fixed/Changed:**
+
+- `VmDialogBody` now has more predictable overflow behavior as it is a `display: block` element.
+
+## `Dmnk.LocalizedDataAnnotations`: `0.0.1` - *2026-06-15*
 
 Initial release.
 

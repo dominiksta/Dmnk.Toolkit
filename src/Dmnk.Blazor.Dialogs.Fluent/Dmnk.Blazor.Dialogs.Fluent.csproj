@@ -10,7 +10,7 @@
 
     <PropertyGroup>
         <PackageId>Dmnk.Blazor.Dialogs.Fluent</PackageId>
-        <Version>0.0.4</Version>
+        <Version>0.0.5</Version>
         <Authors>Dominik Stahmer</Authors>
         <Description>
             Implementation of Dmnk.Blazor.Dialogs using Fluent UI styles and components.
@@ -18,12 +18,8 @@
         <PackageTags>Blazor;MVVM;Model-View-ViewModel;Fluent;FluentUI</PackageTags>
         
         <PackageReleaseNotes>
-            - Fixed: DisposeAsync() of DialogControllerProvider would error on 
-              page refresh / tab close
-            - Fixed: BlazorVmDialogController/IVmDialogController were registered as 
-              singletons, causing issues with shared state between tabs in Blazor server
-            - Fixed: Dialogs with AllowCancel=false could still be closed by hitting escape twice
-              (from the internal `OnDocumentKeyDownEscape` method)
+            - Fixed/Changed: VmDialogBody now has more predictable overflow behavior
+              as it is a `display: block` element.
         </PackageReleaseNotes>
         
         <RepositoryUrl>

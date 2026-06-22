@@ -1,5 +1,6 @@
 ﻿::deep .r-dialog-component .r-dialog-body {
-    display: contents;
+    display: block;
+    overflow: auto;
 }
 
 ::deep .r-dialog-component .r-dialog-footer {
