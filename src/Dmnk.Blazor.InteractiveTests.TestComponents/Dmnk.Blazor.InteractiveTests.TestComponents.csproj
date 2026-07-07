@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+
+    <ItemGroup>
+        <SupportedPlatform Include="browser"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Dmnk.Blazor.Dialogs.CommunityToolkit\Dmnk.Blazor.Dialogs.CommunityToolkit.csproj" />
+        <ProjectReference Include="..\Dmnk.Blazor.Dialogs.Fluent\Dmnk.Blazor.Dialogs.Fluent.csproj" />
+        <ProjectReference Include="..\Dmnk.Blazor.Dialogs\Dmnk.Blazor.Dialogs.csproj" />
+        <ProjectReference Include="..\Dmnk.Blazor.Mvvm.CommunityToolkit\Dmnk.Blazor.Mvvm.CommunityToolkit.csproj" />
+        <ProjectReference Include="..\Dmnk.Blazor.Mvvm\Dmnk.Blazor.Mvvm.csproj" />
+    </ItemGroup>
+</Project>

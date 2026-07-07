@@ -1,0 +1,8 @@
+﻿namespace Dmnk.Blazor.InteractiveTests.Examples;
+
+[SetUpFixture]
+public class InteractiveTestSetup
+{
+    [OneTimeSetUp]
+    public void Setup() => BlazorInteractiveTests.SetTestProjectDir(GetType().Assembly);
+}

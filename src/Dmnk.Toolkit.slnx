@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/App/">
+    <Project Path="Dmnk.Blazor.InteractiveTests.Examples/Dmnk.Blazor.InteractiveTests.Examples.csproj" />
     <Project Path="Dmnk.Toolkit.TestApp/Dmnk.Toolkit.TestApp.csproj" />
   </Folder>
   <Folder Name="/Build/">
@@ -20,6 +21,9 @@
     <Project Path="Dmnk.Blazor.Dialogs.Tests/Dmnk.Blazor.Dialogs.Tests.csproj" />
     <Project Path="Dmnk.Blazor.Dialogs/Dmnk.Blazor.Dialogs.csproj" />
     <Project Path="Dmnk.Blazor.Focus/Dmnk.Blazor.Focus.csproj" />
+    <Project Path="Dmnk.Blazor.InteractiveTests.Assets/Dmnk.Blazor.InteractiveTests.Assets.csproj" />
+    <Project Path="Dmnk.Blazor.InteractiveTests.TestComponents/Dmnk.Blazor.InteractiveTests.TestComponents.csproj" />
+    <Project Path="Dmnk.Blazor.InteractiveTests/Dmnk.Blazor.InteractiveTests.csproj" />
     <Project Path="Dmnk.Blazor.Mvvm.CommunityToolkit/Dmnk.Blazor.Mvvm.CommunityToolkit.csproj" />
     <Project Path="Dmnk.Blazor.Mvvm.SourceGen/Dmnk.Blazor.Mvvm.SourceGen.csproj" />
     <Project Path="Dmnk.Blazor.Mvvm.Tests/Dmnk.Blazor.Mvvm.Tests.csproj" />
