@@ -15,7 +15,7 @@ internal sealed class BlazorInteractiveTestForm<T> : Form where T : ComponentBas
     private readonly InteractiveTestBlazorWebView _blazorWebView;
     
     public BlazorInteractiveTestForm(
-        DirectoryInfo testProjectDir,
+        InteractiveTestsProjectPathInfo pathInfo,
         IReadOnlyDictionary<string, object>? parameters = null,
         IServiceCollection? services = null,
         Size? clientSize = null,
@@ -31,7 +31,7 @@ internal sealed class BlazorInteractiveTestForm<T> : Form where T : ComponentBas
         
         Initialize();
 
-        _blazorWebView = new InteractiveTestBlazorWebView(testProjectDir)
+        _blazorWebView = new InteractiveTestBlazorWebView(pathInfo)
         {
             Dock = DockStyle.Fill,
             HostPage = "index.html",

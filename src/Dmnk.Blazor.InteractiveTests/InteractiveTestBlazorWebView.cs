@@ -4,14 +4,14 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Dmnk.Blazor.InteractiveTests;
 
-internal sealed class InteractiveTestBlazorWebView(DirectoryInfo testProjectDir) : BlazorWebView
+internal sealed class InteractiveTestBlazorWebView(InteractiveTestsProjectPathInfo pathInfo) : BlazorWebView
 {
     public override IFileProvider CreateFileProvider(string contentRootDir)
     {
         IFileProvider defaultProvider = base.CreateFileProvider(contentRootDir);
 
         IFileProvider assetsAndTestProjectFileProvider =
-            AssetsAndTestProjectFileProviderFactory.Create(testProjectDir);
+            AssetsAndTestProjectFileProviderFactory.Create(pathInfo);
         
         var composite = new CompositeFileProvider(
             defaultProvider, 

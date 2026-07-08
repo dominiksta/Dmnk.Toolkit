@@ -1,16 +1,21 @@
 ﻿using System.Reflection;
+using Dmnk.Blazor.InteractiveTests.Assets;
 using Microsoft.Extensions.FileProviders;
 
 namespace Dmnk.Blazor.InteractiveTests;
 
 internal static class AssetsAndTestProjectFileProviderFactory
 {
-    public static IFileProvider Create(DirectoryInfo testProjectDir)
+    public static IFileProvider Create(InteractiveTestsProjectPathInfo pathInfo)
     {
-        var testProjectAssetsProvider = CreateStaticWebAssetFileProviderFromObjDir(testProjectDir);
+        var testProjectAssetsProvider = 
+            CreateStaticWebAssetFileProvider(
+                FindStaticWebAssetFileFromObjDir(pathInfo));
         
-        var assetsProjectAssetsProvider = CreateStaticWebAssetFileProviderNextToAssembly(
-            typeof(AssetsAndTestProjectFileProviderFactory).Assembly);
+        var assetsProjectAssetsProvider = 
+            CreateStaticWebAssetFileProvider(
+                FindStaticWebAssetFileNextToAssembly(
+                    typeof(InteractiveTestsAssets).Assembly));
 
         if (!assetsProjectAssetsProvider.GetFileInfo("index.html").Exists) throw new FileNotFoundException(
             "index.html not found - file provider misconfigured?");
@@ -18,27 +23,7 @@ internal static class AssetsAndTestProjectFileProviderFactory
         return new CompositeFileProvider(assetsProjectAssetsProvider, testProjectAssetsProvider);
     }
     
-    private static ManifestStaticWebAssetFileProvider CreateStaticWebAssetFileProviderFromObjDir(
-        DirectoryInfo projectDir)
-    {
-        const string webAssetsFile = "staticwebassets.development.json";
-        
-        var objDir =  new DirectoryInfo(Path.Combine(projectDir.FullName, "obj"));
-        if (objDir is not { Exists: true }) throw new DirectoryNotFoundException(objDir.FullName);
-
-        string[] found = Directory.GetFiles(
-            objDir.FullName, webAssetsFile, SearchOption.AllDirectories);
-
-        if (found.Length == 0) throw new FileNotFoundException(webAssetsFile);
-        if (found.Length > 1) throw new InvalidOperationException($"Found multiple of {webAssetsFile}");
-        
-        FileInfo runtimeFile = new FileInfo(found[0]);
-        if (!runtimeFile.Exists) throw new FileNotFoundException(runtimeFile.FullName);
-        
-        return CreateStaticWebAssetFileProviderFromFile(runtimeFile);
-    }
-    
-    private static ManifestStaticWebAssetFileProvider CreateStaticWebAssetFileProviderFromFile(
+    private static ManifestStaticWebAssetFileProvider CreateStaticWebAssetFileProvider(
         FileInfo runtimeFile)
     {
         if (runtimeFile is not { Exists: true }) 
@@ -55,10 +40,34 @@ internal static class AssetsAndTestProjectFileProviderFactory
         return staticWebAssetManifestProvider;
     }
     
-    private static ManifestStaticWebAssetFileProvider 
-        CreateStaticWebAssetFileProviderNextToAssembly(Assembly projectAssembly)
+    internal static FileInfo FindStaticWebAssetFileFromObjDir(
+        InteractiveTestsProjectPathInfo pathInfo)
     {
+        const string webAssetsFile = "staticwebassets.development.json";
         
+        var objDir =  new DirectoryInfo(Path.Combine(pathInfo.TestProjectDir.FullName, "obj"));
+        if (objDir is not { Exists: true }) throw new DirectoryNotFoundException(objDir.FullName);
+
+        var fullObjDir = new DirectoryInfo(Path.Combine(objDir.FullName, 
+            pathInfo.ConfigurationDir, pathInfo.TargetFrameworkDir));
+        
+        if (!fullObjDir.Exists) throw new DirectoryNotFoundException(fullObjDir.FullName);
+
+        string[] found = Directory.GetFiles(
+            fullObjDir.FullName, webAssetsFile, SearchOption.AllDirectories);
+
+        if (found.Length == 0) throw new FileNotFoundException(webAssetsFile);
+        if (found.Length > 1) throw new InvalidOperationException(
+            $"Found multiple of {webAssetsFile}: {string.Join(", ", found)}");
+        
+        FileInfo runtimeFile = new FileInfo(found[0]);
+        if (!runtimeFile.Exists) throw new FileNotFoundException(runtimeFile.FullName);
+        
+        return runtimeFile;
+    }
+    
+    internal static FileInfo FindStaticWebAssetFileNextToAssembly(Assembly projectAssembly)
+    {
         string? assemblyDir = Path.GetDirectoryName(projectAssembly.Location);
         if (assemblyDir is null) throw new DirectoryNotFoundException(assemblyDir);
         
@@ -68,6 +77,6 @@ internal static class AssetsAndTestProjectFileProviderFactory
         FileInfo runtimeFile = new FileInfo(Path.Combine(
             assemblyDir, $"{projectName}.staticwebassets.runtime.json"));
         
-        return  CreateStaticWebAssetFileProviderFromFile(runtimeFile);
+        return runtimeFile;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -49,7 +50,8 @@ namespace Dmnk.Blazor.InteractiveTests;
 /// public class TestSetUp
 /// {
 ///     [OneTimeSetUp]
-///     public void Setup() => BlazorInteractiveTests.SetTestProjectDir(GetType().Assembly);
+///     public void Setup() => BlazorInteractiveTests.PathInfo =
+///         InteractiveTestsProjectPathInfo.FromAssemblyInSolutionDir(GetType().Assembly);
 /// }
 /// </code>
 /// </p>
@@ -75,7 +77,7 @@ public static class BlazorInteractiveTests
     /// Show the blazor component given by <typeparamref name="T"/> in a (WinForms) Dialog.
     /// 
     /// <p>
-    /// You MUST set <see cref="TestProjectDir"/> using one of the SetTestProjectDir methods
+    /// You MUST set <see cref="PathInfo"/> using one of the SetTestProjectDir methods
     /// before calling this.
     /// </p>
     /// </summary>
@@ -89,12 +91,12 @@ public static class BlazorInteractiveTests
         IServiceCollection? services = null)
         where T : ComponentBase
     {
-        if (TestProjectDir is null) throw new InvalidOperationException(
-            $"You must set {nameof(TestProjectDir)} to the assembly of your test project." +
+        if (PathInfo is null) throw new InvalidOperationException(
+            $"You must set {nameof(PathInfo)} to the assembly of your test project." +
             "(This is used to determine the location of the `staticwebassets.*.json` files)");
         
 #if _WINDOWS
-        using var form = new BlazorInteractiveTestForm<T>(TestProjectDir, parameters, services);
+        using var form = new BlazorInteractiveTestForm<T>(PathInfo, parameters, services);
         await form.ShowDialogAsync();
 #else
         throw new PlatformNotSupportedException("""
@@ -104,7 +106,7 @@ public static class BlazorInteractiveTests
             """);
 #endif
     }
-    
+
     /// <summary>
     /// Set this once globally (using one of the setter methods)
     /// before calling <see cref="ShowComponent"/>.
@@ -114,37 +116,10 @@ public static class BlazorInteractiveTests
     /// you shouldn't have to worry about that).
     /// </p>
     /// </summary>
-    internal static DirectoryInfo? TestProjectDir { get; private set; }
-
-    /// <summary>
-    /// Set <see cref="TestProjectDir"/> based on a <c>DirectoryInfo</c>.
-    /// This should be something like <c>new DirectoryInfo(&quot;../My.BlazorLibrary/&quot;)</c>.
-    /// </summary>
-    public static void SetTestProjectDir(DirectoryInfo testProjectDir)
-    {
-        if (testProjectDir is not { Exists: true })
-            throw new DirectoryNotFoundException(testProjectDir.FullName);
-        TestProjectDir = testProjectDir;
-    }
-
-    /// <summary>
-    /// Set <see cref="TestProjectDir"/> based on a string. This should be something like
-    /// <c>&quot;../My.BlazorLibrary/&quot;</c>.
-    /// </summary>
-    public static void SetTestProjectDir(string testProjectDir) 
-        => SetTestProjectDir(new DirectoryInfo(testProjectDir));
-
-    /// <summary>
-    /// Set <see cref="TestProjectDir"/> based on an <c>Assembly</c>. Something like
-    /// <c>typeof(MyTypeInMyTestProject).Assembly</c>.
-    /// <p>
-    /// This will find the project directory by walking up the filesystem until a
-    /// <c>.csproj</c> file is found.
-    /// </p>
-    /// </summary>
-    public static void SetTestProjectDir(Assembly testProjectAssembly)
-    {
-        FileInfo csprojFile = CsProjFileFinder.GetCsProjForAssembly(testProjectAssembly);
-        SetTestProjectDir(csprojFile.Directory!);
-    }
+    /// <example>
+    /// BlazorInteractiveTests.PathInfo =
+    ///   InteractiveTestsProjectPathInfo.FromAssemblyInSolutionDir(
+    ///     typeof(MyTypeInTestProject).Assembly);
+    /// </example>
+    public static InteractiveTestsProjectPathInfo? PathInfo { get; set; }
 }
