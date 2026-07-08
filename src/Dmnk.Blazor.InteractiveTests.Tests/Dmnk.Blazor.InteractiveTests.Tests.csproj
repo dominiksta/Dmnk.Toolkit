@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net10.0-windows</TargetFramework>
+        <TargetFramework>net10.0</TargetFramework>
         <LangVersion>14</LangVersion>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
@@ -22,6 +22,12 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Dmnk.Blazor.InteractiveTests\Dmnk.Blazor.InteractiveTests.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="FakeSolution\**">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
 
 </Project>

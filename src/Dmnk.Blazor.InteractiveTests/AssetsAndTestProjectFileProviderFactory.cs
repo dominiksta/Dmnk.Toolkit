@@ -7,9 +7,9 @@ internal static class AssetsAndTestProjectFileProviderFactory
 {
     public static IFileProvider Create(DirectoryInfo testProjectDir)
     {
-        var testProjectAssetsProvider = CreateStaticWebAssetFileProvider(testProjectDir);
+        var testProjectAssetsProvider = CreateStaticWebAssetFileProviderFromObjDir(testProjectDir);
         
-        var assetsProjectAssetsProvider = CreateStaticWebAssetFileProviderDebug(
+        var assetsProjectAssetsProvider = CreateStaticWebAssetFileProviderNextToAssembly(
             typeof(AssetsAndTestProjectFileProviderFactory).Assembly);
 
         if (!assetsProjectAssetsProvider.GetFileInfo("index.html").Exists) throw new FileNotFoundException(
@@ -18,7 +18,7 @@ internal static class AssetsAndTestProjectFileProviderFactory
         return new CompositeFileProvider(assetsProjectAssetsProvider, testProjectAssetsProvider);
     }
     
-    private static ManifestStaticWebAssetFileProvider CreateStaticWebAssetFileProvider(
+    private static ManifestStaticWebAssetFileProvider CreateStaticWebAssetFileProviderFromObjDir(
         DirectoryInfo projectDir)
     {
         const string webAssetsFile = "staticwebassets.development.json";
@@ -35,10 +35,10 @@ internal static class AssetsAndTestProjectFileProviderFactory
         FileInfo runtimeFile = new FileInfo(found[0]);
         if (!runtimeFile.Exists) throw new FileNotFoundException(runtimeFile.FullName);
         
-        return CreateStaticWebAssetFileProvider(runtimeFile);
+        return CreateStaticWebAssetFileProviderFromFile(runtimeFile);
     }
     
-    private static ManifestStaticWebAssetFileProvider CreateStaticWebAssetFileProvider(
+    private static ManifestStaticWebAssetFileProvider CreateStaticWebAssetFileProviderFromFile(
         FileInfo runtimeFile)
     {
         if (runtimeFile is not { Exists: true }) 
@@ -55,8 +55,8 @@ internal static class AssetsAndTestProjectFileProviderFactory
         return staticWebAssetManifestProvider;
     }
     
-    private static ManifestStaticWebAssetFileProvider CreateStaticWebAssetFileProviderDebug(
-        Assembly projectAssembly)
+    private static ManifestStaticWebAssetFileProvider 
+        CreateStaticWebAssetFileProviderNextToAssembly(Assembly projectAssembly)
     {
         
         string? assemblyDir = Path.GetDirectoryName(projectAssembly.Location);
@@ -68,13 +68,6 @@ internal static class AssetsAndTestProjectFileProviderFactory
         FileInfo runtimeFile = new FileInfo(Path.Combine(
             assemblyDir, $"{projectName}.staticwebassets.runtime.json"));
         
-        return  CreateStaticWebAssetFileProvider(runtimeFile);
-    }
-    
-    private static ManifestStaticWebAssetFileProvider CreateStaticWebAssetFileProviderObj(
-        Assembly projectAssembly)
-    {
-        FileInfo csprojFile = CsProjFileFinder.GetCsProjForAssembly(projectAssembly);
-        return  CreateStaticWebAssetFileProvider(csprojFile.Directory!);
+        return  CreateStaticWebAssetFileProviderFromFile(runtimeFile);
     }
 }
