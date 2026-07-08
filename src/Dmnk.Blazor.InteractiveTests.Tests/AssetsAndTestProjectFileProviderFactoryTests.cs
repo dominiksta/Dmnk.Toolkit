@@ -1,6 +1,4 @@
-﻿using Dmnk.Blazor.InteractiveTests.Assets;
-
-namespace Dmnk.Blazor.InteractiveTests.Tests;
+﻿namespace Dmnk.Blazor.InteractiveTests.Tests;
 
 [TestFixture]
 public class AssetsAndTestProjectFileProviderFactoryTests
@@ -9,8 +7,8 @@ public class AssetsAndTestProjectFileProviderFactoryTests
     public void Finds_StaticWebAssetFile_Of_Referenced_Project_Next_To_Assembly()
     {
         // Arrange
-        const string project = "Dmnk.Blazor.InteractiveTests.Assets";
-        var assembly = typeof(InteractiveTestsAssets).Assembly;
+        const string project = "Dmnk.Blazor.InteractiveTests";
+        var assembly = typeof(BlazorInteractiveTests).Assembly;
         
         // Act
         var found = 

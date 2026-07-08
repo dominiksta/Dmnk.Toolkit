@@ -12,6 +12,7 @@ public class MyInteractiveTests
     [Test, Explicit, Apartment(ApartmentState.STA)]
     public async Task Show_Counter_Component()
     {
+        // System.Diagnostics.Debugger.Launch();
         await BlazorInteractiveTests.ShowComponent<Counter>();
     }
     

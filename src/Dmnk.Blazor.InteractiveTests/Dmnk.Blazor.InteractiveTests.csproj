@@ -20,7 +20,10 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Dmnk.Blazor.InteractiveTests.Assets\Dmnk.Blazor.InteractiveTests.Assets.csproj" />
+      <None Remove="wwwroot\index.html" />
+      <EmbeddedResource Include="wwwroot\index.html" />
+      <None Remove="wwwroot\css\app.css" />
+      <EmbeddedResource Include="wwwroot\css\app.css" />
     </ItemGroup>
 
 </Project>

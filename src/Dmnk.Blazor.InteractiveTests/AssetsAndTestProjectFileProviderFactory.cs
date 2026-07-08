@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using Dmnk.Blazor.InteractiveTests.Assets;
 using Microsoft.Extensions.FileProviders;
 
 namespace Dmnk.Blazor.InteractiveTests;
@@ -11,12 +10,12 @@ internal static class AssetsAndTestProjectFileProviderFactory
         var testProjectAssetsProvider = 
             CreateStaticWebAssetFileProvider(
                 FindStaticWebAssetFileFromObjDir(pathInfo));
-        
-        var assetsProjectAssetsProvider = 
-            CreateStaticWebAssetFileProvider(
-                FindStaticWebAssetFileNextToAssembly(
-                    typeof(InteractiveTestsAssets).Assembly));
 
+        var thisAsm = typeof(AssetsAndTestProjectFileProviderFactory).Assembly;
+
+        var assetsProjectAssetsProvider = new EmbeddedFileProvider(
+            thisAsm, $"{thisAsm.GetName().Name}.wwwroot");
+        
         if (!assetsProjectAssetsProvider.GetFileInfo("index.html").Exists) throw new FileNotFoundException(
             "index.html not found - file provider misconfigured?");
 
