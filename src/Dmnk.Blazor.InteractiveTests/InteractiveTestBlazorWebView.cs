@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components.WebView.WindowsForms;
+﻿#if _WINDOWS
+using Microsoft.AspNetCore.Components.WebView.WindowsForms;
 using Microsoft.Extensions.FileProviders;
 
 namespace Dmnk.Blazor.InteractiveTests;
@@ -19,3 +20,4 @@ internal sealed class InteractiveTestBlazorWebView(DirectoryInfo testProjectDir)
         return composite;
     }
 }
+#endif

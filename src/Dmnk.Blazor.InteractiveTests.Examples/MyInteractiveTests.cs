@@ -26,4 +26,12 @@ public class MyInteractiveTests
         await BlazorInteractiveTests.ShowComponent<FluentMvvmTestComponent>(
             parameters: null, services: services);
     }
+
+    /// <summary>
+    /// This test project should still compile and run on linux. The interactive tests
+    /// will simply fail if you haven't selected netX.X-windows in your IDE. And since
+    /// they are explicit, they shouldn't interfere with (linux-based) CI.
+    /// </summary>
+    [Test]
+    public void RegularTest() => Assert.Pass();
 }

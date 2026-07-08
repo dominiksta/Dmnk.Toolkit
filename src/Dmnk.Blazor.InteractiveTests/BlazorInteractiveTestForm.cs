@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿#if _WINDOWS
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebView.WindowsForms;
 using Microsoft.Extensions.DependencyInjection;
@@ -68,3 +69,4 @@ internal sealed class BlazorInteractiveTestForm<T> : Form where T : ComponentBas
         }
     }
 }
+#endif

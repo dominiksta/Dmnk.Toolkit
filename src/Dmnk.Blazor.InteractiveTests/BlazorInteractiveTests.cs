@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using System.Runtime.Versioning;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -70,7 +69,6 @@ namespace Dmnk.Blazor.InteractiveTests;
 /// </code>
 /// </p>
 /// </example>
-[SupportedOSPlatform("windows")]
 public static class BlazorInteractiveTests
 {
     /// <summary>
@@ -95,8 +93,16 @@ public static class BlazorInteractiveTests
             $"You must set {nameof(TestProjectDir)} to the assembly of your test project." +
             "(This is used to determine the location of the `staticwebassets.*.json` files)");
         
+#if _WINDOWS
         using var form = new BlazorInteractiveTestForm<T>(TestProjectDir, parameters, services);
         await form.ShowDialogAsync();
+#else
+        throw new PlatformNotSupportedException("""
+            Interactive tests require windows. Please make sure your project is either targeted
+            for netX.X-windows or multi-targeted for netX.X-windows;netX.X and netX.X-windows
+            is selected as the current target in your IDE.
+            """);
+#endif
     }
     
     /// <summary>
