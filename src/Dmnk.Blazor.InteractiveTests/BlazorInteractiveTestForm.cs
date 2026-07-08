@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Dmnk.Blazor.InteractiveTests;
 
-internal class BlazorInteractiveTestForm<T> : Form where T : ComponentBase
+internal sealed class BlazorInteractiveTestForm<T> : Form where T : ComponentBase
 {
     private readonly Size _clientSize;
     private readonly Size _minimumSize;

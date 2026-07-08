@@ -23,6 +23,7 @@
     <Project Path="Dmnk.Blazor.Focus/Dmnk.Blazor.Focus.csproj" />
     <Project Path="Dmnk.Blazor.InteractiveTests.Assets/Dmnk.Blazor.InteractiveTests.Assets.csproj" />
     <Project Path="Dmnk.Blazor.InteractiveTests.TestComponents/Dmnk.Blazor.InteractiveTests.TestComponents.csproj" />
+    <Project Path="Dmnk.Blazor.InteractiveTests.Tests/Dmnk.Blazor.InteractiveTests.Tests.csproj" />
     <Project Path="Dmnk.Blazor.InteractiveTests/Dmnk.Blazor.InteractiveTests.csproj" />
     <Project Path="Dmnk.Blazor.Mvvm.CommunityToolkit/Dmnk.Blazor.Mvvm.CommunityToolkit.csproj" />
     <Project Path="Dmnk.Blazor.Mvvm.SourceGen/Dmnk.Blazor.Mvvm.SourceGen.csproj" />
