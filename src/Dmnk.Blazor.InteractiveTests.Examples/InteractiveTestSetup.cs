@@ -4,6 +4,6 @@
 public class InteractiveTestSetup
 {
     [OneTimeSetUp]
-    public void Setup() => BlazorInteractiveTests.PathInfo =
+    public void Setup() => BlazorInteractiveTestsRunner.PathInfo =
         InteractiveTestsProjectPathInfo.FromAssemblyInSolutionDir(GetType().Assembly);
 }

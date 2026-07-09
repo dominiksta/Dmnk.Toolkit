@@ -13,7 +13,7 @@ public class MyInteractiveTests
     public async Task Show_Counter_Component()
     {
         // System.Diagnostics.Debugger.Launch();
-        await BlazorInteractiveTests.ShowComponent<Counter>();
+        await BlazorInteractiveTestsRunner.ShowComponent<Counter>();
     }
     
     [Test, Explicit, Apartment(ApartmentState.STA)]
@@ -24,7 +24,7 @@ public class MyInteractiveTests
             .AddBlazorMvvm()
             .AddFluentMvvmDialogs();
         
-        await BlazorInteractiveTests.ShowComponent<FluentMvvmTestComponent>(
+        await BlazorInteractiveTestsRunner.ShowComponent<FluentMvvmTestComponent>(
             parameters: null, services: services);
     }
 

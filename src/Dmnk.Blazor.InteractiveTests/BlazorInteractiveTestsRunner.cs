@@ -50,7 +50,7 @@ namespace Dmnk.Blazor.InteractiveTests;
 /// public class TestSetUp
 /// {
 ///     [OneTimeSetUp]
-///     public void Setup() => BlazorInteractiveTests.PathInfo =
+///     public void Setup() => BlazorInteractiveTestsRunner.PathInfo =
 ///         InteractiveTestsProjectPathInfo.FromAssemblyInSolutionDir(GetType().Assembly);
 /// }
 /// </code>
@@ -66,12 +66,12 @@ namespace Dmnk.Blazor.InteractiveTests;
 /// {
 ///     // This will open up a window with just your `Counter` component so you can play
 ///     // with it without starting the whole app.
-///     await BlazorInteractiveTests.ShowComponent&lt;Counter&gt;();
+///     await BlazorInteractiveTestsRunner.ShowComponent&lt;Counter&gt;();
 /// }
 /// </code>
 /// </p>
 /// </example>
-public static class BlazorInteractiveTests
+public static class BlazorInteractiveTestsRunner
 {
     /// <summary>
     /// Show the blazor component given by <typeparamref name="T"/> in a (WinForms) Dialog.
@@ -102,7 +102,8 @@ public static class BlazorInteractiveTests
         throw new PlatformNotSupportedException("""
             Interactive tests require windows. Please make sure your project is either targeted
             for netX.X-windows or multi-targeted for netX.X-windows;netX.X and netX.X-windows
-            is selected as the current target in your IDE.
+            is selected as the current target in your IDE. If you see this error in CI, a test
+            of yours is probably missing an [Explicit] attribute (or similar).
             """);
 #endif
     }
@@ -117,7 +118,7 @@ public static class BlazorInteractiveTests
     /// </p>
     /// </summary>
     /// <example>
-    /// BlazorInteractiveTests.PathInfo =
+    /// BlazorInteractiveTestsRunner.PathInfo =
     ///   InteractiveTestsProjectPathInfo.FromAssemblyInSolutionDir(
     ///     typeof(MyTypeInTestProject).Assembly);
     /// </example>
