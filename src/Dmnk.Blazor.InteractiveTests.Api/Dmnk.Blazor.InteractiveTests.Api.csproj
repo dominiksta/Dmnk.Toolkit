@@ -5,10 +5,42 @@
         <LangVersion>14</LangVersion>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PackageId>Dmnk.Blazor.InteractiveTests.Api</PackageId>
+        <Version>0.0.1</Version>
+        <Authors>Dominik Stahmer</Authors>
+        <Description>
+            Some basic API / helpers for Dmnk.Blazor.InteractiveTests and friends.
+        </Description>
+        <PackageTags>Blazor;Test;Testing</PackageTags>
+
+        <PackageReleaseNotes>
+            Initial Release
+        </PackageReleaseNotes>
+
+        <RepositoryUrl>
+            https://github.com/dominiksta/Dmnk.Toolkit
+        </RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReadmeFile>_readme_nuget.md</PackageReadmeFile>
+        <PackageProjectUrl>https://dominiksta.github.io/Dmnk.Toolkit</PackageProjectUrl>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <EnablePackageValidation>true</EnablePackageValidation>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
     
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Components.Web"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="..\..\_readme_nuget.md" Pack="true" PackagePath="" />
     </ItemGroup>
 
 </Project>

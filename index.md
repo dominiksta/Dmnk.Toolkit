@@ -24,6 +24,14 @@ Mostly small Blazor-related C# libraries. Documentation and Code are Work-In-Pro
   [MVVM Community Toolkit](https://learn.microsoft.com/en-us/dotnet/communitytoolkit/mvvm/) 
   with <xref:Dmnk.Blazor.Dialogs>.
 
+### "Interactive Tests" for Blazor
+
+- <xref:Dmnk.Blazor.InteractiveTests> - Run blazor component as an explicit "unit test" to try out parts of your 
+  application without starting up everything. Based on WinForms.
+- <xref:Dmnk.Blazor.InteractiveTests.Api> - Some basic API / helpers for `Dmnk.Blazor.InteractiveTests` and friends.
+- <xref:Dmnk.Blazor.InteractiveTests.FluentUIHelpers> - 
+  A pre-configured FluentUI testbed for `Dmnk.Blazor.InteractiveTests`
+
 ### General Utilities
 
 - <xref:Dmnk.Blazor.Suspense> - Blazor components that allow showing placeholder content while waiting some asynchronous

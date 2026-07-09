@@ -7,9 +7,22 @@ namespace Dmnk.Blazor.InteractiveTests;
 /// </summary>
 public sealed record InteractiveTestsProjectPathInfo
 {
+    /// <summary>
+    /// The target framework directory, e.g. <c>net10.0</c> or <c>net10.0-windows</c>.
+    /// </summary>
     public required string TargetFrameworkDir { get; init; }
+    /// <summary>
+    /// The configuration directory, e.g. <c>Debug</c> or <c>Release</c>.
+    /// </summary>
     public required string ConfigurationDir { get; init; }
+    /// <summary>
+    /// The directory of the test project, e.g.
+    /// <c>c:\dev\...\Dmnk.Blazor.InteractiveTests.Examples</c>
+    /// </summary>
     public required DirectoryInfo TestProjectDir { get; init; }
+    /// <summary>
+    /// The name of the test project, e.g. <c>Dmnk.Blazor.InteractiveTests.Examples</c>
+    /// </summary>
     public required string TestProjectName { get; init; }
 
     /// <summary>
