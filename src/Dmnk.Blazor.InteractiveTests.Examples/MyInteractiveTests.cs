@@ -1,4 +1,5 @@
 ﻿using Dmnk.Blazor.Dialogs.Fluent;
+using Dmnk.Blazor.InteractiveTests.FluentUIHelpers;
 using Dmnk.Blazor.InteractiveTests.TestComponents;
 using Dmnk.Blazor.Mvvm;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,8 +34,10 @@ public class MyInteractiveTests
             .AddBlazorMvvm()
             .AddFluentMvvmDialogs();
         
-        await BlazorInteractiveTestRunner.ShowComponent<FluentMvvmTestComponent>(
-            parameters: null, services: services);
+        await BlazorInteractiveTestRunner.ShowComponent<FluentMvvmTestComponent, FluentUITestBed>(
+            configureComponent: parameters => parameters
+                .Add(c => c.Vm, new FluentMvvmTestViewModel() { Title = "My Title" }),
+            services: services);
     }
 
     /// <summary>

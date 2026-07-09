@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Dmnk.Blazor.InteractiveTests.Api;
+using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Dmnk.Blazor.InteractiveTests;
@@ -72,6 +73,42 @@ namespace Dmnk.Blazor.InteractiveTests;
 public static class BlazorInteractiveTestRunner
 {
     /// <summary>
+    /// Show the blazor component given by <typeparamref name="TComponent"/> in a (WinForms) Dialog.
+    /// 
+    /// <p>
+    /// You MUST set <see cref="PathInfo"/> using one of the SetTestProjectDir methods
+    /// before calling this.
+    /// </p>
+    /// </summary>
+    ///
+    /// <example>
+    /// <code>
+    /// BlazorInteractiveTestRunner.ShowComponent&lt;MyComponent&gt;(
+    ///     parameters => parameters
+    ///         .Add(component => component.MyParameter, 4)
+    ///         .Add(component => component.MyOtherParameter, "hi"));
+    /// </code>
+    /// </example>
+    /// 
+    /// <param name="configureComponent">
+    /// Build up a list of parameters for the component.
+    /// </param>
+    /// <param name="services">
+    /// When a blazor component uses <c>@inject</c> or <c>[Inject]</c>, the service will be
+    /// resolved using this collection.
+    /// </param>
+    /// <typeparam name="TComponent">The actual component type</typeparam>
+    public static async Task ShowComponent<TComponent>(
+        Action<BlazorComponentParametersBuilder<TComponent>> configureComponent,
+        IServiceCollection? services = null)
+        where TComponent : ComponentBase
+    {
+        var builder = new BlazorComponentParametersBuilder<TComponent>();
+        configureComponent(builder);
+        await ShowComponent<TComponent>(builder.Build(), services);
+    }
+    
+    /// <summary>
     /// A more advanced version of the more type-safe expression based overload
     /// <see cref="ShowComponent{T}(Action{BlazorComponentParametersBuilder{T}},IServiceCollection?)"/>,
     /// which allows you to define the parameters as a raw dictionary.
@@ -94,59 +131,39 @@ public static class BlazorInteractiveTestRunner
     public static async Task ShowComponent<T>(
         Dictionary<string, object?>? parameters = null,
         IServiceCollection? services = null)
-        where T : ComponentBase
-    {
-        if (PathInfo is null) throw new InvalidOperationException(
-            $"You must set {nameof(PathInfo)} to the assembly of your test project." +
-            "(This is used to determine the location of the `staticwebassets.*.json` files)");
-        
-#if _WINDOWS
-        using var form = new BlazorInteractiveTestForm<T>(PathInfo, parameters, services);
-        await form.ShowDialogAsync();
-#else
-        throw new PlatformNotSupportedException("""
-            Interactive tests require windows. Please make sure your project is either targeted
-            for netX.X-windows or multi-targeted for netX.X-windows;netX.X and netX.X-windows
-            is selected as the current target in your IDE. If you see this error in CI, a test
-            of yours is probably missing an [Explicit] attribute (or similar).
-            """);
-#endif
-    }
+        where T : ComponentBase =>
+        await ShowComponent(typeof(T), parameters, null, null, services);
+
+    /// <summary>
+    /// Allows you to additionally provide a testbed component, which is excepted to have a
+    /// <c>ChildContent</c> parameter that the SUT component will then be wrapped in.
+    /// </summary>
+    public static async Task ShowComponent<TComponent, TTestBed>(
+        Dictionary<string, object?>? componentParameters = null,
+        Dictionary<string, object?>? testBedParameters = null,
+        IServiceCollection? services = null)
+        where TComponent : ComponentBase => 
+        await ShowComponent(
+            typeof(TComponent), componentParameters, 
+            typeof(TTestBed), testBedParameters, services);
     
     /// <summary>
-    /// Show the blazor component given by <typeparamref name="T"/> in a (WinForms) Dialog.
-    /// 
-    /// <p>
-    /// You MUST set <see cref="PathInfo"/> using one of the SetTestProjectDir methods
-    /// before calling this.
-    /// </p>
+    /// Allows you to additionally provide a testbed component, which is excepted to have a
+    /// <c>ChildContent</c> parameter that the SUT component will then be wrapped in.
     /// </summary>
-    ///
-    /// <example>
-    /// <code>
-    /// BlazorInteractiveTestRunner.ShowComponent&lt;MyComponent&gt;(
-    ///     parameters => parameters
-    ///         .Add(component => component.MyParameter, 4)
-    ///         .Add(component => component.MyOtherParameter, "hi"));
-    /// </code>
-    /// </example>
-    /// 
-    /// <param name="configureParameters">
-    /// Build up a list of parameters for the component.
-    /// </param>
-    /// <param name="services">
-    /// When a blazor component uses <c>@inject</c> or <c>[Inject]</c>, the service will be
-    /// resolved using this collection.
-    /// </param>
-    /// <typeparam name="T">The actual component type</typeparam>
-    public static async Task ShowComponent<T>(
-        Action<BlazorComponentParametersBuilder<T>> configureParameters,
+    public static async Task ShowComponent<TComponent, TTestBed>(
+        Action<BlazorComponentParametersBuilder<TComponent>> configureComponent,
+        Action<BlazorComponentParametersBuilder<TTestBed>>? configureTestBed = null,
         IServiceCollection? services = null)
-        where T : ComponentBase
+        where TComponent : ComponentBase
+        where TTestBed : ComponentBase
     {
-        var builder = new BlazorComponentParametersBuilder<T>();
-        configureParameters(builder);
-        await ShowComponent<T>(builder.Build(), services);
+        var sutParamsBuilder = new BlazorComponentParametersBuilder<TComponent>();
+        configureComponent(sutParamsBuilder);
+        var testBedParamsBuilder = new BlazorComponentParametersBuilder<TTestBed>();
+        configureTestBed?.Invoke(testBedParamsBuilder);
+        await ShowComponent<TComponent, TTestBed>(
+            sutParamsBuilder.Build(), testBedParamsBuilder.Build(), services);
     }
 
     /// <summary>
@@ -164,4 +181,33 @@ public static class BlazorInteractiveTestRunner
     ///     typeof(MyTypeInTestProject).Assembly);
     /// </example>
     public static InteractiveTestsProjectPathInfo? PathInfo { get; set; }
+    
+    private static async Task ShowComponent(
+        Type componentType,
+        Dictionary<string, object?>? componentParameters = null,
+        Type? testBedType = null,
+        Dictionary<string, object?>? testBedParameters = null,
+        IServiceCollection? services = null)
+    {
+        
+        if (PathInfo is null) throw new InvalidOperationException(
+            $"You must set {nameof(PathInfo)} to the assembly of your test project." +
+            "(This is used to determine the location of the `staticwebassets.*.json` files)");
+        
+#if _WINDOWS
+        using var form = new BlazorInteractiveTestForm(
+            PathInfo, 
+            componentType, componentParameters, 
+            testBedType, testBedParameters,
+            services);
+        await form.ShowDialogAsync();
+#else
+        throw new PlatformNotSupportedException("""
+            Interactive tests require windows. Please make sure your project is either targeted
+            for netX.X-windows or multi-targeted for netX.X-windows;netX.X and netX.X-windows
+            is selected as the current target in your IDE. If you see this error in CI, a test
+            of yours is probably missing an [Explicit] attribute (or similar).
+            """);
+#endif
+    }
 }

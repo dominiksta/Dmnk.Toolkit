@@ -1,29 +1,39 @@
 ﻿#if _WINDOWS
-using Microsoft.AspNetCore.Components;
+using Dmnk.Blazor.InteractiveTests.Api;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebView.WindowsForms;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Dmnk.Blazor.InteractiveTests;
 
-internal sealed class BlazorInteractiveTestForm<T> : Form where T : ComponentBase
+internal sealed class BlazorInteractiveTestForm : Form
 {
     private readonly Size _clientSize;
     private readonly Size _minimumSize;
     private readonly ServiceProvider _serviceProvider;
     private readonly InteractiveTestBlazorWebView _blazorWebView;
+    private readonly Type _sutType;
     
     public BlazorInteractiveTestForm(
         InteractiveTestsProjectPathInfo pathInfo,
-        Dictionary<string, object?>? parameters = null,
+        Type sutType,
+        Dictionary<string, object?>? sutParameters = null,
+        Type? testBedType = null,
+        Dictionary<string, object?>? testBedParameters = null,
         IServiceCollection? services = null,
         Size? clientSize = null,
         Size? minimumSize = null)
     {
+        _sutType = sutType;
         _clientSize = clientSize ?? new Size(800, 600);
         _minimumSize = minimumSize ?? new Size(800, 600);
         services ??= new ServiceCollection();
         services.AddWindowsFormsBlazorWebView();
+        services.AddBlazorWebViewDeveloperTools();
+        services.AddSingleton(new InteractiveTestContext()
+        {
+            TestProjectName =  pathInfo.TestProjectName,
+        });
         _serviceProvider =  services.BuildServiceProvider();
 
         Initialize();
@@ -33,13 +43,21 @@ internal sealed class BlazorInteractiveTestForm<T> : Form where T : ComponentBas
             Dock = DockStyle.Fill,
             HostPage = "index.html",
             Services = _serviceProvider,
-            StartPath = "/"
+            StartPath = "/",
         };
 
-        _blazorWebView.RootComponents.Add<T>(
-            "#app", parameters ?? new Dictionary<string, object?>());
-        _blazorWebView.RootComponents.Add<HeadOutlet>("#head-outlet");
+        var testRootParams = new BlazorComponentParametersBuilder<TestRoot>()
+            .Add(c => c.ConsumingProjectName, pathInfo.TestProjectName)
+            .Add(c => c.SutType, sutType)
+            .Add(c => c.SutParameters, sutParameters ?? new Dictionary<string, object?>());
 
+        if (testBedType is not null) testRootParams
+            .Add(c => c.TestBedType, testBedType)
+            .Add(c => c.TestBedParameters, testBedParameters ?? new Dictionary<string, object?>());
+        
+        _blazorWebView.RootComponents.Add<TestRoot>("#app", testRootParams.Build());
+        _blazorWebView.RootComponents.Add<HeadOutlet>("head::after");
+        
         Controls.Add(_blazorWebView);
     }
 
@@ -54,7 +72,7 @@ internal sealed class BlazorInteractiveTestForm<T> : Form where T : ComponentBas
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = _clientSize;
         MinimumSize = _minimumSize;
-        Text = $"{typeof(T).Name} [Interactive Test]";
+        Text = $"{_sutType.Name} [Interactive Test]";
     }
 
     protected override void Dispose(bool disposing)

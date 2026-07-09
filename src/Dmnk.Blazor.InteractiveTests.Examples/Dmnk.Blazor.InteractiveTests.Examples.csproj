@@ -21,6 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Dmnk.Blazor.InteractiveTests.FluentUIHelpers\Dmnk.Blazor.InteractiveTests.FluentUIHelpers.csproj" />
       <ProjectReference Include="..\Dmnk.Blazor.InteractiveTests.TestComponents\Dmnk.Blazor.InteractiveTests.TestComponents.csproj" />
       <ProjectReference Include="..\Dmnk.Blazor.InteractiveTests\Dmnk.Blazor.InteractiveTests.csproj" />
     </ItemGroup>

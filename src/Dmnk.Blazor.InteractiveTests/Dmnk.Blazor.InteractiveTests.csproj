@@ -26,4 +26,8 @@
       <EmbeddedResource Include="wwwroot\css\app.css" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Dmnk.Blazor.InteractiveTests.Api\Dmnk.Blazor.InteractiveTests.Api.csproj" />
+    </ItemGroup>
+
 </Project>

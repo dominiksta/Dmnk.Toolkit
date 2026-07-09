@@ -10,6 +10,7 @@ public sealed record InteractiveTestsProjectPathInfo
     public required string TargetFrameworkDir { get; init; }
     public required string ConfigurationDir { get; init; }
     public required DirectoryInfo TestProjectDir { get; init; }
+    public required string TestProjectName { get; init; }
 
     /// <summary>
     /// Constructs a <see cref="InteractiveTestsProjectPathInfo"/> instance from an assembly
@@ -51,6 +52,7 @@ public sealed record InteractiveTestsProjectPathInfo
             TargetFrameworkDir = split[^2], 
             ConfigurationDir = split[^3],
             TestProjectDir = testProjectDir,
+            TestProjectName = testProjectDir.Name,
         };
         
     }

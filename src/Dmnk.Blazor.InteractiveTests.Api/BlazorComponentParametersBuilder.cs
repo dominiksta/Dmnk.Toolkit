@@ -2,13 +2,13 @@
 using System.Reflection;
 using Microsoft.AspNetCore.Components;
 
-namespace Dmnk.Blazor.InteractiveTests;
+namespace Dmnk.Blazor.InteractiveTests.Api;
 
 /// <summary>
 /// This class helps you build up a dictionary of parameters for a given blazor component.
 /// <p>
 /// You shouldn't need to instantiate this directly. Instead, you are expected to use it in
-/// <see cref="BlazorInteractiveTestRunner"/>'s ShowComponent method(s).
+/// BlazorInteractiveTestRunner's ShowComponent method(s).
 /// </p>
 /// </summary>
 /// <typeparam name="TComponent">The type of the blazor component</typeparam>

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Dmnk.Blazor.InteractiveTests.Api;
+using Microsoft.AspNetCore.Components;
 
 namespace Dmnk.Blazor.InteractiveTests.Tests;
 

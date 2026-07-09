@@ -1,1 +1,5 @@
-﻿<FluentMvvmTestView Vm="@(new FluentMvvmTestViewModel())"/>
+﻿<FluentMvvmTestView Vm="@Vm"/>
+
+@code {
+    [Parameter] public required FluentMvvmTestViewModel Vm { get; set; }
+}
