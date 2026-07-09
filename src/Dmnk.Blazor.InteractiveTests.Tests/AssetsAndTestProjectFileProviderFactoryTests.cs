@@ -119,6 +119,64 @@ public class AssetsAndTestProjectFileProviderFactoryTests
         }
     }
 
+    [Test]
+    public void FindStaticWebAssetFileFromObjDir_Throws_When_Obj_Dir_Does_Not_Exist()
+    {
+        using var temp = new TemporaryDirectory();
+        var pathInfo = new InteractiveTestsProjectPathInfo
+        {
+            TestProjectName = "MissingObjProject",
+            TestProjectDir = temp.CreateDirectory("MissingObjProject"),
+            ConfigurationDir = "Debug",
+            TargetFrameworkDir = "net10.0",
+        };
+
+        Assert.That(
+            () => AssetsAndTestProjectFileProviderFactory.FindStaticWebAssetFileFromObjDir(pathInfo),
+            Throws.InstanceOf<DirectoryNotFoundException>()
+                .With.Message.Contains(Path.Combine("MissingObjProject", "obj")));
+    }
+
+    [Test]
+    public void FindStaticWebAssetFileFromObjDir_Throws_When_Configuration_And_TargetFramework_Dir_Does_Not_Exist()
+    {
+        using var temp = new TemporaryDirectory();
+        var projectDir = temp.CreateDirectory("MissingConfigurationProject");
+        temp.CreateDirectory(Path.Combine("MissingConfigurationProject", "obj"));
+        var pathInfo = new InteractiveTestsProjectPathInfo
+        {
+            TestProjectName = "MissingConfigurationProject",
+            TestProjectDir = projectDir,
+            ConfigurationDir = "Debug",
+            TargetFrameworkDir = "net10.0",
+        };
+
+        Assert.That(
+            () => AssetsAndTestProjectFileProviderFactory.FindStaticWebAssetFileFromObjDir(pathInfo),
+            Throws.InstanceOf<DirectoryNotFoundException>()
+                .With.Message.Contains(Path.Combine("obj", "Debug", "net10.0")));
+    }
+
+    [Test]
+    public void FindStaticWebAssetFileFromObjDir_Throws_When_Manifest_Is_Missing()
+    {
+        using var temp = new TemporaryDirectory();
+        var projectDir = temp.CreateDirectory("MissingManifestProject");
+        temp.CreateDirectory(Path.Combine("MissingManifestProject", "obj", "Debug", "net10.0"));
+        var pathInfo = new InteractiveTestsProjectPathInfo
+        {
+            TestProjectName = "MissingManifestProject",
+            TestProjectDir = projectDir,
+            ConfigurationDir = "Debug",
+            TargetFrameworkDir = "net10.0",
+        };
+
+        Assert.That(
+            () => AssetsAndTestProjectFileProviderFactory.FindStaticWebAssetFileFromObjDir(pathInfo),
+            Throws.InstanceOf<FileNotFoundException>()
+                .With.Message.Contains("staticwebassets.development.json"));
+    }
+
     private static string EscapeJsonPath(string path) => path.Replace("\\", "\\\\");
 
     private static string ReadAllText(IFileInfo fileInfo)

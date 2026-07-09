@@ -34,7 +34,7 @@ internal static class CsProjFileFinder
     {
         var name = testProjectAssembly.GetName().Name;
         
-        var csprojFile = GetCsProjForAssembly(new FileInfo(testProjectAssembly.Location));
+        var csprojFile = GetCsProjForAssembly(new FileInfo(testProjectAssembly.Location), extension);
         
         if (csprojFile is null) throw new DirectoryNotFoundException(
             $".csproj not found for assembly {name}");

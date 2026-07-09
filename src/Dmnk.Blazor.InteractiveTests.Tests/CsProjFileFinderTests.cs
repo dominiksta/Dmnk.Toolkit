@@ -46,4 +46,39 @@ public class CsProjFileFinderTests
                 Does.EndWith(Path.Combine(project, $"{project}{ext}")));
         }
     }
+
+    [Test]
+    public void Returns_Null_When_No_Project_File_Can_Be_Found()
+    {
+        using var temp = new TemporaryDirectory();
+        var assemblyFile = temp.CreateFile(Path.Combine("bin", "Debug", "net10.0", "NoProject.dll"));
+
+        var csprojFile = CsProjFileFinder.GetCsProjForAssembly(assemblyFile, ".fakecsproj");
+
+        Assert.That(csprojFile, Is.Null);
+    }
+
+    [Test]
+    public void Throws_When_Multiple_Project_Files_Exist_In_Same_Directory()
+    {
+        using var temp = new TemporaryDirectory();
+        temp.CreateFile(Path.Combine("Project", "A.fakecsproj"));
+        temp.CreateFile(Path.Combine("Project", "B.fakecsproj"));
+        var assemblyFile = temp.CreateFile(Path.Combine(
+            "Project", "bin", "Debug", "net10.0", "MultipleProjects.dll"));
+
+        Assert.That(
+            () => CsProjFileFinder.GetCsProjForAssembly(assemblyFile, ".fakecsproj"),
+            Throws.InstanceOf<InvalidOperationException>()
+                .With.Message.Contains("Multiple csproj files found"));
+    }
+
+    [Test]
+    public void Assembly_Overload_Uses_Given_Extension()
+    {
+        Assert.That(
+            () => CsProjFileFinder.GetCsProjForAssembly(GetType().Assembly, ".fakecsproj"),
+            Throws.InstanceOf<DirectoryNotFoundException>()
+                .With.Message.Contains(".csproj not found"));
+    }
 }

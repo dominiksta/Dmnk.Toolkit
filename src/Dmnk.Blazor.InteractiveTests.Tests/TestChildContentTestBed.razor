@@ -1,0 +1,16 @@
+﻿@namespace Dmnk.Blazor.InteractiveTests.Tests
+@using Microsoft.AspNetCore.Components.Web
+
+<HeadContent>
+    <link href="testbed.css" rel="stylesheet" />
+</HeadContent>
+
+<section class="testbed">
+    @Name
+    @ChildContent
+</section>
+
+@code {
+    [Parameter] public string? Name { get; set; }
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+}
