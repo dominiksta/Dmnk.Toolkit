@@ -8,6 +8,9 @@ are Work-In-Progress.
 
 ## Contributing & Maintenance
 
+Note that while the `Dmnk.Blazor.InteractiveTests.*` packages only work on Windows, they should 
+absolutely build and cause no trouble working on the rest of the codebase on Linux or Mac.
+
 - Run `dotnet cake.cs --target=pack --configuration=Release` to build the NuGet packages.
 - Run `dotnet cake.cs --target=test` to run the tests.
 - The documentation is built from the code and published via GitHub pages.

@@ -1,0 +1,68 @@
+{
+  "ContentRoots": [
+    "__FAKE_SOLUTION_ROOT__\\My.BlazorLibrary\\wwwroot\\",
+    "__FAKE_SOLUTION_ROOT__\\My.BlazorLibrary.Tests\\wwwroot\\"
+  ],
+  "Root": {
+    "Children": {
+      "app.css": {
+        "Children": null,
+        "Asset": {
+          "ContentRootIndex": 0,
+          "SubPath": "app.css"
+        },
+        "Patterns": null
+      },
+      "data": {
+        "Children": {
+          "test.json": {
+            "Children": null,
+            "Asset": {
+              "ContentRootIndex": 0,
+              "SubPath": "data/test.json"
+            },
+            "Patterns": null
+          }
+        },
+        "Asset": null,
+        "Patterns": null
+      },
+      "_content": {
+        "Children": {
+          "My.BlazorLibrary.Tests": {
+            "Children": {
+              "lib.css": {
+                "Children": null,
+                "Asset": {
+                  "ContentRootIndex": 1,
+                  "SubPath": "lib.css"
+                },
+                "Patterns": null
+              },
+              "js": {
+                "Children": {
+                  "widget.js": {
+                    "Children": null,
+                    "Asset": {
+                      "ContentRootIndex": 1,
+                      "SubPath": "js/widget.js"
+                    },
+                    "Patterns": null
+                  }
+                },
+                "Asset": null,
+                "Patterns": null
+              }
+            },
+            "Asset": null,
+            "Patterns": null
+          }
+        },
+        "Asset": null,
+        "Patterns": null
+      }
+    },
+    "Asset": null,
+    "Patterns": null
+  }
+}

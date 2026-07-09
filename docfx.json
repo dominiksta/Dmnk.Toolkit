@@ -21,6 +21,9 @@
             "Dmnk.Icons.Blazor.Fluent/bin/Release/net10.0/Dmnk.Icons.Blazor.Fluent.dll",
             "Dmnk.Icons.Core/bin/Release/netstandard2.0/Dmnk.Icons.Core.dll",
             "Dmnk.LocalizedDataAnnotations/bin/Release/netstandard2.0/Dmnk.LocalizedDataAnnotations.dll",
+			"Dmnk.Blazor.InteractiveTests/bin/Release/net10.0/Dmnk.Blazor.InteractiveTests.dll",
+			"Dmnk.Blazor.InteractiveTests.Api/bin/Release/net10.0/Dmnk.Blazor.InteractiveTests.Api.dll",
+			"Dmnk.Blazor.InteractiveTests.FluentUIHelpers/bin/Release/net10.0/Dmnk.Blazor.InteractiveTests.FluentUIHelpers.dll"
           ],
           "exclude": [
             "**/obj/**",

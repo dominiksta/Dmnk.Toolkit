@@ -1,0 +1,74 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net10.0-windows;net10.0</TargetFrameworks>
+        <LangVersion>14</LangVersion>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PackageId>Dmnk.Blazor.InteractiveTests</PackageId>
+        <Version>0.0.1</Version>
+        <Authors>Dominik Stahmer</Authors>
+        <Description>
+            Run blazor component as an explicit "unit test" to try out parts of your application
+            without starting up everything. Based on WinForms.
+        </Description>
+        <PackageTags>Blazor;WinForms;Test;Testing</PackageTags>
+
+        <PackageReleaseNotes>
+            Initial Release
+        </PackageReleaseNotes>
+
+        <RepositoryUrl>
+            https://github.com/dominiksta/Dmnk.Toolkit
+        </RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReadmeFile>_readme_nuget.md</PackageReadmeFile>
+        <PackageProjectUrl>https://dominiksta.github.io/Dmnk.Toolkit</PackageProjectUrl>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <EnablePackageValidation>true</EnablePackageValidation>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    </PropertyGroup>
+    
+    <PropertyGroup Condition="$(TargetFramework) == 'net10.0-windows'">
+        <UseWindowsForms>true</UseWindowsForms>
+        <DefineConstants>_WINDOWS</DefineConstants>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebView.WindowsForms"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebView"/>
+        <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="wwwroot\index.html" />
+      <EmbeddedResource Include="wwwroot\index.html" />
+      <None Remove="wwwroot\css\app.css" />
+      <EmbeddedResource Include="wwwroot\css\app.css" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Dmnk.Blazor.InteractiveTests.Api\Dmnk.Blazor.InteractiveTests.Api.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="..\..\_readme_nuget.md" Pack="true" PackagePath="" />
+    </ItemGroup>
+
+    <!-- See https://github.com/MicrosoftEdge/WebView2Feedback/issues/4860#issuecomment-4197770869 -->
+    <Target Name="RemoveUnusedWebView2" BeforeTargets="ResolveAssemblyReferences">
+        <ItemGroup>
+            <Reference Remove="@(Reference->WithMetadataValue('FileName', 'Microsoft.Web.WebView2.WinForms'))" Condition="'$(UseWindowsForms)' != 'true'" />
+            <Reference Remove="@(Reference->WithMetadataValue('FileName', 'Microsoft.Web.WebView2.Wpf'))" Condition="'$(UseWpf)' != 'true'" />
+        </ItemGroup>
+    </Target>
+
+</Project>

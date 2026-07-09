@@ -1,0 +1,25 @@
+﻿@using Dmnk.Blazor.InteractiveTests.Api
+@using Microsoft.FluentUI.AspNetCore.Components
+@inject InteractiveTestContext TestContext
+
+<HeadContent>
+    <link href='@($"{TestContext.TestProjectName}.styles.css")' rel="stylesheet" />
+    
+    @* Setup from https://www.fluentui-blazor.net/CodeSetup *@
+    @* Reboot is of course not technically necessary, but we have been using it. *@
+    <link href="_content/Microsoft.FluentUI.AspNetCore.Components/css/reboot.css" rel="stylesheet" />
+</HeadContent>
+
+<FluentDialogProvider/>
+<FluentToastProvider/>
+<FluentMessageBarProvider/>
+<FluentMenuProvider/>
+<FluentTooltipProvider/>
+<FluentDesignSystemProvider/>
+<FluentKeyCodeProvider/>
+
+@ChildContent
+
+@code {
+    [Parameter, EditorRequired] public required RenderFragment ChildContent { get; set; }
+}

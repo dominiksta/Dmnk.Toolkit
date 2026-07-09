@@ -1,0 +1,22 @@
+﻿@inherits MvvmComponentBase<FluentMvvmTestViewModel>
+@inject IDialogService DialogService
+
+<h3>Title: @Vm.Title</h3>
+
+<FluentCard>
+    <p>Current Count: @Vm.Count</p>
+    <FluentButton OnClick="@Vm.IncrementCountCommand.Execute">Increment</FluentButton>
+</FluentCard>
+
+<FluentCard>
+    <FluentTextField @bind-Value="@Vm.Name" 
+                     Immediate="true"
+                     Placeholder="Name"/>
+    <p>Name: @Vm.Name</p>
+</FluentCard>
+
+<FluentCard>
+    <FluentButton OnClick='@(() =>  DialogService.ShowInfoAsync("Hello"))'>
+        Show Message Box
+    </FluentButton>
+</FluentCard>

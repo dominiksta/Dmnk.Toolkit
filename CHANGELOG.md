@@ -1,5 +1,13 @@
 ﻿# Changelog
 
+## `Dmnk.Blazor.InteractiveTests.*`: `0.0.1` - *2026-07-28*
+
+**Added:**
+
+- `Dmnk.Blazor.InteractiveTests`: Initial Release
+- `Dmnk.Blazor.InteractiveTests.Api`: Initial Release
+- `Dmnk.Blazor.InteractiveTests.FluentUIHelpers`: Initial Release
+
 ## `Dmnk.Blazor.Dialogs.Fluent`: `0.0.6` - *2026-06-22*
 
 **Fixed/Changed:**
