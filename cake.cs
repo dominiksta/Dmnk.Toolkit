@@ -21,6 +21,8 @@ Task("build")
         DotNetBuild("./src/Dmnk.Toolkit.slnx", new DotNetBuildSettings
         {
             Configuration = configuration,
+            MSBuildSettings = new DotNetMSBuildSettings()
+                .WithProperty("EnableWindowsTargeting", "true")
         });
     });
 
