@@ -1,0 +1,1 @@
+window.fakeWidget = () => "fixture-widget";

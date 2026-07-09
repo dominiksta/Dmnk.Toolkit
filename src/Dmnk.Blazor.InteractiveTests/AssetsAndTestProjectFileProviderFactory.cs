@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using Microsoft.Extensions.FileProviders;
+﻿using Microsoft.Extensions.FileProviders;
 
 namespace Dmnk.Blazor.InteractiveTests;
 
@@ -61,20 +60,6 @@ internal static class AssetsAndTestProjectFileProviderFactory
         
         FileInfo runtimeFile = new FileInfo(found[0]);
         if (!runtimeFile.Exists) throw new FileNotFoundException(runtimeFile.FullName);
-        
-        return runtimeFile;
-    }
-    
-    internal static FileInfo FindStaticWebAssetFileNextToAssembly(Assembly projectAssembly)
-    {
-        string? assemblyDir = Path.GetDirectoryName(projectAssembly.Location);
-        if (assemblyDir is null) throw new DirectoryNotFoundException(assemblyDir);
-        
-        string? projectName = projectAssembly.GetName().Name;
-        if (projectName is null) throw new FileNotFoundException(assemblyDir);
-        
-        FileInfo runtimeFile = new FileInfo(Path.Combine(
-            assemblyDir, $"{projectName}.staticwebassets.runtime.json"));
         
         return runtimeFile;
     }

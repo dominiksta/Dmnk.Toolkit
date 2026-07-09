@@ -36,8 +36,8 @@ public sealed record InteractiveTestsProjectPathInfo
         FileInfo assemblyFile, string csprojExt)
     {
         FileInfo? csprojFile = CsProjFileFinder.GetCsProjForAssembly(assemblyFile, csprojExt);
-        if (csprojFile is not { Exists: true }) 
-            throw new FileNotFoundException(assemblyFile.FullName);
+        if (csprojFile is not { Exists: true }) throw new FileNotFoundException(
+            "csproj not found for assembly: " + assemblyFile.FullName);
         
         var testProjectDir = csprojFile.Directory!;
         
