@@ -63,4 +63,12 @@
         <None Include="..\..\_readme_nuget.md" Pack="true" PackagePath="" />
     </ItemGroup>
 
+    <!-- See https://github.com/MicrosoftEdge/WebView2Feedback/issues/4860#issuecomment-4197770869 -->
+    <Target Name="RemoveUnusedWebView2" BeforeTargets="ResolveAssemblyReferences">
+        <ItemGroup>
+            <Reference Remove="@(Reference->WithMetadataValue('FileName', 'Microsoft.Web.WebView2.WinForms'))" Condition="'$(UseWindowsForms)' != 'true'" />
+            <Reference Remove="@(Reference->WithMetadataValue('FileName', 'Microsoft.Web.WebView2.Wpf'))" Condition="'$(UseWpf)' != 'true'" />
+        </ItemGroup>
+    </Target>
+
 </Project>
