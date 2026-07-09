@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-using System.Runtime.CompilerServices;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Dmnk.Blazor.InteractiveTests;
@@ -50,7 +48,7 @@ namespace Dmnk.Blazor.InteractiveTests;
 /// public class TestSetUp
 /// {
 ///     [OneTimeSetUp]
-///     public void Setup() => BlazorInteractiveTestsRunner.PathInfo =
+///     public void Setup() => BlazorInteractiveTestRunner.PathInfo =
 ///         InteractiveTestsProjectPathInfo.FromAssemblyInSolutionDir(GetType().Assembly);
 /// }
 /// </code>
@@ -66,28 +64,35 @@ namespace Dmnk.Blazor.InteractiveTests;
 /// {
 ///     // This will open up a window with just your `Counter` component so you can play
 ///     // with it without starting the whole app.
-///     await BlazorInteractiveTestsRunner.ShowComponent&lt;Counter&gt;();
+///     await BlazorInteractiveTestRunner.ShowComponent&lt;Counter&gt;();
 /// }
 /// </code>
 /// </p>
 /// </example>
-public static class BlazorInteractiveTestsRunner
+public static class BlazorInteractiveTestRunner
 {
     /// <summary>
-    /// Show the blazor component given by <typeparamref name="T"/> in a (WinForms) Dialog.
-    /// 
+    /// A more advanced version of the more type-safe expression based overload
+    /// <see cref="ShowComponent{T}(Action{BlazorComponentParametersBuilder{T}},IServiceCollection?)"/>,
+    /// which allows you to define the parameters as a raw dictionary.
+    ///
     /// <p>
-    /// You MUST set <see cref="PathInfo"/> using one of the SetTestProjectDir methods
-    /// before calling this.
+    /// You typically shouldn't need to use this.
     /// </p>
     /// </summary>
-    /// <param name="parameters">
-    /// The set of parameters of the blazor component (properties annotated with [Parameter]).
-    /// </param>
-    /// <param name="services"></param>
-    /// <typeparam name="T"></typeparam>
+    /// 
+    /// <example>
+    /// <code>
+    /// BlazorInteractiveTestRunner.ShowComponent&lt;MyComponent&gt;(
+    ///     new Dictionary&lt;string, object?&gt;()
+    ///     {
+    ///         { "MyParameter", 4 },
+    ///         { "MyOtherParameter", "hi" },
+    ///     });
+    /// </code>
+    /// </example>
     public static async Task ShowComponent<T>(
-        IReadOnlyDictionary<string, object>? parameters = null,
+        Dictionary<string, object?>? parameters = null,
         IServiceCollection? services = null)
         where T : ComponentBase
     {
@@ -107,10 +112,46 @@ public static class BlazorInteractiveTestsRunner
             """);
 #endif
     }
+    
+    /// <summary>
+    /// Show the blazor component given by <typeparamref name="T"/> in a (WinForms) Dialog.
+    /// 
+    /// <p>
+    /// You MUST set <see cref="PathInfo"/> using one of the SetTestProjectDir methods
+    /// before calling this.
+    /// </p>
+    /// </summary>
+    ///
+    /// <example>
+    /// <code>
+    /// BlazorInteractiveTestRunner.ShowComponent&lt;MyComponent&gt;(
+    ///     parameters => parameters
+    ///         .Add(component => component.MyParameter, 4)
+    ///         .Add(component => component.MyOtherParameter, "hi"));
+    /// </code>
+    /// </example>
+    /// 
+    /// <param name="configureParameters">
+    /// Build up a list of parameters for the component.
+    /// </param>
+    /// <param name="services">
+    /// When a blazor component uses <c>@inject</c> or <c>[Inject]</c>, the service will be
+    /// resolved using this collection.
+    /// </param>
+    /// <typeparam name="T">The actual component type</typeparam>
+    public static async Task ShowComponent<T>(
+        Action<BlazorComponentParametersBuilder<T>> configureParameters,
+        IServiceCollection? services = null)
+        where T : ComponentBase
+    {
+        var builder = new BlazorComponentParametersBuilder<T>();
+        configureParameters(builder);
+        await ShowComponent<T>(builder.Build(), services);
+    }
 
     /// <summary>
     /// Set this once globally (using one of the setter methods)
-    /// before calling <see cref="ShowComponent"/>.
+    /// before calling any of the ShowComponent methods.
     /// <p>
     /// Used to determine the location of the <c>staticwebassets.*.json</c> files, which are
     /// required for any BlazorWebView to function (and produced automatically on build by default,
@@ -118,7 +159,7 @@ public static class BlazorInteractiveTestsRunner
     /// </p>
     /// </summary>
     /// <example>
-    /// BlazorInteractiveTestsRunner.PathInfo =
+    /// BlazorInteractiveTestRunner.PathInfo =
     ///   InteractiveTestsProjectPathInfo.FromAssemblyInSolutionDir(
     ///     typeof(MyTypeInTestProject).Assembly);
     /// </example>

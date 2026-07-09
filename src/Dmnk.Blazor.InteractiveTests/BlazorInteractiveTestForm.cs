@@ -10,13 +10,12 @@ internal sealed class BlazorInteractiveTestForm<T> : Form where T : ComponentBas
 {
     private readonly Size _clientSize;
     private readonly Size _minimumSize;
-    private readonly IReadOnlyDictionary<string, object> _parameters;
     private readonly ServiceProvider _serviceProvider;
     private readonly InteractiveTestBlazorWebView _blazorWebView;
     
     public BlazorInteractiveTestForm(
         InteractiveTestsProjectPathInfo pathInfo,
-        IReadOnlyDictionary<string, object>? parameters = null,
+        Dictionary<string, object?>? parameters = null,
         IServiceCollection? services = null,
         Size? clientSize = null,
         Size? minimumSize = null)
@@ -26,9 +25,7 @@ internal sealed class BlazorInteractiveTestForm<T> : Form where T : ComponentBas
         services ??= new ServiceCollection();
         services.AddWindowsFormsBlazorWebView();
         _serviceProvider =  services.BuildServiceProvider();
-        
-        _parameters  = parameters ?? new Dictionary<string, object>();
-        
+
         Initialize();
 
         _blazorWebView = new InteractiveTestBlazorWebView(pathInfo)
@@ -39,7 +36,8 @@ internal sealed class BlazorInteractiveTestForm<T> : Form where T : ComponentBas
             StartPath = "/"
         };
 
-        _blazorWebView.RootComponents.Add<T>("#app");
+        _blazorWebView.RootComponents.Add<T>(
+            "#app", parameters ?? new Dictionary<string, object?>());
         _blazorWebView.RootComponents.Add<HeadOutlet>("#head-outlet");
 
         Controls.Add(_blazorWebView);
