@@ -14,28 +14,35 @@
     <File Path="../README.md" />
     <File Path="../_readme_nuget.md" />
   </Folder>
-  <Folder Name="/Lib/">
-    <Project Path="Dmnk.Blazor.Dialogs.CommunityToolkit/Dmnk.Blazor.Dialogs.CommunityToolkit.csproj" />
-    <Project Path="Dmnk.Blazor.Cookies/Dmnk.Blazor.Cookies.csproj" />
-    <Project Path="Dmnk.Blazor.Dialogs.Fluent/Dmnk.Blazor.Dialogs.Fluent.csproj" />
-    <Project Path="Dmnk.Blazor.Dialogs.Tests/Dmnk.Blazor.Dialogs.Tests.csproj" />
-    <Project Path="Dmnk.Blazor.Dialogs/Dmnk.Blazor.Dialogs.csproj" />
-    <Project Path="Dmnk.Blazor.Focus/Dmnk.Blazor.Focus.csproj" />
+  <Folder Name="/Lib/" />
+  <Folder Name="/Lib/Icons/">
+    <Project Path="Dmnk.Icons.Blazor.Fluent/Dmnk.Icons.Blazor.Fluent.csproj" />
+    <Project Path="Dmnk.Icons.Blazor/Dmnk.Icons.Blazor.csproj" />
+    <Project Path="Dmnk.Icons.Core/Dmnk.Icons.Core.csproj" />
+  </Folder>
+  <Folder Name="/Lib/InteractiveTests/">
     <Project Path="Dmnk.Blazor.InteractiveTests.Api/Dmnk.Blazor.InteractiveTests.Api.csproj" />
     <Project Path="Dmnk.Blazor.InteractiveTests.FluentUIHelpers/Dmnk.Blazor.InteractiveTests.FluentUIHelpers.csproj" />
     <Project Path="Dmnk.Blazor.InteractiveTests.TestComponents/Dmnk.Blazor.InteractiveTests.TestComponents.csproj" />
     <Project Path="Dmnk.Blazor.InteractiveTests.Tests/Dmnk.Blazor.InteractiveTests.Tests.csproj" />
     <Project Path="Dmnk.Blazor.InteractiveTests/Dmnk.Blazor.InteractiveTests.csproj" />
+  </Folder>
+  <Folder Name="/Lib/Mvvm/">
+    <Project Path="Dmnk.Blazor.Dialogs.CommunityToolkit/Dmnk.Blazor.Dialogs.CommunityToolkit.csproj" />
+    <Project Path="Dmnk.Blazor.Dialogs.Fluent/Dmnk.Blazor.Dialogs.Fluent.csproj" />
+    <Project Path="Dmnk.Blazor.Dialogs.Tests/Dmnk.Blazor.Dialogs.Tests.csproj" />
+    <Project Path="Dmnk.Blazor.Dialogs/Dmnk.Blazor.Dialogs.csproj" />
     <Project Path="Dmnk.Blazor.Mvvm.CommunityToolkit/Dmnk.Blazor.Mvvm.CommunityToolkit.csproj" />
     <Project Path="Dmnk.Blazor.Mvvm.SourceGen/Dmnk.Blazor.Mvvm.SourceGen.csproj" />
     <Project Path="Dmnk.Blazor.Mvvm.Tests/Dmnk.Blazor.Mvvm.Tests.csproj" />
     <Project Path="Dmnk.Blazor.Mvvm/Dmnk.Blazor.Mvvm.csproj" />
+  </Folder>
+  <Folder Name="/Lib/Utility/">
+    <Project Path="Dmnk.Blazor.Cookies/Dmnk.Blazor.Cookies.csproj" />
+    <Project Path="Dmnk.Blazor.Focus/Dmnk.Blazor.Focus.csproj" />
     <Project Path="Dmnk.Blazor.OverlayScrollbar/Dmnk.Blazor.OverlayScrollbar.csproj" />
     <Project Path="Dmnk.Blazor.Storage/Dmnk.Blazor.Storage.csproj" />
     <Project Path="Dmnk.Blazor.Suspense/Dmnk.Blazor.Suspense.csproj" />
-    <Project Path="Dmnk.Icons.Blazor.Fluent/Dmnk.Icons.Blazor.Fluent.csproj" />
-    <Project Path="Dmnk.Icons.Blazor/Dmnk.Icons.Blazor.csproj" />
-    <Project Path="Dmnk.Icons.Core/Dmnk.Icons.Core.csproj" />
     <Project Path="Dmnk.LocalizedDataAnnotations.Hack.Tests/Dmnk.LocalizedDataAnnotations.Hack.Tests.csproj" />
     <Project Path="Dmnk.LocalizedDataAnnotations.Tests/Dmnk.LocalizedDataAnnotations.Tests.csproj" />
     <Project Path="Dmnk.LocalizedDataAnnotations/Dmnk.LocalizedDataAnnotations.csproj" />
