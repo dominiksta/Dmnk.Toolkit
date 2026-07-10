@@ -17,7 +17,7 @@ absolutely build and cause no trouble working on the rest of the codebase on Lin
   - See [publish-docs.yml](.github/workflows/docs_pages.yml)
   - Run `dotnet cake.cs --target=docs:serve` to preview the docs locally.
 - New releases are published to nuget.org via a [GitHub action](.github/workflows/publish_nuget.yml) 
-  that runs when a new tag is pushed. Before publishing a release, ensure that:
+  that runs when a new release is published. Before publishing a release, ensure that:
   - The CHANGELOG.md file is updated accordingly
   - The AnalyzerReleases.(Shipped|Unshipped).md files of any analyzer are update accordingly.
   - The ReleaseNotes in the csproj files are updated accordingly
