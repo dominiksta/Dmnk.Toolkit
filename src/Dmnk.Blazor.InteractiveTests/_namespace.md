@@ -25,6 +25,16 @@ will raise an exception. But since they should be `[Explicit]`, they won't inter
 
 ## Example (Assuming NUnit)
 
+In `My.BlazorLibrary.Tests\My.BlazorLibrary.Tests.csproj`:
+
+```xml
+<!-- You MUST use the Razor SDK here. Otherwise, the relevant asset manifest files will -->
+<!-- not be produced. -->
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+    <!-- ... -->
+</Project>
+```
+
 In `My.BlazorLibrary.Tests\Setup.cs`:
 
 ```csharp
