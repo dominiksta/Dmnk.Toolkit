@@ -7,11 +7,12 @@ uid: Dmnk.Blazor.Dialogs
 Provides a set of components and services to easily create and manage dialogs in Blazor applications
 using the MVVM pattern. Based on <xref:Dmnk.Blazor.Mvvm> (and <xref:Dmnk.Icons.Core>).
 
-## Example
+## Example (Assuming `Dmnk.Blazor.Dialogs.Fluent` implementation)
 
 **MyHostViewModel.cs**:
 
 ```csharp
+[ViewModelFor(typeof(MyHostView))]
 public class MyHostViewModel(IVmDialogController dialogController) : ObservableObject
 {
     [RelayCommand]
@@ -35,6 +36,7 @@ public class MyHostViewModel(IVmDialogController dialogController) : ObservableO
 **MyInputDialogViewModel.cs**:
 
 ```csharp
+[ViewModelFor(typeof(MyInputDialog))]
 public class MyInputDialogViewModel : DialogViewModelBase
 {
     [ObservableProperty]
@@ -45,13 +47,15 @@ public class MyInputDialogViewModel : DialogViewModelBase
 **Program.cs**:
 
 ```csharp
-// Dialog views are resolved via IViewModelRegistry — register each pair as a singleton:
 services.AddBlazorMvvm();
+services.AddFluentMvvmDialogs(); // specific to Dmnk.Blazor.Dialogs.Fluent
+// Dialog views are resolved via IViewModelRegistry — register each pair as a singleton:
 services.AddViewModelRegistration<MyInputDialog, MyInputDialogViewModel>();
-builder.Services.AddFluentMvvmDialogs();
+// or, preferably, with the source generator:
+My.Namespace.SourceGeneratedViewModelRegistrations.Register(services);
 ```
 
-**SomeRootComponentWithInteractivity.razor**:
+**SomeRootComponentWithInteractivity.razor** (specific to Dmnk.Blazor.Dialogs.Fluent):
 ```razor
 @using Dmnk.Blazor.Dialogs.Fluent
 @* again, if you don't use the fluent implementation you will have to supply your own *@
@@ -71,6 +75,8 @@ builder.Services.AddFluentMvvmDialogs();
 
 ```razor
 @inherits BlazorVmDialogViewFor<MyInputDialogViewModel>
+
+@* VmDialogBody and VmDialogFooter are specific to Dmnk.Blazor.Dialogs.Fluent *@
 
 <VmDialogBody>
   <input @bind="Vm.InputValue" placeholder="Enter something..." />
