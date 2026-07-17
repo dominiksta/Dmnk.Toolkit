@@ -1,6 +1,12 @@
 ﻿# Changelog
 
-## `Dmnk.Blazor.InteractiveTests.*`: `0.0.1` - *2026-07-28*
+## `Dmnk.Blazor.InteractiveTests.Api`: `0.0.2` - *2026-07-17*
+
+**Fixed**:
+
+- Fix setting parameters from (abstract) base class
+
+## `Dmnk.Blazor.InteractiveTests.*`: `0.0.1` - *2026-06-28*
 
 **Added:**
 
