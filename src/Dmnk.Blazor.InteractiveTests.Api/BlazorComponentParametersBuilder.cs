@@ -68,7 +68,7 @@ public sealed class BlazorComponentParametersBuilder<TComponent> where TComponen
     private static void ValidateParameterProperty(PropertyInfo property)
     {
         if (property.DeclaringType is null ||
-            !typeof(TComponent).IsAssignableFrom(property.DeclaringType))
+            !property.DeclaringType.IsAssignableFrom(typeof(TComponent)))
         {
             throw new ArgumentException("Selector must target the component type.");
         }
