@@ -11,7 +11,7 @@
 
     <PropertyGroup>
         <PackageId>Dmnk.Blazor.InteractiveTests.Api</PackageId>
-        <Version>0.0.1</Version>
+        <Version>0.0.2</Version>
         <Authors>Dominik Stahmer</Authors>
         <Description>
             Some basic API / helpers for Dmnk.Blazor.InteractiveTests and friends.
@@ -19,7 +19,7 @@
         <PackageTags>Blazor;Test;Testing</PackageTags>
 
         <PackageReleaseNotes>
-            Initial Release
+            Fix setting parameters from (abstract) base class
         </PackageReleaseNotes>
 
         <RepositoryUrl>

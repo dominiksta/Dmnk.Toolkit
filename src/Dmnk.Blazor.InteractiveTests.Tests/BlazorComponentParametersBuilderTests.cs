@@ -59,6 +59,18 @@ public class BlazorComponentParametersBuilderTests
     }
 
     [Test]
+    public void Add_Allows_Parameter_Property_Declared_In_Abstract_Base_Component()
+    {
+        var builder = new BlazorComponentParametersBuilder<DerivedTestComponent>();
+
+        var built = builder
+            .Add(component => component.BaseTitle, "Hello")
+            .Build();
+
+        Assert.That(built[nameof(AbstractTestComponent.BaseTitle)], Is.EqualTo("Hello"));
+    }
+
+    [Test]
     public void Add_Throws_For_Non_Parameter_Property()
     {
         var builder = new BlazorComponentParametersBuilder<TestComponent>();
@@ -92,5 +104,15 @@ public class BlazorComponentParametersBuilderTests
         public string? Theme { get; set; }
 
         public string? NonParameter { get; set; }
+    }
+
+    private abstract class AbstractTestComponent : ComponentBase
+    {
+        [Parameter]
+        public string? BaseTitle { get; set; }
+    }
+
+    private sealed class DerivedTestComponent : AbstractTestComponent
+    {
     }
 }

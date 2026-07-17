@@ -6,6 +6,9 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <IsPackable>false</IsPackable>
+
+        <!-- Ignore warning for duplicate WebView2 -->
+        <NoWarn>MSB3277</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
