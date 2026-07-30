@@ -61,10 +61,17 @@ internal sealed class BlazorInteractiveTestForm : Form
         Controls.Add(_blazorWebView);
     }
 
+    protected override void OnLoad(EventArgs e)
+    {
+        base.OnLoad(e);
+        // potential fix for window being invisible - see https://stackoverflow.com/a/18619181
+        Visible = true;
+    }
+
     protected override void OnShown(EventArgs e)
     {
         base.OnShown(e);
-        Activate();
+        Activate(); // bring to foreground
     }
 
     private void Initialize()

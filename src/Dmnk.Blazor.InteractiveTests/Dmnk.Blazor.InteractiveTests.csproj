@@ -11,7 +11,7 @@
 
     <PropertyGroup>
         <PackageId>Dmnk.Blazor.InteractiveTests</PackageId>
-        <Version>0.0.1</Version>
+        <Version>0.0.2</Version>
         <Authors>Dominik Stahmer</Authors>
         <Description>
             Run blazor component as an explicit "unit test" to try out parts of your application
@@ -20,7 +20,7 @@
         <PackageTags>Blazor;WinForms;Test;Testing</PackageTags>
 
         <PackageReleaseNotes>
-            Initial Release
+            - Fixed: Potential fix for window being invisible
         </PackageReleaseNotes>
 
         <RepositoryUrl>

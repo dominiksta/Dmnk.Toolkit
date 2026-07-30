@@ -1,5 +1,11 @@
 ﻿# Changelog
 
+## `Dmnk.Blazor.InteractiveTests`: `0.0.2` - *2026-07-30*
+
+**Fixed**:
+
+- Potential fix for window being invisible
+
 ## `Dmnk.Blazor.InteractiveTests.Api`: `0.0.2` - *2026-07-17*
 
 **Fixed**:
