@@ -1,5 +1,12 @@
 ﻿# Changelog
 
+## `Dmnk.Blazor.InteractiveTests`: `0.0.3` - *2026-08-28*
+
+**Fixed**:
+
+- Some components would not work because the WinForms message loop was fighting with the NUnit 
+  text context.
+
 ## `Dmnk.Blazor.InteractiveTests`: `0.0.2` - *2026-07-30*
 
 **Fixed**:

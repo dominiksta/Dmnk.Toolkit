@@ -51,8 +51,7 @@ In `My.BlazorLibrary.Tests\MyInteractiveTests.cs`:
 
 ```csharp
 // MUST be explicit - it will not terminate on its own.
-// MUST have this ApartmentState.
-[Test, Explicit, Apartment(ApartmentState.STA)]
+[Test, Explicit]
 public async Task Show_Counter_Component()
 {
     // This will open up a window with just your `Counter` component so you can play
@@ -92,7 +91,7 @@ using Dmnk.Blazor.InteractiveTests.TestComponents;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.FluentUI.AspNetCore.Components;
 
-[Test, Explicit, Apartment(ApartmentState.STA)]
+[Test, Explicit]
 public async Task Show_FluentMvvm_Component()
 {
     var services = new ServiceCollection()

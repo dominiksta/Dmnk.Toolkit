@@ -59,8 +59,7 @@ namespace Dmnk.Blazor.InteractiveTests;
 /// In <c>My.BlazorLibrary.Tests\MyInteractiveTests.cs</c>:
 /// <code>
 /// // MUST be explicit - it will not terminate on its own.
-/// // MUST have this ApartmentState.
-/// [Test, Explicit, Apartment(ApartmentState.STA)]
+/// [Test, Explicit]
 /// public async Task Show_Counter_Component()
 /// {
 ///     // This will open up a window with just your `Counter` component so you can play
@@ -182,7 +181,7 @@ public static class BlazorInteractiveTestRunner
     /// </example>
     public static InteractiveTestsProjectPathInfo? PathInfo { get; set; }
     
-    private static async Task ShowComponent(
+    private static Task ShowComponent(
         Type componentType,
         Dictionary<string, object?>? componentParameters = null,
         Type? testBedType = null,
@@ -195,12 +194,30 @@ public static class BlazorInteractiveTestRunner
             "(This is used to determine the location of the `staticwebassets.*.json` files)");
         
 #if _WINDOWS
-        using var form = new BlazorInteractiveTestForm(
-            PathInfo, 
-            componentType, componentParameters, 
-            testBedType, testBedParameters,
-            services);
-        await form.ShowDialogAsync();
+        // Test frameworks can install synchronization contexts that prevent nested
+        // asynchronous component updates from completing in a WinForms message loop.
+        var completion = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously);
+        var uiThread = new Thread(() =>
+        {
+            try
+            {
+                using var form = new BlazorInteractiveTestForm(
+                    PathInfo,
+                    componentType, componentParameters,
+                    testBedType, testBedParameters,
+                    services);
+                Application.Run(form);
+                completion.SetResult();
+            }
+            catch (Exception exception)
+            {
+                completion.SetException(exception);
+            }
+        });
+        uiThread.SetApartmentState(ApartmentState.STA);
+        uiThread.Start();
+        return completion.Task;
 #else
         throw new PlatformNotSupportedException("""
             Interactive tests require windows. Please make sure your project is either targeted
